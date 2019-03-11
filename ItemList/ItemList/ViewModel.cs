@@ -8,7 +8,7 @@ namespace ItemList
     /// This is a class, that represents a ViewModel layer with all fields from View and logic how to handle requests from UI
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    internal sealed class ViewModel : INotifyPropertyChanged
+    public sealed class ViewModel : INotifyPropertyChanged
     {
         private RelayCommand addCommand;
         private RelayCommand deleteCommand;
