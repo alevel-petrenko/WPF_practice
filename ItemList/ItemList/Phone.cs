@@ -4,7 +4,7 @@
     /// Class represents a template for Phone
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    public class Phone
+    public sealed class Phone
     {
         /// <summary>
         /// Gets or sets the manufacture of the phone.

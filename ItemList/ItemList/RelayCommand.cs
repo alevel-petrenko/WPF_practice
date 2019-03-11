@@ -7,7 +7,7 @@ namespace ItemList
     /// This class is used for implementing commands between View and ViewModel
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    public class RelayCommand : ICommand
+    public sealed class RelayCommand : ICommand
     {
         /// <summary>
         /// Generic delegate to determine whether command can be executed.
