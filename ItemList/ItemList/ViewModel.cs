@@ -9,7 +9,7 @@ namespace ItemList
     /// This is a class, that represents a ViewModel layer with all fields from View and logic how to handle requests from UI
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    public sealed class ViewModel : INotifyPropertyChanged, IDisposable
+    public sealed class ViewModel : INotifyPropertyChanged
     {
         /// <summary>
         /// Stores an instance of RelayCommand to add.
@@ -44,7 +44,7 @@ namespace ItemList
             }
         }
         /// <summary>
-        /// Adds new item to Observable Collection of phones.
+        /// Command adds new item to Observable Collection of phones and clean text boxes.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>Instance of RelayCommand class.</returns>
@@ -53,8 +53,18 @@ namespace ItemList
             return new RelayCommand(obj =>
             {
                 this.ListOfItems.Add(new Phone { Manufacture = this.Manufacture, Model = this.Model });
+                ClearField();
                 UpdateTextBoxes();
             });
+        }
+        /// <summary>
+        /// Method is used for clearing text boxes.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private void ClearField()
+        {
+            Manufacture = string.Empty;
+            Model = string.Empty;
         }
         /// <summary>
         /// Calls OnPropertyChanged event
@@ -64,17 +74,6 @@ namespace ItemList
         {
             OnPropertyChanged("Manufacture");
             OnPropertyChanged("Model");
-        }
-        /// <summary>
-        /// Method is used for clearing text boxes after adding values to the list.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">Arguments</param>
-        private void ClearField(object sender, PropertyChangedEventArgs e)
-        {
-            Manufacture = string.Empty;
-            Model = string.Empty;
         }
         /// <summary>
         /// Gets delete command for collection of phones.
@@ -91,14 +90,6 @@ namespace ItemList
                         this.ListOfItems.Remove(this.selectedItem);
                     }));
             }
-        }
-        /// <summary>
-        /// Releases memory from event by removing subscription before closing app.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public void Dispose()
-        {
-            PropertyChanged -= ClearField;
         }
         /// <summary>
         /// Gets or sets collection of items.
@@ -127,7 +118,7 @@ namespace ItemList
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
         /// <summary>
-        /// Represents event type of PropertyChangedEventHandler
+        /// Represents event type of PropertyChangedEventHandler.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public event PropertyChangedEventHandler PropertyChanged;
@@ -146,12 +137,11 @@ namespace ItemList
             }
         }
         /// <summary>
-        /// Initializes new instance of ViewModel with ListOfItems and subscription for PropertyChanged event.
+        /// Initializes new instance of ViewModel with ListOfItems.
         /// </summary>
         public ViewModel()
         {
             this.ListOfItems = new ObservableCollection<Phone>();
-            this.PropertyChanged += this.ClearField;
         }
     }
 }
