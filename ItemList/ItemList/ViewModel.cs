@@ -32,7 +32,7 @@ namespace ItemList
         /// Initializes addCommand field.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <returns>Instance of RelayCommand class.</returns>
+        /// <returns>The add command.</returns>
         public RelayCommand AddCommand
         {
             get
@@ -45,9 +45,9 @@ namespace ItemList
                 return this.addCommand;
             }
         }
-        
+
         /// <summary>
-        /// Command adds new item to Observable Collection of phones and clean text boxes.
+        /// Command adds new item to Observable Collection of phones and cleans phone's view model state.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>Instance of RelayCommand class.</returns>
@@ -60,9 +60,9 @@ namespace ItemList
                 this.UpdateTextBoxes();
             });
         }
-        
+
         /// <summary>
-        /// Method is used for clearing text boxes.
+        /// Clears the phone's view model state.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private void ClearField()
@@ -72,20 +72,10 @@ namespace ItemList
         }
         
         /// <summary>
-        /// Calls OnPropertyChanged event.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private void UpdateTextBoxes()
-        {
-            this.OnPropertyChanged("Manufacture");
-            this.OnPropertyChanged("Model");
-        }
-        
-        /// <summary>
         /// Gets delete command for collection of phones.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <returns>Instance of RelayCommand class.</returns>
+        /// <returns>The delete command.</returns>
         public RelayCommand DeleteCommand
         {
             get
@@ -108,14 +98,14 @@ namespace ItemList
         /// Gets or sets manufacture of the item.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <returns>Manufacture name as a string.</returns>
+        /// <returns>Manufacture name of the phone.</returns>
         public string Manufacture { get; set; }
-        
+
         /// <summary>
         /// Gets or sets model of the item.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <returns>Model name as a string.</returns>
+        /// <returns>Model name of the phone.</returns>
         public string Model { get; set; }
         
         /// <summary>
@@ -124,8 +114,7 @@ namespace ItemList
         /// <owner>Anton Petrenko</owner>
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
-            if (this.PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
         
         /// <summary>
@@ -144,14 +133,26 @@ namespace ItemList
             get { return this.selectedItem; }
             set
             {
+                if (this.selectedItem!=value)
                 this.selectedItem = value;
                 this.OnPropertyChanged("SelectedItem");
             }
         }
-        
+
+        /// <summary>
+        /// Notifies about changing the Model and the Manufacture.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private void UpdateTextBoxes()
+        {
+            this.OnPropertyChanged("Manufacture");
+            this.OnPropertyChanged("Model");
+        }
+
         /// <summary>
         /// Initializes new instance of ViewModel with ListOfItems.
         /// </summary>
+        /// <owner>Anton Petrenko</owner>
         public ViewModel()
         {
             this.ListOfItems = new ObservableCollection<Phone>();
