@@ -41,7 +41,7 @@ namespace ItemList
                 {
                     return this.addCommand;
                 }
-                this.addCommand = AddNewItemToCollection();
+                this.addCommand = this.AddNewItemToCollection();
                 return this.addCommand;
             }
         }
@@ -56,8 +56,8 @@ namespace ItemList
             return new RelayCommand(obj =>
             {
                 this.ListOfItems.Add(new Phone { Manufacture = this.Manufacture, Model = this.Model });
-                ClearField();
-                UpdateTextBoxes();
+                this.ClearField();
+                this.UpdateTextBoxes();
             });
         }
         
@@ -67,8 +67,8 @@ namespace ItemList
         /// <owner>Anton Petrenko</owner>
         private void ClearField()
         {
-            Manufacture = string.Empty;
-            Model = string.Empty;
+            this.Manufacture = string.Empty;
+            this.Model = string.Empty;
         }
         
         /// <summary>
@@ -77,8 +77,8 @@ namespace ItemList
         /// <owner>Anton Petrenko</owner>
         private void UpdateTextBoxes()
         {
-            OnPropertyChanged("Manufacture");
-            OnPropertyChanged("Model");
+            this.OnPropertyChanged("Manufacture");
+            this.OnPropertyChanged("Model");
         }
         
         /// <summary>
@@ -124,7 +124,7 @@ namespace ItemList
         /// <owner>Anton Petrenko</owner>
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
-            if (PropertyChanged != null)
+            if (this.PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
         
@@ -141,11 +141,11 @@ namespace ItemList
         /// <returns>Instance of the phone.</returns>
         public Phone SelectedItem
         {
-            get { return selectedItem; }
+            get { return this.selectedItem; }
             set
             {
                 this.selectedItem = value;
-                OnPropertyChanged("SelectedItem");
+                this.OnPropertyChanged("SelectedItem");
             }
         }
         
