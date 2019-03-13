@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace ItemList
 {
     /// <summary>
-    /// This is a class, that represents a ViewModel layer with all fields from View and logic how to handle requests from UI
+    /// This is a class, that represents a ViewModel layer with all fields from View and logic how to handle requests from UI.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public sealed class ViewModel : INotifyPropertyChanged
@@ -15,16 +15,19 @@ namespace ItemList
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private RelayCommand addCommand;
+        
         /// <summary>
         /// Stores an instance of RelayCommand to delete.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private RelayCommand deleteCommand;
+        
         /// <summary>
         /// Stores instance of selected Phone.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public Phone selectedItem;
+        
         /// <summary>
         /// Initializes addCommand field.
         /// </summary>
@@ -42,6 +45,7 @@ namespace ItemList
                 return this.addCommand;
             }
         }
+        
         /// <summary>
         /// Command adds new item to Observable Collection of phones and clean text boxes.
         /// </summary>
@@ -56,6 +60,7 @@ namespace ItemList
                 UpdateTextBoxes();
             });
         }
+        
         /// <summary>
         /// Method is used for clearing text boxes.
         /// </summary>
@@ -65,8 +70,9 @@ namespace ItemList
             Manufacture = string.Empty;
             Model = string.Empty;
         }
+        
         /// <summary>
-        /// Calls OnPropertyChanged event
+        /// Calls OnPropertyChanged event.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private void UpdateTextBoxes()
@@ -74,6 +80,7 @@ namespace ItemList
             OnPropertyChanged("Manufacture");
             OnPropertyChanged("Model");
         }
+        
         /// <summary>
         /// Gets delete command for collection of phones.
         /// </summary>
@@ -90,23 +97,27 @@ namespace ItemList
                     }));
             }
         }
+        
         /// <summary>
         /// Gets or sets collection of items.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public ObservableCollection<Phone> ListOfItems { get; set; }
+        
         /// <summary>
         /// Gets or sets manufacture of the item.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>Manufacture name as a string.</returns>
         public string Manufacture { get; set; }
+        
         /// <summary>
         /// Gets or sets model of the item.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>Model name as a string.</returns>
         public string Model { get; set; }
+        
         /// <summary>
         /// Calls PropertyChanged event.
         /// </summary>
@@ -116,11 +127,13 @@ namespace ItemList
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        
         /// <summary>
         /// Represents event type of PropertyChangedEventHandler.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public event PropertyChangedEventHandler PropertyChanged;
+        
         /// <summary>
         /// Gets or sets selected item.
         /// </summary>
@@ -135,6 +148,7 @@ namespace ItemList
                 OnPropertyChanged("SelectedItem");
             }
         }
+        
         /// <summary>
         /// Initializes new instance of ViewModel with ListOfItems.
         /// </summary>

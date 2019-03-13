@@ -4,7 +4,7 @@ using System.Windows.Input;
 namespace ItemList
 {
     /// <summary>
-    /// This class is used for implementing commands between View and ViewModel
+    /// This class is used for implementing commands between View and ViewModel.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public sealed class RelayCommand : ICommand
@@ -16,12 +16,14 @@ namespace ItemList
         /// <param>Object for the command implementation.</param>
         /// <value>The possibility of execution.</value>
         private readonly Func<object, bool> canExecute;
+
         /// <summary>
         /// The implementation of the command.
         /// </summary>
         /// <param>Object for the command implementation.</param>
         /// <owner>Anton Petrenko</owner>
         private readonly Action<object> execute;
+
         /// <summary>
         /// Defines the method that determines whether the command can execute in its current state.
         /// </summary>
@@ -32,6 +34,7 @@ namespace ItemList
         {
             return this.canExecute == null || this.canExecute(parameter);
         }
+
         /// <summary>
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
@@ -41,6 +44,7 @@ namespace ItemList
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
+
         /// <summary>
         /// Defines the method to be called when the command is invoked.
         /// </summary>
@@ -50,6 +54,7 @@ namespace ItemList
         {
             this.execute(parameter);
         }
+
         /// <summary>
         /// Initializes a new instance of the RelayCommand class.
         /// </summary>
