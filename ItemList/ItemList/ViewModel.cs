@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace ItemList
@@ -37,28 +38,33 @@ namespace ItemList
         {
             get
             {
-                if (this.addCommand != null)
-                {
-                    return this.addCommand;
-                }
-                this.addCommand = this.AddNewItemToCollection();
+                if (this.addCommand is null)
+                    this.addCommand = new RelayCommand(this.AddPhone, this.GetCanExecuteAddCommand);
+                
                 return this.addCommand;
             }
         }
 
         /// <summary>
-        /// Command adds new item to Observable Collection of phones and cleans phone's view model state.
+        /// Gets the can execute add command.
         /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <returns>Instance of RelayCommand class.</returns>
-        private RelayCommand AddNewItemToCollection ()
+        /// <owner>Aleksey Beletsky</owner>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        private bool GetCanExecuteAddCommand(object obj)
         {
-            return new RelayCommand(obj =>
-            {
-                this.ListOfItems.Add(new Phone { Manufacture = this.Manufacture, Model = this.Model });
-                this.ClearField();
-                this.UpdateTextBoxes();
-            });
+            return !(string.IsNullOrEmpty(this.Manufacture) || string.IsNullOrEmpty(this.Model));
+        }
+
+        /// <summary>
+        /// Adds the phone.
+        /// </summary>
+        /// <owner>Aleksey Beletsky</owner>
+        private void AddPhone(object obj)
+        {
+            this.ListOfItems.Add(new Phone { Manufacture = this.Manufacture, Model = this.Model });
+            this.ClearField();
+            this.UpdateTextBoxes();
         }
 
         /// <summary>
@@ -80,14 +86,35 @@ namespace ItemList
         {
             get
             {
-                return this.deleteCommand ??
-                    (this.deleteCommand = new RelayCommand(obj =>
-                    {
-                        this.ListOfItems.Remove(this.selectedItem);
-                    }));
+                if (this.deleteCommand == null)
+                    this.deleteCommand = new RelayCommand(this.DeletePhone, this.IsDeleteAvailable);
+
+                return this.deleteCommand;
             }
         }
-        
+
+        /// <summary>
+        /// Deletes the phone.
+        /// </summary>
+        /// <owner>Aleksey Beletsky</owner>
+        private void DeletePhone(object obj)
+        {
+            this.ListOfItems.Remove(this.SelectedItem);
+        }
+
+        /// <summary>
+        /// Determines whether the delete is available.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>
+        ///   <c>true</c> if [is delete available] [the specified object]; otherwise, <c>false</c>.
+        /// </returns>
+        /// <owner>Aleksey Beletsky</owner>
+        private bool IsDeleteAvailable(object obj)
+        {
+            return this.ListOfItems.Any() && this.SelectedItem != null;
+        }
+
         /// <summary>
         /// Gets or sets collection of items.
         /// </summary>
@@ -133,9 +160,11 @@ namespace ItemList
             get { return this.selectedItem; }
             set
             {
-                if (this.selectedItem!=value)
+                if (this.selectedItem == value)
+                    return;
+
                 this.selectedItem = value;
-                this.OnPropertyChanged("SelectedItem");
+                this.OnPropertyChanged(nameof(this.SelectedItem));
             }
         }
 
@@ -145,8 +174,8 @@ namespace ItemList
         /// <owner>Anton Petrenko</owner>
         private void UpdateTextBoxes()
         {
-            this.OnPropertyChanged("Manufacture");
-            this.OnPropertyChanged("Model");
+            this.OnPropertyChanged(nameof(this.Manufacture));
+            this.OnPropertyChanged(nameof(this.Model));
         }
 
         /// <summary>
