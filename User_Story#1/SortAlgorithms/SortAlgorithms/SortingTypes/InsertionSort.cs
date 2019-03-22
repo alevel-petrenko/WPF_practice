@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace SortAlgorithms.SortingTypes
 {
-    public class InsertionSort<T> where T : IComparable
+    public class InsertionSort<T> : CollectionSorter<T> where T : IComparable
     {
         public InsertionSort()
         {
             //Here will be sort type from enum
         }
 
-        public void Sort (T[] inputCollection)
+        public override void Sort (T[] inputCollection)
         {
             for (int i = 1; i < inputCollection.Count(); i++)
             {

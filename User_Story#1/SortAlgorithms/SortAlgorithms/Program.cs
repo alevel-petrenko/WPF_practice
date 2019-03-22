@@ -14,7 +14,7 @@ namespace SortAlgorithms
             }
             Console.WriteLine();
 
-            InsertionSort<int> IS = new InsertionSort<int>();
+            SelectionSort<int> IS = new SelectionSort<int>();
             IS.Sort(list);
 
             foreach (var item in list)
