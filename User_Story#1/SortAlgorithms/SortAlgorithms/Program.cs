@@ -1,0 +1,26 @@
+﻿using SortAlgorithms.SortingTypes;
+using System;
+
+namespace SortAlgorithms
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var list = new int[] { 6, 1, 8, 7, 150, 98, 56, 11 };
+            foreach (var item in list)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+
+            InsertionSort<int> IS = new InsertionSort<int>();
+            IS.Sort(list);
+
+            foreach (var item in list)
+            {
+                Console.Write(item + " ");
+            }
+        }
+    }
+}
