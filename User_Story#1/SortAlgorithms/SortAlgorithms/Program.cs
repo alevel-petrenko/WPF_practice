@@ -7,14 +7,14 @@ namespace SortAlgorithms
     {
         static void Main(string[] args)
         {
-            var list = new int[] { 6, 1, 8, 7, 150, 98, 56, 11 };
+            var list = new int[] { 6, 1, 8, 7, 150, 98, 56, 11, -5 };
             foreach (var item in list)
             {
                 Console.Write(item + " ");
             }
             Console.WriteLine();
 
-            SelectionSort<int> IS = new SelectionSort<int>();
+            var IS = new InsertionSort<int>();
             IS.Sort(list);
 
             foreach (var item in list)
