@@ -7,20 +7,21 @@ namespace SortAlgorithms
     {
         static void Main(string[] args)
         {
-            var list = new int[] { 6, 1, 8, 7, 150, 98, 56, 11, -5 };
+            var list = new int[] { 6, 1, 8, 0,5, 7, 150, 98, 56, 11, -5 };
             foreach (var item in list)
             {
                 Console.Write(item + " ");
             }
             Console.WriteLine();
-
-            var IS = new InsertionSort<int>();
+            
+            var IS = new SortTest<int>();
             IS.Sort(list);
 
             foreach (var item in list)
             {
                 Console.Write(item + " ");
             }
+            Console.WriteLine();
         }
     }
 }

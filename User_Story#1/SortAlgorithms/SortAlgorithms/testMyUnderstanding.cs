@@ -1,29 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SortAlgorithms.SortingTypes;
+using System;
 
 namespace SortAlgorithms
 {
-    class testMyUnderstanding<T> where T: IComparable
+    class SortTest<T> : CollectionSorter<T> where T : IComparable
     {
-        public void Sort (T [] array)
+        //insertion
+        //public override void Sort(T[] inputCollection)
+        //{
+        //    for (int i = 1; i < inputCollection.Count(); i++)
+        //    {
+        //        var temp = inputCollection[i];
+        //        int j = i - 1;
+        //        for (; j>=0; j--)
+        //        {
+        //            if (inputCollection[j].CompareTo(temp) > 0)
+        //            {
+        //                inputCollection[j + 1] = inputCollection[j];
+        //            }
+        //            else
+        //                break;
+        //        }
+        //        inputCollection[j+1] = temp;
+        //    }
+        //}
+
+        //selection
+        public override void Sort(T[] inputCollection)
         {
-            for (int i = 1; i < array.Length; i++)
+            for (int i = 0; i < inputCollection.Length; i++)
             {
-                var temp = array[i];
-                int j = i - 1;
-                for (; j >= 0; j--)
+                var min = inputCollection[i];
+                for (int j = i+1; j < inputCollection.Length; j++)
                 {
-                    if (array[j].CompareTo(temp) > 0)
-                    {
-                        array[j + 1] = array[j];
-                    }
-                    else
-                        break;
+                    if (inputCollection[j].CompareTo(min) < 0)
+                        min = inputCollection[j];
                 }
-                array[j+1] = temp;
+                inputCollection[Array.IndexOf(inputCollection, min)] = inputCollection[i];
+                inputCollection[i] = min;
             }
         }
     }

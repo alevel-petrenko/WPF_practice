@@ -49,6 +49,7 @@
     <Compile Include="SortingTypes\InsertionSort.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortingTypes\QuickSort.cs" />
     <Compile Include="SortingTypes\SelectionSort.cs" />
     <Compile Include="testMyUnderstanding.cs" />
   </ItemGroup>
