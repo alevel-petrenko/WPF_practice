@@ -14,7 +14,7 @@ namespace SortAlgorithms
             }
             Console.WriteLine();
             
-            var IS = new SortTest<int>();
+            var IS = new QuickSort<int>();
             IS.Sort(list);
 
             foreach (var item in list)

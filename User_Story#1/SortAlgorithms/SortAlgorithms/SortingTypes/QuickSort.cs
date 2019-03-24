@@ -2,26 +2,33 @@
 
 namespace SortAlgorithms.SortingTypes
 {
-    class QuickSort<T> : CollectionSorter<T> where T : IComparable
+    public class QuickSort<T> : CollectionSorter<T> where T : IComparable
     {
         public override void Sort(T[] inputCollection)
         {
-            for (int i = 0, j = 0; i < inputCollection.Length;)
+            for (int i = 0; i < inputCollection.Length; i++)
             {
                 var pivot = inputCollection[inputCollection.Length - 1];
+                int currentIndex = 0;
+                int wall = 0;
 
-                if (inputCollection[j].CompareTo(pivot)>0)
+                while (currentIndex < inputCollection.Length)
                 {
-                    i++;
-                    continue;
-                }
-                else
-                {
-                    var temp = inputCollection[i];
-                    inputCollection[i] = inputCollection[j];
-                    inputCollection[j] = temp;
+                    if (inputCollection[currentIndex].CompareTo(pivot) > 0)
+                    {
+                        currentIndex++;
+                    }
+                    else if (currentIndex == Array.IndexOf(inputCollection, pivot) ||
+                        inputCollection[currentIndex].CompareTo(pivot) <= 0)
+                    {
+                        var temp = inputCollection[currentIndex];
+                        inputCollection[currentIndex] = inputCollection[wall];
+                        inputCollection[wall] = temp;
+                        wall++;
+                    }
                 }
             }
+            // 16 10 11 58 4 7
         }
     }
 }
