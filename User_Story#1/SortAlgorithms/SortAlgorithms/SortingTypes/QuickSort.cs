@@ -6,11 +6,16 @@ namespace SortAlgorithms.SortingTypes
     {
         public override void Sort(T[] inputCollection)
         {
-            var pivot = inputCollection[(inputCollection.Length/2)];
-            int currentIndex = 0;
-            int wall = 0;
+            SortSubArray(inputCollection, 0, inputCollection.Length-1);
+        }
 
-            for (; currentIndex < inputCollection.Length; currentIndex++)
+        private void SortSubArray (T[] inputCollection, int left, int range)
+        {
+            var pivot = inputCollection[inputCollection.Length / 2];
+            int currentIndex = left;
+            int wall = left;
+
+            for (; currentIndex <= range; currentIndex++)
             {
                 if (currentIndex == Array.IndexOf(inputCollection, pivot))
                 {
@@ -18,17 +23,23 @@ namespace SortAlgorithms.SortingTypes
                 }
                 if (inputCollection[currentIndex].CompareTo(pivot) < 0)
                 {
-                    var temp = inputCollection[currentIndex];
-                    inputCollection[currentIndex] = inputCollection[wall];
-                    inputCollection[wall] = temp;
+                    Swap(inputCollection, currentIndex, wall);
                     wall++;
                 }
-                if (currentIndex == inputCollection.Length-1)
+                if (currentIndex == inputCollection.Length - 1)
                 {
-                    var temp = inputCollection[Array.IndexOf(inputCollection, pivot)];
-                    inputCollection[Array.IndexOf(inputCollection, pivot)] = inputCollection[wall];
-                    inputCollection[wall] = temp;
+                    Swap(inputCollection, Array.IndexOf(inputCollection, pivot), wall);
                 }
+            }
+        }
+
+        private void Swap (T[] collection, int currentIndex, int wall)
+        {
+            if (collection != null)
+            {
+                var temp = collection[currentIndex];
+                collection[currentIndex] = collection[wall];
+                collection[wall] = temp;
             }
         }
     }
