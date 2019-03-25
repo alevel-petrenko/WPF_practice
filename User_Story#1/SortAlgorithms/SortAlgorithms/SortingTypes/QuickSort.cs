@@ -6,29 +6,25 @@ namespace SortAlgorithms.SortingTypes
     {
         public override void Sort(T[] inputCollection)
         {
-            for (int i = 0; i < inputCollection.Length; i++)
-            {
-                var pivot = inputCollection[inputCollection.Length - 1];
-                int currentIndex = 0;
-                int wall = 0;
+            var pivot = inputCollection[(inputCollection.Length/2)];
+            int currentIndex = 0;
+            int wall = 0;
 
-                while (currentIndex < inputCollection.Length)
+            for (; currentIndex < inputCollection.Length; currentIndex++)
+            {
+                if (inputCollection[currentIndex].CompareTo(pivot) < 0)
                 {
-                    if (inputCollection[currentIndex].CompareTo(pivot) > 0)
-                    {
-                        currentIndex++;
-                    }
-                    else if (currentIndex == Array.IndexOf(inputCollection, pivot) ||
-                        inputCollection[currentIndex].CompareTo(pivot) <= 0)
-                    {
-                        var temp = inputCollection[currentIndex];
-                        inputCollection[currentIndex] = inputCollection[wall];
-                        inputCollection[wall] = temp;
-                        wall++;
-                    }
+                    var temp = inputCollection[currentIndex];
+                    inputCollection[currentIndex] = inputCollection[wall];
+                    inputCollection[wall] = temp;
+                    wall++;
+                }
+                else if (inputCollection[currentIndex].CompareTo(pivot) < 0)
+                {
+                    continue;
                 }
             }
-            // 16 10 11 58 4 7
+            // 16 8 10 11 58 4 7
         }
     }
 }
