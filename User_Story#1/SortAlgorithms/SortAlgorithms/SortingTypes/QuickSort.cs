@@ -9,42 +9,38 @@ namespace SortAlgorithms.SortingTypes
             SortSubArray(inputCollection, 0, inputCollection.Length);
         }
 
-        private void SortSubArray(T[] inputCollection, int left, int range)
+        private void SortSubArray(T[] inputCollection, int start, int range)
         {
-            if (left >= range)
+            if (start >= range)
             {
                 return;
             }
 
-            var pivot = (range - left) / 2;
-            int currentIndex = left;
-            int wall = left;
+            var pivot = range - 1;
+            int currentIndex = start;
+            int wall = start;
 
             for (; currentIndex < range; currentIndex++)
             {
-                if (currentIndex == Array.IndexOf(inputCollection, pivot))
-                {
-                    continue;
-                }
-                if (inputCollection[currentIndex].CompareTo(pivot) < 0)
+                if (inputCollection[currentIndex].CompareTo(inputCollection[pivot]) < 0)
                 {
                     SwapElements(inputCollection, currentIndex, wall);
                     wall++;
                 }
             }
-            SwapElements(inputCollection, Array.IndexOf(inputCollection, pivot), wall);
+            SwapElements(inputCollection, Array.IndexOf(inputCollection, inputCollection[pivot]), wall);
 
-            SortSubArray(inputCollection, left, pivot - 1);
+            SortSubArray(inputCollection, start, pivot - 1);
             SortSubArray(inputCollection, pivot + 1, range);
         }
 
-        private void SwapElements(T[] collection, int currentIndex, int wall)
+        private void SwapElements(T[] collection, int rightIndex, int leftIndex)
         {
-            if (collection != null && currentIndex >= 0 || wall >= 0)
+            if (collection != null && rightIndex >= 0 || leftIndex >= 0)
             {
-                var temp = collection[currentIndex];
-                collection[currentIndex] = collection[wall];
-                collection[wall] = temp;
+                var temp = collection[rightIndex];
+                collection[rightIndex] = collection[leftIndex];
+                collection[leftIndex] = temp;
             }
         }
     }
