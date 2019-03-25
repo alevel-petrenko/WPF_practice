@@ -12,6 +12,10 @@ namespace SortAlgorithms.SortingTypes
 
             for (; currentIndex < inputCollection.Length; currentIndex++)
             {
+                if (currentIndex == Array.IndexOf(inputCollection, pivot))
+                {
+                    continue;
+                }
                 if (inputCollection[currentIndex].CompareTo(pivot) < 0)
                 {
                     var temp = inputCollection[currentIndex];
@@ -19,12 +23,13 @@ namespace SortAlgorithms.SortingTypes
                     inputCollection[wall] = temp;
                     wall++;
                 }
-                else if (inputCollection[currentIndex].CompareTo(pivot) < 0)
+                if (currentIndex == inputCollection.Length-1)
                 {
-                    continue;
+                    var temp = inputCollection[Array.IndexOf(inputCollection, pivot)];
+                    inputCollection[Array.IndexOf(inputCollection, pivot)] = inputCollection[wall];
+                    inputCollection[wall] = temp;
                 }
             }
-            // 16 8 10 11 58 4 7
         }
     }
 }
