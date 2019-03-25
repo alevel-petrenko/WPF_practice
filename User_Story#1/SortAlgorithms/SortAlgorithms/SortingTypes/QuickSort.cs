@@ -6,16 +6,21 @@ namespace SortAlgorithms.SortingTypes
     {
         public override void Sort(T[] inputCollection)
         {
-            SortSubArray(inputCollection, 0, inputCollection.Length-1);
+            SortSubArray(inputCollection, 0, inputCollection.Length);
         }
 
-        private void SortSubArray (T[] inputCollection, int left, int range)
+        private void SortSubArray(T[] inputCollection, int left, int range)
         {
-            var pivot = inputCollection[inputCollection.Length / 2];
+            if (left >= range)
+            {
+                return;
+            }
+
+            var pivot = (range - left) / 2;
             int currentIndex = left;
             int wall = left;
 
-            for (; currentIndex <= range; currentIndex++)
+            for (; currentIndex < range; currentIndex++)
             {
                 if (currentIndex == Array.IndexOf(inputCollection, pivot))
                 {
@@ -23,19 +28,19 @@ namespace SortAlgorithms.SortingTypes
                 }
                 if (inputCollection[currentIndex].CompareTo(pivot) < 0)
                 {
-                    Swap(inputCollection, currentIndex, wall);
+                    SwapElements(inputCollection, currentIndex, wall);
                     wall++;
                 }
-                if (currentIndex == inputCollection.Length - 1)
-                {
-                    Swap(inputCollection, Array.IndexOf(inputCollection, pivot), wall);
-                }
             }
+            SwapElements(inputCollection, Array.IndexOf(inputCollection, pivot), wall);
+
+            SortSubArray(inputCollection, left, pivot - 1);
+            SortSubArray(inputCollection, pivot + 1, range);
         }
 
-        private void Swap (T[] collection, int currentIndex, int wall)
+        private void SwapElements(T[] collection, int currentIndex, int wall)
         {
-            if (collection != null)
+            if (collection != null && currentIndex >= 0 || wall >= 0)
             {
                 var temp = collection[currentIndex];
                 collection[currentIndex] = collection[wall];
