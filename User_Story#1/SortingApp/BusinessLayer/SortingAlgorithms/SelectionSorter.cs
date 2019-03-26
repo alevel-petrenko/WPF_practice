@@ -9,7 +9,7 @@ namespace BusinessLayer.SortingAlgorithms
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="BusinessLayer.SortingAlgorithms.CollectionSorter{T}" />
-    public class SelectionSort<T> : CollectionSorter<T> where T : IComparable
+    public class SelectionSorter<T> : CollectionSorter<T> where T : IComparable
     {
         /// <summary>
         /// Sorts the specified input collection.
