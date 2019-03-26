@@ -27,9 +27,10 @@ namespace ViewModel
         /// Initializes a new instance of the <see cref="CollectionSortingViewModel{T}"/> class.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public CollectionSortingViewModel()
+        public CollectionSortingViewModel(CollectionSortHandler<T> handler)
         {
             this.CollectionOfNumbers = new ObservableCollection<T>();
+            this.handler = handler;
         }
 
         /// <summary>
@@ -37,6 +38,7 @@ namespace ViewModel
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private SortType type;
+
 
         private CollectionSortHandler<T> handler;
 
@@ -52,17 +54,35 @@ namespace ViewModel
             get;
         }
 
+        /// <summary>
+        /// Gets the sort command.
+        /// </summary>
+        /// <returns>
+        /// The sort command.
+        /// </returns>
+        /// <owner>Anton Petrenko</owner>
         public RelayCommand Sort
         {
             get;
         }
 
+        /// <summary>
+        /// Gets the save command.
+        /// </summary>
+        /// <returns>
+        /// The save command.
+        /// </returns>
+        /// <owner>Anton Petrenko</owner>
         public RelayCommand Save
         {
             get;
         }
     }
 
+    /// <summary>
+    /// Stores types of sort.
+    /// </summary>
+    /// <owner>Anton Petrenko</owner>
     public enum SortType
     {
         InsertionSorter,
