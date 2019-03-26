@@ -49,9 +49,11 @@
     <Compile Include="DataReader\Interfaces\IValidator.cs" />
     <Compile Include="DataWriter\DataWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortingAlgorithms\InsertionSort.cs" />
+    <Compile Include="SortingAlgorithms\Interfaces\CollectionSorter.cs" />
+    <Compile Include="SortingAlgorithms\QuickSort.cs" />
+    <Compile Include="SortingAlgorithms\SelectionSorter.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SortingAlgorithms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
