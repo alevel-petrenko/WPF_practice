@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataParser\Interfaces\IDataParser.cs" />
+    <Compile Include="DataParser\ParserToIEnumerable.cs" />
     <Compile Include="DataReader\DataReader.cs" />
     <Compile Include="DataReader\СloudFileValidator.cs" />
     <Compile Include="DataReader\LocalFileValidator.cs" />
