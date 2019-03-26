@@ -1,6 +1,6 @@
-﻿using BusinessLayer.Interfaces;
+﻿using BusinessLayer.Validator.Interfaces;
 
-namespace BusinessLayer.DataReader
+namespace BusinessLayer.Validator
 {
     /// <summary>
     /// Check whether content from file is valid.

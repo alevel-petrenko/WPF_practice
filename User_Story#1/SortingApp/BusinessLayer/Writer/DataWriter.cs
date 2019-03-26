@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace BusinessLayer.DataWriter
+namespace BusinessLayer.Writer
 {
     /// <summary>
     /// Write content to file.

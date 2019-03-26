@@ -41,13 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataParser\Interfaces\IDataParser.cs" />
-    <Compile Include="DataParser\ParserToArray.cs" />
-    <Compile Include="DataReader\DataReader.cs" />
-    <Compile Include="DataReader\СloudFileValidator.cs" />
-    <Compile Include="DataReader\LocalFileValidator.cs" />
-    <Compile Include="DataReader\Interfaces\IValidator.cs" />
-    <Compile Include="DataWriter\DataWriter.cs" />
+    <Compile Include="CollectionSortHandler.cs" />
+    <Compile Include="Parser\Interfaces\IDataParser.cs" />
+    <Compile Include="Parser\ParserToArray.cs" />
+    <Compile Include="Reader\DataReader.cs" />
+    <Compile Include="Validator\СloudFileValidator.cs" />
+    <Compile Include="Validator\LocalFileValidator.cs" />
+    <Compile Include="Validator\Interfaces\IValidator.cs" />
+    <Compile Include="Writer\DataWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortingAlgorithms\InsertionSort.cs" />
     <Compile Include="SortingAlgorithms\Interfaces\CollectionSorter.cs" />

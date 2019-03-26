@@ -1,7 +1,7 @@
-﻿using BusinessLayer.DataReader.Interfaces;
+﻿using BusinessLayer.Validator.Interfaces;
 using System.IO;
 
-namespace BusinessLayer.DataReader
+namespace BusinessLayer.Reader
 {
     /// <summary>
     /// Read content from file and store it.

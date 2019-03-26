@@ -1,4 +1,4 @@
-﻿namespace BusinessLayer.DataReader.Interfaces
+﻿namespace BusinessLayer.Validator.Interfaces
 {
     /// <summary>
     /// Represents general interface for validation classes.
