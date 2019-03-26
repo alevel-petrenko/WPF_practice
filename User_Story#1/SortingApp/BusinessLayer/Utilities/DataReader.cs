@@ -28,12 +28,6 @@ namespace BusinessLayer.Reader
         public string Path { get; set; }
 
         /// <summary>
-        /// The reader
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private StreamReader reader;
-
-        /// <summary>
         /// The validator
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -55,7 +49,7 @@ namespace BusinessLayer.Reader
         /// <owner>Anton Petrenko</owner>
         public void ReadContent()
         {
-            using (reader = new StreamReader(Path))
+            using (StreamReader reader = new StreamReader(Path))
             {
 
             }

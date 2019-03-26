@@ -11,17 +11,9 @@ namespace BusinessLayer.Writer
         /// <summary>
         /// Gets or sets the path.
         /// </summary>
-        /// <value>
-        /// The path.
-        /// </value>
         /// <owner>Anton Petrenko</owner>
+        /// <returns>The path.</returns>
         public string Path { get; set; }
-
-        /// <summary>
-        /// The writer.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private StreamWriter writer;
 
         /// <summary>
         /// Writes the collection by specified path.
@@ -29,7 +21,7 @@ namespace BusinessLayer.Writer
         /// <owner>Anton Petrenko</owner>
         public void WriteContent(T[] collection)
         {
-            using (writer = new StreamWriter(Path))
+            using (StreamWriter writer = new StreamWriter(Path))
             {
 
             }

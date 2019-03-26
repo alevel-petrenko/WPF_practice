@@ -42,16 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionSortHandler.cs" />
-    <Compile Include="Parser\Interfaces\IDataParser.cs" />
-    <Compile Include="Parser\ParserToArray.cs" />
-    <Compile Include="Reader\DataReader.cs" />
-    <Compile Include="Validator\СloudFileValidator.cs" />
-    <Compile Include="Validator\LocalFileValidator.cs" />
-    <Compile Include="Validator\Interfaces\IValidator.cs" />
-    <Compile Include="Writer\DataWriter.cs" />
+    <Compile Include="Utilities\Parser\Interfaces\IDataParser.cs" />
+    <Compile Include="Utilities\Parser\ParserToArray.cs" />
+    <Compile Include="Utilities\DataReader.cs" />
+    <Compile Include="Utilities\Validator\СloudFileValidator.cs" />
+    <Compile Include="Utilities\Validator\LocalFileValidator.cs" />
+    <Compile Include="Utilities\Validator\Interfaces\IValidator.cs" />
+    <Compile Include="Utilities\DataWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortingAlgorithms\InsertionSort.cs" />
-    <Compile Include="SortingAlgorithms\Interfaces\CollectionSorter.cs" />
+    <Compile Include="SortingAlgorithms\CollectionSorter.cs" />
     <Compile Include="SortingAlgorithms\QuickSort.cs" />
     <Compile Include="SortingAlgorithms\SelectionSorter.cs" />
   </ItemGroup>
