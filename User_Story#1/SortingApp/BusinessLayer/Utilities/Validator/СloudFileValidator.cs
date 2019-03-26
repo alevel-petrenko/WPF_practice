@@ -1,4 +1,4 @@
-﻿using BusinessLayer.Validator.Interfaces;
+﻿using BusinessLayer.Utilities.Validator.Interfaces;
 
 namespace BusinessLayer.Validator
 {

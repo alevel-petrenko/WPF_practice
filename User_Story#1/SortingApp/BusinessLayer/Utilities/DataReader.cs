@@ -1,4 +1,4 @@
-﻿using BusinessLayer.Validator.Interfaces;
+﻿using BusinessLayer.Utilities.Validator.Interfaces;
 using System.IO;
 
 namespace BusinessLayer.Reader

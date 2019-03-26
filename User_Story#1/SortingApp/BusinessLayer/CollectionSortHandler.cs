@@ -1,4 +1,4 @@
-﻿using BusinessLayer.DataParser.Interfaces;
+﻿using BusinessLayer.Utilities.Parser.Interfaces;
 using BusinessLayer.Reader;
 using BusinessLayer.SortingAlgorithms;
 using BusinessLayer.Writer;
@@ -13,31 +13,31 @@ namespace BusinessLayer
     public class CollectionSortHandler<T>
     {
         /// <summary>
-        /// The parser instance.
+        /// Holds the parser.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private IDataParser parser;
 
         /// <summary>
-        /// The reader instance.
+        /// Holds the reader.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private DataReader reader;
 
         /// <summary>
-        /// The sorted collection.
+        /// Holds the sorted collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private T[] sortedCollection;
 
         /// <summary>
-        /// The sorter instance.
+        /// Holds the sorter.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private CollectionSorter<T> sorter;
 
         /// <summary>
-        /// The writer instance.
+        /// Holds the writer.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private DataWriter<T> writer;
@@ -52,10 +52,13 @@ namespace BusinessLayer
         /// <param name="parser">The parser instance.</param>
         public CollectionSortHandler(DataReader reader, DataWriter<T> writer, CollectionSorter<T> sorter, IDataParser parser)
         {
-            this.parser = parser;
-            this.reader = reader;
-            this.sorter = sorter;
-            this.writer = writer;
+            if (reader != null && writer != null && sorter != null && parser != null)
+            {
+                this.parser = parser;
+                this.reader = reader;
+                this.sorter = sorter;
+                this.writer = writer;
+            }
         }
 
         /// <summary>

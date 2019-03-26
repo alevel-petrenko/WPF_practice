@@ -1,4 +1,4 @@
-﻿namespace BusinessLayer.Validator.Interfaces
+﻿namespace BusinessLayer.Utilities.Validator.Interfaces
 {
     /// <summary>
     /// Represents general interface for validation classes.

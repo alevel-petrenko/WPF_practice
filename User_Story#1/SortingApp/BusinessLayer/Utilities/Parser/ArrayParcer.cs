@@ -1,4 +1,4 @@
-﻿using BusinessLayer.DataParser.Interfaces;
+﻿using BusinessLayer.Utilities.Parser.Interfaces;
 using System;
 
 namespace BusinessLayer.DataParser
@@ -9,7 +9,7 @@ namespace BusinessLayer.DataParser
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="BusinessLayer.DataParser.Interfaces.IDataParser" />
-    public class ParserToArray<T> : IDataParser
+    public class ArrayParcer<T> : IDataParser
     {
         /// <summary>
         /// The list of items from file
@@ -27,7 +27,7 @@ namespace BusinessLayer.DataParser
         /// Convert data to collection of type Double.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public void ConvertDataToCollectionOfDouble()
+        public void DataConverter()
         {
             throw new NotImplementedException();
         }
@@ -36,7 +36,7 @@ namespace BusinessLayer.DataParser
         /// Initializes a new instance of the ParserToIEnumerable class with array of separators.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public ParserToArray()
+        public ArrayParcer()
         {
             separators = new char[] { '.', ',', ';', '/', ' ' };
         }

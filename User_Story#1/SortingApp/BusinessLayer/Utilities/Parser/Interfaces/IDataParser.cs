@@ -1,4 +1,4 @@
-﻿namespace BusinessLayer.DataParser.Interfaces
+﻿namespace BusinessLayer.Utilities.Parser.Interfaces
 {
     /// <summary>
     /// Represents general interface for data parser classes.
@@ -10,6 +10,6 @@
         /// Convert data to collection of type Double.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        void ConvertDataToCollectionOfDouble();
+        void DataConverter();
     }
 }
