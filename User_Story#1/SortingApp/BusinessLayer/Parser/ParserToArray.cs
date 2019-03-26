@@ -4,7 +4,7 @@ using System;
 namespace BusinessLayer.DataParser
 {
     /// <summary>
-    /// Parse collection to array of Double type
+    /// Parse collection to array of Double type.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <owner>Anton Petrenko</owner>
