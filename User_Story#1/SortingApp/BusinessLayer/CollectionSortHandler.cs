@@ -8,8 +8,8 @@ namespace BusinessLayer
     /// <summary>
     /// Handle all requests regarding reading, sorting collection and writing it to the file.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     /// <owner>Anton Petrenko</owner>
+    /// <typeparam name="T"></typeparam>
     public class CollectionSortHandler<T>
     {
         /// <summary>
@@ -45,11 +45,11 @@ namespace BusinessLayer
         /// <summary>
         /// Initializes a new instance of the <see cref="CollectionSortHandler{T}"/> class.
         /// </summary>
+        /// <owner>Anton Petrenko</owner>
         /// <param name="reader">The reader instance.</param>
         /// <param name="writer">The writer instance.</param>
         /// <param name="sorter">The sorter instance.</param>
         /// <param name="parser">The parser instance.</param>
-        /// <owner>Anton Petrenko</owner>
         public CollectionSortHandler(DataReader reader, DataWriter<T> writer, CollectionSorter<T> sorter, IDataParser parser)
         {
             this.parser = parser;

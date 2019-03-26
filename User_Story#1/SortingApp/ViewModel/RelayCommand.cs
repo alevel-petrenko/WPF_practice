@@ -20,8 +20,8 @@ namespace ViewModel
         /// <summary>
         /// The implementation of the command.
         /// </summary>
-        /// <param>Object for the command implementation.</param>
         /// <owner>Anton Petrenko</owner>
+        /// <param>Object for the command implementation.</param>
         private readonly Action<object> execute;
 
         /// <summary>

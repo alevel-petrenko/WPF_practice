@@ -6,8 +6,8 @@ namespace BusinessLayer.DataParser
     /// <summary>
     /// Parse collection to array of Double type.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     /// <owner>Anton Petrenko</owner>
+    /// <typeparam name="T"></typeparam>
     /// <seealso cref="BusinessLayer.DataParser.Interfaces.IDataParser" />
     public class ParserToArray<T> : IDataParser
     {

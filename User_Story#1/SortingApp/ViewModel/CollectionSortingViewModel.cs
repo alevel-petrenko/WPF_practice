@@ -7,8 +7,8 @@ namespace ViewModel
     /// <summary>
     /// Represents a ViewModel layer with all fields from View and logic how to handle requests from UI.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     /// <owner>Anton Petrenko</owner>
+    /// <typeparam name="T"></typeparam>
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public class CollectionSortingViewModel<T> : INotifyPropertyChanged
     {
@@ -17,10 +17,8 @@ namespace ViewModel
         /// <summary>
         /// Gets or sets the collection of numbers.
         /// </summary>
-        /// <returns>
-        /// The collection of numbers.
-        /// </returns>
         /// <owner>Anton Petrenko</owner>
+        /// <returns>The collection of numbers.</returns>
         public ObservableCollection<T> CollectionOfNumbers { get; set; }
 
         /// <summary>
@@ -45,10 +43,8 @@ namespace ViewModel
         /// <summary>
         /// Gets the read command.
         /// </summary>
-        /// <returns>
-        /// The read command.
-        /// </returns>
         /// <owner>Anton Petrenko</owner>
+        /// <returns>The read command.</returns>
         public RelayCommand Read
         {
             get;
@@ -57,10 +53,8 @@ namespace ViewModel
         /// <summary>
         /// Gets the sort command.
         /// </summary>
-        /// <returns>
-        /// The sort command.
-        /// </returns>
         /// <owner>Anton Petrenko</owner>
+        /// <returns>The sort command.</returns>
         public RelayCommand Sort
         {
             get;
@@ -69,10 +63,8 @@ namespace ViewModel
         /// <summary>
         /// Gets the save command.
         /// </summary>
-        /// <returns>
-        /// The save command.
-        /// </returns>
         /// <owner>Anton Petrenko</owner>
+        /// <returns>The save command.</returns>
         public RelayCommand Save
         {
             get;

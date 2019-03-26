@@ -12,19 +12,15 @@ namespace BusinessLayer.Reader
         /// <summary>
         /// Gets or sets the content.
         /// </summary>
-        /// <value>
-        /// The content.
-        /// </value>
         /// <owner>Anton Petrenko</owner>
+        /// <returns>The content.</returns>
         public string Content { get; set; }
 
         /// <summary>
         /// Gets or sets the path.
         /// </summary>
-        /// <value>
-        /// The path.
-        /// </value>
         /// <owner>Anton Petrenko</owner>
+        /// <returns>The path.</returns>
         public string Path { get; set; }
 
         /// <summary>
@@ -36,8 +32,8 @@ namespace BusinessLayer.Reader
         /// <summary>
         /// Initializes a new instance of the DataReader class.
         /// </summary>
-        /// <param name="validator">The validator.</param>
         /// <owner>Anton Petrenko</owner>
+        /// <param name="validator">The validator.</param>
         public DataReader(IValidator validator)
         {
             this.validator = validator;

@@ -3,15 +3,15 @@
     /// <summary>
     /// Sort elements in an ascending order.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     /// <owner>Anton Petrenko</owner>
+    /// <typeparam name="T"></typeparam>
     abstract public class CollectionSorter<T>
     {
         /// <summary>
         /// Sorts the specified input collection.
         /// </summary>
-        /// <param name="inputCollection">The input collection.</param>
         /// <owner>Anton Petrenko</owner>
+        /// <param name="inputCollection">The input collection.</param>
         abstract public void Sort(T[] inputCollection);
     }
 }

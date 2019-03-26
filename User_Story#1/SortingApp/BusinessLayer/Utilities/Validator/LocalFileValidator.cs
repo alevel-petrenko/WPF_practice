@@ -12,11 +12,11 @@ namespace BusinessLayer.Validator
         /// <summary>
         /// Determines whether data exists.
         /// </summary>
+        /// <owner>Anton Petrenko</owner>
         /// <param name="content">The content.</param>
         /// <returns>
         ///   <c>true</c> if data exists; otherwise, <c>false</c>.
         /// </returns>
-        /// <owner>Anton Petrenko</owner>
         public bool IsDataExist(string content)
         {
             throw new System.NotImplementedException();
@@ -25,11 +25,11 @@ namespace BusinessLayer.Validator
         /// <summary>
         /// Determines whether file is in valid format.
         /// </summary>
+        /// <owner>Anton Petrenko</owner>
         /// <param name="content">The content.</param>
         /// <returns>
         ///   <c>true</c> if file is in valid format; otherwise, <c>false</c>.
         /// </returns>
-        /// <owner>Anton Petrenko</owner>
         private bool IsFileInValidFormat(string content)
         {
             throw new System.NotImplementedException();
