@@ -39,7 +39,7 @@ namespace BusinessLayer.SortingAlgorithms
                     wall++;
                 }
             }
-            SwapElements(inputCollection, Array.IndexOf(inputCollection, inputCollection[pivot]), wall);
+            SwapElements(inputCollection, pivot, wall);
 
             SortSubArray(inputCollection, start, pivot - 1);
             SortSubArray(inputCollection, pivot + 1, range);
