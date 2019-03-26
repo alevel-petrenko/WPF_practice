@@ -1,5 +1,4 @@
-﻿using BusinessLayer.Interfaces;
-using System.IO;
+﻿using System.IO;
 
 namespace BusinessLayer.DataWriter
 {

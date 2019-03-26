@@ -1,4 +1,4 @@
-﻿using BusinessLayer.Interfaces;
+﻿using BusinessLayer.DataReader.Interfaces;
 using System.IO;
 
 namespace BusinessLayer.DataReader

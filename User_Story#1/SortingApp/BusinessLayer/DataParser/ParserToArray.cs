@@ -1,6 +1,5 @@
 ﻿using BusinessLayer.DataParser.Interfaces;
 using System;
-using System.Collections.Generic;
 
 namespace BusinessLayer.DataParser
 {
@@ -10,7 +9,7 @@ namespace BusinessLayer.DataParser
     /// <typeparam name="T"></typeparam>
     /// <owner>Anton Petrenko</owner>
     /// <seealso cref="BusinessLayer.DataParser.Interfaces.IDataParser" />
-    public class ParserToIEnumerable<T> : IDataParser
+    public class ParserToArray<T> : IDataParser
     {
         /// <summary>
         /// The list of items from file
@@ -37,7 +36,7 @@ namespace BusinessLayer.DataParser
         /// Initializes a new instance of the ParserToIEnumerable class with array of separators.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public ParserToIEnumerable()
+        public ParserToArray()
         {
             separators = new char[] { '.', ',', ';', '/', ' ' };
         }
