@@ -10,6 +10,6 @@
         /// Convert data to collection of type Double.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        void DataConverter(string content);
+        T[] DataConverter(string content);
     }
 }

@@ -16,7 +16,7 @@ namespace BusinessLayer
         /// Holds the parser.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private IDataParser parser;
+        private IDataParser<T> parser;
 
         /// <summary>
         /// Holds the reader.
@@ -50,7 +50,7 @@ namespace BusinessLayer
         /// <param name="writer">The writer instance.</param>
         /// <param name="sorter">The sorter instance.</param>
         /// <param name="parser">The parser instance.</param>
-        public CollectionSortHandler(DataReader reader, DataWriter<T> writer, CollectionSorter<T> sorter, IDataParser<double> parser)
+        public CollectionSortHandler(DataReader reader, DataWriter<T> writer, CollectionSorter<T> sorter, IDataParser<T> parser)
         {
             if (reader != null && writer != null && sorter != null && parser != null)
             {

@@ -42,9 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionSortHandler.cs" />
+    <Compile Include="Utilities\Parser\IntegerParser.cs" />
+    <Compile Include="Utilities\Parser\DoubleParser.cs" />
     <Compile Include="Utilities\Parser\Interfaces\IDataParser.cs" />
-    <Compile Include="Utilities\Parser\ArrayParcer.cs" />
+    <Compile Include="Utilities\Parser\ArrayParser.cs" />
     <Compile Include="Utilities\DataReader.cs" />
+    <Compile Include="Utilities\Parser\Interfaces\ITypeParser.cs" />
     <Compile Include="Utilities\Validator\СloudFileValidator.cs" />
     <Compile Include="Utilities\Validator\LocalFileValidator.cs" />
     <Compile Include="Utilities\Validator\Interfaces\IValidator.cs" />
