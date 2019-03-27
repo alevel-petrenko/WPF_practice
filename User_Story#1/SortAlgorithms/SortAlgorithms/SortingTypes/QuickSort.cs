@@ -9,29 +9,23 @@ namespace SortAlgorithms.SortingTypes
             SortSubArray(inputCollection, 0, inputCollection.Length);
         }
 
-        private void SortSubArray(T[] inputCollection, int start, int range)
+        private void SortSubArray(T[] inputCollection, int start, int end)
         {
-            if (start >= range)
+            if (start >= end)
             {
                 return;
             }
-
-            var pivot = range - 1;
-            int currentIndex = start;
             int wall = start;
-
-            for (; currentIndex < range; currentIndex++)
+            for (int currentIndex = start; currentIndex < end; currentIndex++)
             {
-                if (inputCollection[currentIndex].CompareTo(inputCollection[pivot]) < 0)
+                if (inputCollection[currentIndex].CompareTo(inputCollection[end-1]) <= 0)
                 {
                     SwapElements(inputCollection, currentIndex, wall);
                     wall++;
                 }
             }
-            SwapElements(inputCollection, Array.IndexOf(inputCollection, inputCollection[pivot]), wall);
-
-            SortSubArray(inputCollection, start, pivot - 1);
-            SortSubArray(inputCollection, pivot + 1, range);
+            SortSubArray(inputCollection, start, wall - 1);
+            SortSubArray(inputCollection, wall + 1, end);
         }
 
         private void SwapElements(T[] collection, int rightIndex, int leftIndex)
