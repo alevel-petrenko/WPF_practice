@@ -9,7 +9,7 @@ namespace BusinessLayer.DataParser
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="BusinessLayer.DataParser.Interfaces.IDataParser" />
-    public class ArrayParcer<T> : IDataParser
+    public class ArrayParcer<T> : IDataParser<T>
     {
         /// <summary>
         /// The list of items from file
@@ -24,21 +24,28 @@ namespace BusinessLayer.DataParser
         private readonly char[] separators;
 
         /// <summary>
-        /// Convert data to collection of type Double.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public void DataConverter()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Initializes a new instance of the ParserToIEnumerable class with array of separators.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public ArrayParcer()
         {
-            separators = new char[] { '.', ',', ';', '/', ' ' };
+            separators = new char[] { '.', ',', ';', '/' };
+        }
+
+        /// <summary>
+        /// Convert data to collection of type Double.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public void DataConverter(string content)
+        {
+            string[] items = content.Split(separators);
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (Double.TryParse(items[i], out double number))
+                {
+                    listOfItemsFromFile = new double[1]
+                }
+            }
         }
     }
 }

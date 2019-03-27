@@ -50,7 +50,7 @@ namespace BusinessLayer
         /// <param name="writer">The writer instance.</param>
         /// <param name="sorter">The sorter instance.</param>
         /// <param name="parser">The parser instance.</param>
-        public CollectionSortHandler(DataReader reader, DataWriter<T> writer, CollectionSorter<T> sorter, IDataParser parser)
+        public CollectionSortHandler(DataReader reader, DataWriter<T> writer, CollectionSorter<T> sorter, IDataParser<double> parser)
         {
             if (reader != null && writer != null && sorter != null && parser != null)
             {
@@ -67,7 +67,8 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Execute()
         {
-
+            string content = reader.ReadContent();
+            parser.DataConverter(content);
         }
 
         /// <summary>
@@ -76,7 +77,7 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Write()
         {
-
+            writer.WriteContent(sortedCollection);
         }
     }
 }

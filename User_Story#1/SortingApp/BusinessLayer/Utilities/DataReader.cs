@@ -44,7 +44,7 @@ namespace BusinessLayer.Reader
         /// Reads the content from specified path through specified validator.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public void ReadContent()
+        public string ReadContent()
         {
             if (validator.IsDataExist(Path))
             {
@@ -57,9 +57,10 @@ namespace BusinessLayer.Reader
                 }
                 catch (IOException)
                 {
-                    return;
+                    return null;
                 }
             }
+            return Content;
         }
     }
 }

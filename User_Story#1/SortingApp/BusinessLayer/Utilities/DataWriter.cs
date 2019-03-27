@@ -15,15 +15,27 @@ namespace BusinessLayer.Writer
         /// <returns>The path.</returns>
         public string Path { get; set; }
 
+        public DataWriter()
+        {
+            Path = @"D:\Git\WPF_practice\User_Story#1\collectionToWrite.txt";
+        }
+
         /// <summary>
         /// Writes the collection by specified path.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public void WriteContent(T[] collection)
         {
-            using (StreamWriter writer = new StreamWriter(Path))
+            try
             {
-
+                using (StreamWriter writer = new StreamWriter(Path))
+                {
+                    writer.Write(collection);
+                }
+            }
+            catch
+            {
+                return;
             }
         }
     }
