@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Utilities.Validator.Interfaces;
+using System.Net;
 
 namespace BusinessLayer.Validator
 {
@@ -17,9 +18,20 @@ namespace BusinessLayer.Validator
         /// <returns>
         ///   <c>true</c> if data exists; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsDataExist(string content)
+        public bool IsDataExist(string url)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+                request.Method = "HEAD";
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                response.Close();
+                return (response.StatusCode == HttpStatusCode.OK);
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

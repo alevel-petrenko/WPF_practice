@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Utilities.Validator.Interfaces;
+using System.IO;
 
 namespace BusinessLayer.Validator
 {
@@ -19,7 +20,7 @@ namespace BusinessLayer.Validator
         /// </returns>
         public bool IsDataExist(string content)
         {
-            throw new System.NotImplementedException();
+            return File.Exists(content) ? IsFileInValidFormat(content) : false;
         }
 
         /// <summary>
@@ -32,7 +33,16 @@ namespace BusinessLayer.Validator
         /// </returns>
         private bool IsFileInValidFormat(string content)
         {
-            throw new System.NotImplementedException();
+            if (content != null)
+            {
+                string[] subArray = content.Split('.');
+                string format = subArray[subArray.Length - 1];
+                if (format == "txt" || format == "doc" || format == "docx")
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

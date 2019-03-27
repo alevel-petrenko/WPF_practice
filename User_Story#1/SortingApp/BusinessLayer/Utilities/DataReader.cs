@@ -37,6 +37,7 @@ namespace BusinessLayer.Reader
         public DataReader(IValidator validator)
         {
             this.validator = validator;
+            Path = @"D:\Git\WPF_practice\User_Story#1\collectionToRead.txt";
         }
 
         /// <summary>
@@ -45,9 +46,19 @@ namespace BusinessLayer.Reader
         /// <owner>Anton Petrenko</owner>
         public void ReadContent()
         {
-            using (StreamReader reader = new StreamReader(Path))
+            if (validator.IsDataExist(Path))
             {
-
+                try
+                {
+                    using (StreamReader reader = new StreamReader(Path))
+                    {
+                        Content = reader.ReadToEnd();
+                    }
+                }
+                catch (IOException)
+                {
+                    return;
+                }
             }
         }
     }
