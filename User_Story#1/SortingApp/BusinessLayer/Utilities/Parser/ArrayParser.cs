@@ -1,5 +1,5 @@
-﻿using BusinessLayer.Utilities.Parser.Interfaces;
-using System;
+﻿using BusinessLayer.Extentions;
+using BusinessLayer.Utilities.Parser.Interfaces;
 
 namespace BusinessLayer.DataParser
 {
@@ -23,14 +23,13 @@ namespace BusinessLayer.DataParser
         /// <owner>Anton Petrenko</owner>
         private readonly char[] separators;
 
-        private ITypeParser typeParser;
-
         /// <summary>
         /// Initializes a new instance of the ParserToIEnumerable class with array of separators.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public ArrayParser()
         {
+            listOfItemsFromFile = new T[1];
             this.separators = new char[] { ';', '/', '|' };
         }
 
@@ -43,12 +42,10 @@ namespace BusinessLayer.DataParser
             string[] items = content.Split(separators);
             for (int i = 0; i < items.Length; i++)
             {
-                if (Double.TryParse(items[i], out double number))
-                {
-                    
-                }
+                listOfItemsFromFile[i] = TypeParser.ChangeType<T>(items[i].Trim());
+                listOfItemsFromFile.CopyTo(listOfItemsFromFile, 0);
             }
-            return null;
+            return listOfItemsFromFile;
         }
     }
 }
