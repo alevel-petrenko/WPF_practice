@@ -20,29 +20,31 @@ namespace BusinessLayer.SortingAlgorithms
             SortSubArray(inputCollection, 0, inputCollection.Length);
         }
 
-        private void SortSubArray(T[] inputCollection, int start, int range)
+        /// <summary>
+        /// Sorts the sub array.
+        /// </summary>
+        /// <param name="inputCollection">The input collection.</param>
+        /// <param name="start">The first index of array.</param>
+        /// <param name="end">The last index of array.</param>
+        /// <owner>Anton Petrenko</owner>
+        private void SortSubArray(T[] inputCollection, int start, int end)
         {
-            if (start >= range)
+            if (start >= end)
             {
                 return;
             }
-
-            var pivot = range - 1;
-            int currentIndex = start;
+            var pivot = end - 1;
             int wall = start;
-
-            for (; currentIndex < range; currentIndex++)
+            for (int currentIndex = start; currentIndex < end; currentIndex++)
             {
-                if (inputCollection[currentIndex].CompareTo(inputCollection[pivot]) < 0)
+                if (inputCollection[currentIndex].CompareTo(inputCollection[pivot]) <= 0)
                 {
                     SwapElements(inputCollection, currentIndex, wall);
                     wall++;
                 }
             }
-            SwapElements(inputCollection, pivot, wall);
-
-            SortSubArray(inputCollection, start, pivot - 1);
-            SortSubArray(inputCollection, pivot + 1, range);
+            SortSubArray(inputCollection, start, wall - 1);
+            SortSubArray(inputCollection, wall + 1, end);
         }
 
         /// <summary>
@@ -50,8 +52,8 @@ namespace BusinessLayer.SortingAlgorithms
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <param name="collection">The collection.</param>
-        /// <param name="rightIndex">Index of the most right element in array.</param>
-        /// <param name="leftIndex">Index of the most left element in array.</param>
+        /// <param name="rightIndex">Index of right element in array.</param>
+        /// <param name="leftIndex">Index of left element in array.</param>
         private void SwapElements(T[] collection, int rightIndex, int leftIndex)
         {
             if (collection != null && rightIndex >= 0 || leftIndex >= 0)
