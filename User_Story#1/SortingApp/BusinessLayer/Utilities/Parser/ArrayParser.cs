@@ -12,19 +12,19 @@ namespace BusinessLayer.DataParser
     public class ArrayParser<T> : IDataParser<T>
     {
         /// <summary>
-        /// The list of items from file
+        /// The list of items from file.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private T[] listOfItemsFromFile;
 
         /// <summary>
-        /// The separators array
+        /// The separators array.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private readonly char[] separators;
 
         /// <summary>
-        /// Initializes a new instance of the ParserToIEnumerable class with array of separators.
+        /// Initializes a new instance of the Parser class with array of separators.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public ArrayParser()
@@ -34,7 +34,7 @@ namespace BusinessLayer.DataParser
         }
 
         /// <summary>
-        /// Convert data to collection of type Double.
+        /// Convert data to collection of type T.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public T[] DataConverter(string content)

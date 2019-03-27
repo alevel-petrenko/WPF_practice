@@ -67,8 +67,8 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Execute()
         {
-            string content = reader.ReadContent();
-            parser.DataConverter(content);
+            sortedCollection = parser.DataConverter(reader.ReadContent());
+            sorter.Sort(sortedCollection);
         }
 
         /// <summary>
