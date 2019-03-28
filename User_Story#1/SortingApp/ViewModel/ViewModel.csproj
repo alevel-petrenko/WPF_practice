@@ -51,10 +51,6 @@
       <Project>{b672fb6c-605d-405d-a13c-f1cdd2c93752}</Project>
       <Name>BusinessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SortingApp\PresentationLayer.csproj">
-      <Project>{a2bdbe3d-efde-4b1b-bd8b-03dfa3fe401c}</Project>
-      <Name>PresentationLayer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
