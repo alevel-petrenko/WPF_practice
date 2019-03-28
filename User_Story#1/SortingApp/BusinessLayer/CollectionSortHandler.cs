@@ -6,7 +6,7 @@ using BusinessLayer.Writer;
 namespace BusinessLayer
 {
     /// <summary>
-    /// Handle all requests regarding reading, sorting collection and writing it to the file.
+    /// Handles all requests regarding reading, sorting collection and writing it to the file.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
@@ -67,8 +67,8 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Execute()
         {
-            sortedCollection = parser.DataConverter(reader.ReadContent());
-            sorter.Sort(sortedCollection);
+            this.sortedCollection = parser.DataConverter(reader.ReadContent());
+            this.sorter.Sort(sortedCollection);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Write()
         {
-            writer.WriteContent(sortedCollection);
+            this.writer.WriteContent(sortedCollection);
         }
     }
 }

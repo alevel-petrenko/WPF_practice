@@ -4,7 +4,7 @@ using System.Windows.Input;
 namespace ViewModel
 {
     /// <summary>
-    /// This class is used for implementing commands between View and ViewModel.
+    /// Implements commands between View and ViewModel.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public sealed class RelayCommand : ICommand
