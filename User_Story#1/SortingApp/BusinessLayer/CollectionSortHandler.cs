@@ -2,6 +2,7 @@
 using BusinessLayer.Reader;
 using BusinessLayer.SortingAlgorithms;
 using BusinessLayer.Writer;
+using System;
 
 namespace BusinessLayer
 {
@@ -10,7 +11,7 @@ namespace BusinessLayer
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
-    public class CollectionSortHandler<T>
+    public class CollectionSortHandler<T> where T : IComparable
     {
         /// <summary>
         /// Holds the parser.

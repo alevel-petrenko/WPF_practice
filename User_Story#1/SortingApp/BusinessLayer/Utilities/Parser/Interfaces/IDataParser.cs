@@ -1,10 +1,12 @@
-﻿namespace BusinessLayer.Utilities.Parser.Interfaces
+﻿using System;
+
+namespace BusinessLayer.Utilities.Parser.Interfaces
 {
     /// <summary>
-    /// Represents general interface for data parser classes.
+    /// Parses data.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    public interface IDataParser<T>
+    public interface IDataParser<T> where T : IComparable
     {
         /// <summary>
         /// Converts data to collection of srecific type.

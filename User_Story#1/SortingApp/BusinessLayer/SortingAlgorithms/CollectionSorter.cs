@@ -1,11 +1,13 @@
-﻿namespace BusinessLayer.SortingAlgorithms
+﻿using System;
+
+namespace BusinessLayer.SortingAlgorithms
 {
     /// <summary>
     /// Sorts elements in an ascending order.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
-    abstract public class CollectionSorter<T>
+    abstract public class CollectionSorter<T> where T : IComparable
     {
         /// <summary>
         /// Sorts the specified input collection.

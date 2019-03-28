@@ -2,12 +2,10 @@
 using BusinessLayer.DataParser;
 using BusinessLayer.Reader;
 using BusinessLayer.SortingAlgorithms;
-using BusinessLayer.Utilities.Parser.Interfaces;
-using BusinessLayer.Utilities.Validator.Interfaces;
 using BusinessLayer.Validator;
 using BusinessLayer.Writer;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace ViewModel
@@ -18,7 +16,7 @@ namespace ViewModel
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    public class CollectionSortingViewModel<T> : INotifyPropertyChanged
+    public class CollectionSortingViewModel<T> : INotifyPropertyChanged where T : IComparable
     {
         /// <summary>
         /// The handler.
@@ -84,7 +82,7 @@ namespace ViewModel
             get
             {
                 if (this.sort is null)
-                    this.sort = new RelayCommand(this.SortArray, this.GetCanSortArray); 
+                    this.sort = new RelayCommand(this.SortArray, this.GetCanSortArray);
                 return this.sort;
             }
         }
@@ -100,7 +98,7 @@ namespace ViewModel
         /// The sorter.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private readonly CollectionSorter<T>sorter;
+        private readonly CollectionSorter<T> sorter;
 
         /// <summary>
         /// The type of sort from enum.
@@ -117,7 +115,7 @@ namespace ViewModel
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>The collection of numbers.</returns>
-        public ObservableCollection<T> UnSortedCollectionOfNumbers { get; set; }
+        public List<T> UnSortedCollectionOfNumbers { get; set; }
 
         /// <summary>
         /// Gets the can sort array.
@@ -147,7 +145,8 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         public CollectionSortingViewModel()
         {
-            this.handler = new CollectionSortHandler<T>(new DataReader(new LocalFileValidator()), new DataWriter<T>(), sorter, new ArrayParser<T>());
+            this.handler = new CollectionSortHandler<T>
+                (new DataReader(new LocalFileValidator()), new DataWriter<T>(), new InsertionSorter<T>(), new ArrayParser<T>());
         }
 
         /// <summary>

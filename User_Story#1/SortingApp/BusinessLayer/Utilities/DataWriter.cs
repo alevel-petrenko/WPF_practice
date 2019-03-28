@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace BusinessLayer.Writer
 {
@@ -6,7 +7,7 @@ namespace BusinessLayer.Writer
     /// Writes content to file.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    public class DataWriter<T>
+    public class DataWriter<T> where T : IComparable
     {
         /// <summary>
         /// Gets or sets the path.

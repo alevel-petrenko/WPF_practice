@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Markup;
 
-namespace Helpers.Concrete
+namespace SortingApp.Helpers
 {
     /// <summary>
     /// EnumToItemsSource.

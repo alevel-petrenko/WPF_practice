@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Extensions;
 using BusinessLayer.Utilities.Parser.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace BusinessLayer.DataParser
@@ -10,7 +11,7 @@ namespace BusinessLayer.DataParser
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="BusinessLayer.DataParser.Interfaces.IDataParser" />
-    public class ArrayParser<T> : IDataParser<T>
+    public class ArrayParser<T> : IDataParser<T> where T : IComparable
     {
         /// <summary>
         /// The list of items from file.
