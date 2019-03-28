@@ -37,6 +37,12 @@ namespace BusinessLayer
         private CollectionSorter<T> sorter;
 
         /// <summary>
+        /// Holds the unsorted collection.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private T[] unSortedCollection;
+
+        /// <summary>
         /// Holds the writer.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -62,13 +68,22 @@ namespace BusinessLayer
         }
 
         /// <summary>
-        /// Executes reading and sorting for collection.
+        /// Executes sorting for collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public void Execute()
         {
-            this.sortedCollection = parser.DataConverter(reader.ReadContent());
+            this.unSortedCollection.CopyTo(sortedCollection, 0);
             this.sorter.Sort(sortedCollection);
+        }
+
+        /// <summary>
+        /// Executes reading for collection.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public void Read()
+        {
+            this.unSortedCollection = parser.DataConverter(reader.ReadContent());
         }
 
         /// <summary>

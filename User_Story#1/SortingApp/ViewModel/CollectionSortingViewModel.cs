@@ -19,24 +19,16 @@ namespace ViewModel
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public class CollectionSortingViewModel<T> : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Gets or sets the collection of numbers.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <returns>The collection of numbers.</returns>
-        public ObservableCollection<T> CollectionOfNumbers { get; set; }
+        private bool GetCanSortArray (object obj)
+        {
+            return !(this.UnSortedCollectionOfNumbers == null);
+        }
 
         /// <summary>
         /// The handler.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private readonly CollectionSortHandler<T> handler;
-
-        /// <summary>
-        /// The parser.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private readonly IDataParser<T> parser;
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -55,12 +47,6 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// The reader.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private readonly DataReader reader;
-
-        /// <summary>
         /// Gets the save command.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -77,8 +63,23 @@ namespace ViewModel
         /// <returns>The sort command.</returns>
         public RelayCommand Sort
         {
-            get;
+            get
+            {
+                return new RelayCommand(this.SortArray, this.GetCanSortArray); 
+            }
         }
+
+        private void SortArray(object obj)
+        {
+            this.handler.Execute();
+        }
+
+        /// <summary>
+        /// Gets or sets the sorted collection of numbers.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <returns>The collection of numbers.</returns>
+        public ObservableCollection<T> SortedCollectionOfNumbers { get; set; }
 
         /// <summary>
         /// The sorter.
@@ -93,16 +94,11 @@ namespace ViewModel
         private SortType type;
 
         /// <summary>
-        /// The validator.
+        /// Gets or sets the unsorted collection of numbers.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private readonly IValidator validator;
-
-        /// <summary>
-        /// The writer.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private readonly DataWriter<T> writer;
+        /// <returns>The collection of numbers.</returns>
+        public ObservableCollection<T> UnSortedCollectionOfNumbers { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CollectionSortingViewModel{T}"/> class.
@@ -110,11 +106,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         public CollectionSortingViewModel()
         {
-            this.validator = new LocalFileValidator();
-            this.reader = new DataReader(validator);
-            this.writer = new DataWriter<T>();
-            this.parser = new ArrayParser<T>();
-            this.handler = new CollectionSortHandler<T>(reader, writer, sorter, parser);
+            this.handler = new CollectionSortHandler<T>(new DataReader(new LocalFileValidator()), new DataWriter<T>(), sorter, new ArrayParser<T>());
         }
     }
 
