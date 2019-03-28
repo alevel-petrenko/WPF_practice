@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace ViewModel
 {
@@ -12,6 +13,10 @@ namespace ViewModel
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public class CollectionSortingViewModel<T> : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -32,12 +37,15 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// The type of sort
+        /// The type of sort from enum
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private SortType type;
 
-
+        /// <summary>
+        /// The handler
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
         private CollectionSortHandler<T> handler;
 
         /// <summary>
