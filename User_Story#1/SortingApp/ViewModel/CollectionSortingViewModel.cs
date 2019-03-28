@@ -45,10 +45,40 @@ namespace ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
+        /// Gets the read command.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <returns>The read command.</returns>
+        public RelayCommand Read
+        {
+            get;
+        }
+
+        /// <summary>
         /// The reader.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private readonly DataReader reader;
+
+        /// <summary>
+        /// Gets the save command.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <returns>The save command.</returns>
+        public RelayCommand Save
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the sort command.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <returns>The sort command.</returns>
+        public RelayCommand Sort
+        {
+            get;
+        }
 
         /// <summary>
         /// The sorter.
@@ -85,36 +115,6 @@ namespace ViewModel
             this.writer = new DataWriter<T>();
             this.parser = new ArrayParser<T>();
             this.handler = new CollectionSortHandler<T>(reader, writer, sorter, parser);
-        }
-
-        /// <summary>
-        /// Gets the read command.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <returns>The read command.</returns>
-        public RelayCommand Read
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the save command.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <returns>The save command.</returns>
-        public RelayCommand Save
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the sort command.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <returns>The sort command.</returns>
-        public RelayCommand Sort
-        {
-            get;
         }
     }
 
