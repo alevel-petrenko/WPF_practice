@@ -45,7 +45,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="2" Margin="10,50,10,190" Text="Please choose type"/>
-        <ComboBox Grid.Column="2" Margin="50,0,50,0" Height="30" SelectedValue="{Binding type}">
+        <ComboBox Grid.Column="2" Margin="50,0,50,0" Height="30" SelectedItem="{Binding Path=Type}">
             <ComboBoxItem>Insertion Sort</ComboBoxItem>
             <ComboBoxItem>Quick Sort</ComboBoxItem>
             <ComboBoxItem>Selection Sort</ComboBoxItem>
@@ -55,9 +55,9 @@
         <TextBlock Grid.Column="0" Text="Input array:" Margin="0,50,0,190"/>
         <TextBlock Grid.Column="1" Text="Output array:" Margin="0,50,0,190"/>
         <WrapPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Read"/>
-            <Button Content="Save"/>
-            <Button Content="Sort" Background="MediumPurple"/>
+            <Button Content="Read" Command="{Binding Read}"/>
+            <Button Content="Save" Command="{Binding Save}"/>
+            <Button Content="Sort" Command="{Binding Sort}" Background="MediumPurple"/>
         </WrapPanel>
     </Grid>
 </Window>
