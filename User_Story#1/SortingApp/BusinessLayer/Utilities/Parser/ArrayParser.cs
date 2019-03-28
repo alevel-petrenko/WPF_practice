@@ -1,10 +1,11 @@
-﻿using BusinessLayer.Extentions;
+﻿using BusinessLayer.Extensions;
 using BusinessLayer.Utilities.Parser.Interfaces;
+using System.Collections.Generic;
 
 namespace BusinessLayer.DataParser
 {
     /// <summary>
-    /// Parse collection to array of Double type.
+    /// Parses string into array of srecific type.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
@@ -18,7 +19,7 @@ namespace BusinessLayer.DataParser
         private T[] listOfItemsFromFile;
 
         /// <summary>
-        /// The separators array.
+        /// The array with separator values.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private readonly char[] separators;
@@ -29,7 +30,7 @@ namespace BusinessLayer.DataParser
         /// <owner>Anton Petrenko</owner>
         public ArrayParser()
         {
-            listOfItemsFromFile = new T[1];
+            this.listOfItemsFromFile = new T[1];
             this.separators = new char[] { ';', '/', '|' };
         }
 
@@ -39,13 +40,14 @@ namespace BusinessLayer.DataParser
         /// <owner>Anton Petrenko</owner>
         public T[] DataConverter(string content)
         {
+            List<T> numbers = new List<T>();
             string[] items = content.Split(separators);
             for (int i = 0; i < items.Length; i++)
             {
-                listOfItemsFromFile[i] = TypeParser.ChangeType<T>(items[i].Trim());
-                listOfItemsFromFile.CopyTo(listOfItemsFromFile, 0);
+                numbers.Add(TypeParser.ChangeType<T>(items[i].Trim()));
             }
-            return listOfItemsFromFile;
+            this.listOfItemsFromFile = numbers.ToArray();
+            return this.listOfItemsFromFile;
         }
     }
 }

@@ -23,10 +23,10 @@ namespace BusinessLayer.SortingAlgorithms
         /// <summary>
         /// Sorts the sub array.
         /// </summary>
+        /// <owner>Anton Petrenko</owner>
         /// <param name="inputCollection">The input collection.</param>
         /// <param name="start">The first index of array.</param>
         /// <param name="end">The last index of array.</param>
-        /// <owner>Anton Petrenko</owner>
         private void SortSubArray(T[] inputCollection, int start, int end)
         {
             if (start >= end)

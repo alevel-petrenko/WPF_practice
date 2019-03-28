@@ -3,7 +3,7 @@
 namespace BusinessLayer.Writer
 {
     /// <summary>
-    /// Write content to file.
+    /// Writes content to file.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public class DataWriter<T>

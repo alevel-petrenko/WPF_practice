@@ -4,7 +4,7 @@ using System.Net;
 namespace BusinessLayer.Validator
 {
     /// <summary>
-    /// Check whether content from cloud doc is valid.
+    /// Checks whether content from cloud doc is valid.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <seealso cref="BusinessLayer.Interfaces.IValidator" />

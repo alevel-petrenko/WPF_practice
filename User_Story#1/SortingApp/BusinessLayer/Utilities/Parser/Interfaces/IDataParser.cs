@@ -7,7 +7,7 @@
     public interface IDataParser<T>
     {
         /// <summary>
-        /// Convert data to collection of type Double.
+        /// Converts data to collection of srecific type.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         T[] DataConverter(string content);

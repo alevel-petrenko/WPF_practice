@@ -4,7 +4,7 @@ using System.IO;
 namespace BusinessLayer.Validator
 {
     /// <summary>
-    /// Check whether content from file is valid.
+    /// Checks whether content from file is valid.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <seealso cref="BusinessLayer.Interfaces.IValidator" />
