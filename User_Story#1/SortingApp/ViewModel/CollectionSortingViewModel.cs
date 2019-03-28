@@ -1,7 +1,6 @@
 ﻿using BusinessLayer;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Input;
 
 namespace ViewModel
 {
@@ -13,12 +12,6 @@ namespace ViewModel
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public class CollectionSortingViewModel<T> : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
         /// Gets or sets the collection of numbers.
         /// </summary>
@@ -37,16 +30,22 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// The type of sort from enum
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private SortType type;
-
-        /// <summary>
         /// The handler
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private CollectionSortHandler<T> handler;
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        /// <summary>
+        /// The type of sort from enum
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private SortType type;
 
         /// <summary>
         /// Gets the read command.
@@ -59,21 +58,21 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Gets the sort command.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <returns>The sort command.</returns>
-        public RelayCommand Sort
-        {
-            get;
-        }
-
-        /// <summary>
         /// Gets the save command.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>The save command.</returns>
         public RelayCommand Save
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the sort command.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <returns>The sort command.</returns>
+        public RelayCommand Sort
         {
             get;
         }
