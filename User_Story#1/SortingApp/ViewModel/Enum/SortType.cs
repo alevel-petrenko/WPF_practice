@@ -6,8 +6,8 @@
     /// <owner>Anton Petrenko</owner>
     public enum SortType
     {
-        InsertionSorter,
-        SelectionSorter,
-        QuickSorter
+        InsertionSort,
+        SelectionSort,
+        QuickSort
     }
 }

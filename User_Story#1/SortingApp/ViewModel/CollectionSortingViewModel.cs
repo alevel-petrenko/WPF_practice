@@ -101,7 +101,7 @@ namespace ViewModel
         /// The sorter.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private readonly CollectionSorter<T> sorter;
+        private CollectionSorter<T> sorter;
 
         /// <summary>
         /// The type of sort from enum.
@@ -109,8 +109,10 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         public SortType Type
         {
-            get;
-            set;
+            set
+            {
+                
+            }
         }
 
         /// <summary>
@@ -128,7 +130,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private bool GetCanSortArray(object obj)
         {
-            return !(this.UnSortedCollectionOfNumbers == null);
+            return this.UnSortedCollectionOfNumbers != null && this.sorter != null;
         }
 
         /// <summary>
@@ -175,7 +177,16 @@ namespace ViewModel
         private void ReadArray(object obj)
         {
             this.handler.Read();
-            this.UnSortedCollectionOfNumbers = new ObservableCollection<T>(handler.UnSortedCollection);
+            if (this.UnSortedCollectionOfNumbers == null)
+                this.UnSortedCollectionOfNumbers = new ObservableCollection<T>(handler.UnSortedCollection);
+            else
+            {
+                this.UnSortedCollectionOfNumbers.Clear();
+                foreach (var number in handler.UnSortedCollection)
+                {
+                    UnSortedCollectionOfNumbers.Add(number);
+                }
+            }
         }
 
         /// <summary>
@@ -186,7 +197,16 @@ namespace ViewModel
         private void SortArray(object obj)
         {
             this.handler.Execute();
-            this.SortedCollectionOfNumbers = new ObservableCollection<T>(handler.SortedCollection);
+            if (this.SortedCollectionOfNumbers == null)
+                this.SortedCollectionOfNumbers = new ObservableCollection<T>(handler.SortedCollection);
+            else
+            {
+                this.SortedCollectionOfNumbers.Clear();
+                foreach (var number in handler.SortedCollection)
+                {
+                    SortedCollectionOfNumbers.Add(number);
+                }
+            }
         }
 
         /// <summary>
