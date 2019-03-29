@@ -31,7 +31,10 @@ namespace BusinessLayer.Writer
             {
                 using (StreamWriter writer = new StreamWriter(Path))
                 {
-                    writer.Write(collection);
+                    foreach (var value in collection)
+                    {
+                        writer.Write(value + "; ");
+                    }
                 }
             }
             catch

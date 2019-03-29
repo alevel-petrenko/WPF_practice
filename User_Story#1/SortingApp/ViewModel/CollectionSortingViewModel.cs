@@ -7,7 +7,6 @@ using BusinessLayer.Writer;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using ViewModel.Enum;
 
@@ -98,22 +97,10 @@ namespace ViewModel
         public ObservableCollection<T> SortedCollectionOfNumbers { get; set; }
 
         /// <summary>
-        /// The sorter.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private CollectionSorter<T> sorter;
-
-        /// <summary>
         /// The type of sort from enum.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public SortType Type
-        {
-            set
-            {
-                
-            }
-        }
+        public SortType SortType { get; set; }
 
         /// <summary>
         /// Gets or sets the unsorted collection of numbers.
@@ -123,17 +110,6 @@ namespace ViewModel
         public ObservableCollection<T> UnSortedCollectionOfNumbers { get; set; }
 
         /// <summary>
-        /// Gets the can sort array.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        /// <owner>Anton Petrenko</owner>
-        private bool GetCanSortArray(object obj)
-        {
-            return this.UnSortedCollectionOfNumbers != null && this.sorter != null;
-        }
-
-        /// <summary>
         /// Gets the can save array.
         /// </summary>
         /// <param name="obj">The object.</param>
@@ -141,7 +117,18 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private bool GetCanSaveArray(object obj)
         {
-            return !(this.SortedCollectionOfNumbers == null);
+            return !(this.SortedCollectionOfNumbers.Count == 0);
+        }
+
+        /// <summary>
+        /// Gets the can sort array.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        /// <owner>Anton Petrenko</owner>
+        private bool GetCanSortArray(object obj)
+        {
+            return this.UnSortedCollectionOfNumbers.Count != 0;
         }
 
         /// <summary>
@@ -152,6 +139,8 @@ namespace ViewModel
         {
             this.handler = new CollectionSortHandler<T>
                 (new DataReader(new LocalFileValidator()), new DataWriter<T>(), new InsertionSorter<T>(), new ArrayParser<T>());
+            UnSortedCollectionOfNumbers = new ObservableCollection<T>();
+            SortedCollectionOfNumbers = new ObservableCollection<T>();
         }
 
         /// <summary>
@@ -177,15 +166,10 @@ namespace ViewModel
         private void ReadArray(object obj)
         {
             this.handler.Read();
-            if (this.UnSortedCollectionOfNumbers == null)
-                this.UnSortedCollectionOfNumbers = new ObservableCollection<T>(handler.UnSortedCollection);
-            else
+            this.UnSortedCollectionOfNumbers.Clear();
+            foreach (var number in handler.UnSortedCollection)
             {
-                this.UnSortedCollectionOfNumbers.Clear();
-                foreach (var number in handler.UnSortedCollection)
-                {
-                    UnSortedCollectionOfNumbers.Add(number);
-                }
+                UnSortedCollectionOfNumbers.Add(number);
             }
         }
 
@@ -197,15 +181,10 @@ namespace ViewModel
         private void SortArray(object obj)
         {
             this.handler.Execute();
-            if (this.SortedCollectionOfNumbers == null)
-                this.SortedCollectionOfNumbers = new ObservableCollection<T>(handler.SortedCollection);
-            else
+            this.SortedCollectionOfNumbers.Clear();
+            foreach (var number in handler.SortedCollection)
             {
-                this.SortedCollectionOfNumbers.Clear();
-                foreach (var number in handler.SortedCollection)
-                {
-                    SortedCollectionOfNumbers.Add(number);
-                }
+                SortedCollectionOfNumbers.Add(number);
             }
         }
 

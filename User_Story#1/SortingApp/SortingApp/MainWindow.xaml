@@ -43,16 +43,16 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="2" Margin="10,50,10,190" Text="Please choose type"/>
-        <ComboBox Grid.Column="2" Margin="50,0,50,0" Height="30" FontSize="18" SelectedItem="{Binding Path=Type}">
-            <ComboBoxItem>Insertion Sort</ComboBoxItem>
-            <ComboBoxItem>Quick Sort</ComboBoxItem>
-            <ComboBoxItem>Selection Sort</ComboBoxItem>
-        </ComboBox>
-        <!--<ComboBox
-            ItemsSource="{enumHelper:EnumToItemsSource {enumType:SortType}}">
-        </ComboBox>-->
-        <ListBox Grid.Column="0" ItemsSource="{Binding UnSortedCollectionOfNumbers}">
-        </ListBox>
+        <ComboBox
+            DisplayMemberPath="DisplayName"
+                    ItemsSource="{enumHelper:EnumToItemsSource {x:Type enumType:SortType}}"
+                    SelectedValue="{Binding Path=SortType}"
+                    SelectedValuePath="Value" 
+                    Margin="30, 125" 
+                    Grid.Column="2" 
+                    Grid.Row="0" 
+                    ToolTip="Sort type"/>
+        <ListBox Grid.Column="0" ItemsSource="{Binding UnSortedCollectionOfNumbers}"/>
         <ListBox Grid.Column="1" ItemsSource="{Binding SortedCollectionOfNumbers}" IsSynchronizedWithCurrentItem="True"/>
         <TextBlock Grid.Column="0" Text="Input array:" Margin="0,50,0,190"/>
         <TextBlock Grid.Column="1" Text="Output array:" Margin="0,50,0,190"/>
