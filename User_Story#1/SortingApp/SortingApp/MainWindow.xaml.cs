@@ -15,8 +15,8 @@ namespace SortingApp
         /// <owner>Anton Petrenko</owner>
         public MainWindow()
         {
+            this.DataContext = new CollectionSortingViewModel<double>();
             InitializeComponent();
-            DataContext = new CollectionSortingViewModel<double>();
         }
     }
 }

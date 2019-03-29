@@ -74,6 +74,7 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Execute()
         {
+            this.SortedCollection = new T[UnSortedCollection.Length];
             this.UnSortedCollection.CopyTo(SortedCollection, 0);
             this.sorter.Sort(SortedCollection);
         }

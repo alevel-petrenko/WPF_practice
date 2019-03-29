@@ -46,8 +46,12 @@
             <ComboBoxItem>Quick Sort</ComboBoxItem>
             <ComboBoxItem>Selection Sort</ComboBoxItem>
         </ComboBox>
-        <ListBox Grid.Column="0" ItemsSource="{Binding UnSortedCollectionOfNumbers}"/>
-        <ListBox Grid.Column="1" ItemsSource="{Binding SortedCollectionOfNumbers}"/>
+        <ListBox Grid.Column="0" ItemsSource="{Binding Path=UnSortedCollectionOfNumbers}" IsSynchronizedWithCurrentItem="True">
+            <ListBoxItem>
+                
+            </ListBoxItem>
+        </ListBox>
+        <ListBox Grid.Column="1" ItemsSource="{Binding SortedCollectionOfNumbers}" IsSynchronizedWithCurrentItem="True"/>
         <TextBlock Grid.Column="0" Text="Input array:" Margin="0,50,0,190"/>
         <TextBlock Grid.Column="1" Text="Output array:" Margin="0,50,0,190"/>
         <WrapPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">

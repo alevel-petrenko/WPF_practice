@@ -174,8 +174,8 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void ReadArray(object obj)
         {
-            handler.Read();
-            UnSortedCollectionOfNumbers = handler.UnSortedCollection.ToList();
+            this.handler.Read();
+            this.UnSortedCollectionOfNumbers = new ObservableCollection<T>(handler.UnSortedCollection);
         }
 
         /// <summary>
@@ -186,6 +186,7 @@ namespace ViewModel
         private void SortArray(object obj)
         {
             this.handler.Execute();
+            this.SortedCollectionOfNumbers = new ObservableCollection<T>(handler.SortedCollection);
         }
 
         /// <summary>
