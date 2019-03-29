@@ -5,7 +5,7 @@ using BusinessLayer.SortingAlgorithms;
 using BusinessLayer.Validator;
 using BusinessLayer.Writer;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -95,7 +95,7 @@ namespace ViewModel
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>The collection of numbers.</returns>
-        public List<T> SortedCollectionOfNumbers { get; set; }
+        public ObservableCollection<T> SortedCollectionOfNumbers { get; set; }
 
         /// <summary>
         /// The sorter.
@@ -118,7 +118,7 @@ namespace ViewModel
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>The collection of numbers.</returns>
-        public List<T> UnSortedCollectionOfNumbers { get; set; }
+        public ObservableCollection<T> UnSortedCollectionOfNumbers { get; set; }
 
         /// <summary>
         /// Gets the can sort array.
@@ -176,7 +176,6 @@ namespace ViewModel
         {
             handler.Read();
             UnSortedCollectionOfNumbers = handler.UnSortedCollection.ToList();
-            UpdateUnsortedBox();
         }
 
         /// <summary>
@@ -197,25 +196,6 @@ namespace ViewModel
         private void SaveArray(object obj)
         {
             this.handler.Write();
-        }
-
-
-        /// <summary>
-        /// Notifies about changing unsorted list.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private void UpdateUnsortedBox()
-        {
-            this.OnPropertyChanged(UnSortedCollectionOfNumbers.ToString());
-        }
-
-        /// <summary>
-        /// Notifies about changing sorted list.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private void UpdateSortedBox()
-        {
-            this.OnPropertyChanged(SortedCollectionOfNumbers.ToString());
         }
     }
 }
