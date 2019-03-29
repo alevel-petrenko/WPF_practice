@@ -29,7 +29,7 @@
     </Window.Resources>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\\Users\\anton.petrenko\\Desktop\\unsplash.jpg"/>
+            <ImageBrush ImageSource="D:\Git\WPF_practice\User_Story#1\unsplash.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -46,8 +46,8 @@
             <ComboBoxItem>Quick Sort</ComboBoxItem>
             <ComboBoxItem>Selection Sort</ComboBoxItem>
         </ComboBox>
-        <ListBox Grid.Column="0"/>
-        <ListBox Grid.Column="1"/>
+        <ListBox Grid.Column="0" ItemsSource="{Binding UnSortedCollectionOfNumbers}"/>
+        <ListBox Grid.Column="1" ItemsSource="{Binding SortedCollectionOfNumbers}"/>
         <TextBlock Grid.Column="0" Text="Input array:" Margin="0,50,0,190"/>
         <TextBlock Grid.Column="1" Text="Output array:" Margin="0,50,0,190"/>
         <WrapPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">

@@ -29,7 +29,7 @@ namespace BusinessLayer
         /// Holds the sorted collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private T[] sortedCollection;
+        public T[] SortedCollection { get; private set; }
 
         /// <summary>
         /// Holds the sorter.
@@ -41,7 +41,7 @@ namespace BusinessLayer
         /// Holds the unsorted collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private T[] unSortedCollection;
+        public T[] UnSortedCollection { get; private set; }
 
         /// <summary>
         /// Holds the writer.
@@ -74,8 +74,8 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Execute()
         {
-            this.unSortedCollection.CopyTo(sortedCollection, 0);
-            this.sorter.Sort(sortedCollection);
+            this.UnSortedCollection.CopyTo(SortedCollection, 0);
+            this.sorter.Sort(SortedCollection);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Read()
         {
-            this.unSortedCollection = parser.DataConverter(reader.ReadContent());
+            this.UnSortedCollection = parser.DataConverter(reader.ReadContent());
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Write()
         {
-            this.writer.WriteContent(sortedCollection);
+            this.writer.WriteContent(SortedCollection);
         }
     }
 }

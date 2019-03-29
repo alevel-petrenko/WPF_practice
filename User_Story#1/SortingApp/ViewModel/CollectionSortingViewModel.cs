@@ -7,6 +7,9 @@ using BusinessLayer.Writer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using ViewModel.Enum;
 
 namespace ViewModel
 {
@@ -150,6 +153,15 @@ namespace ViewModel
         }
 
         /// <summary>
+        /// Calls PropertyChanged event.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -163,6 +175,8 @@ namespace ViewModel
         private void ReadArray(object obj)
         {
             handler.Read();
+            UnSortedCollectionOfNumbers = handler.UnSortedCollection.ToList();
+            UpdateUnsortedBox();
         }
 
         /// <summary>
@@ -184,16 +198,24 @@ namespace ViewModel
         {
             this.handler.Write();
         }
-    }
 
-    /// <summary>
-    /// Stores types of sort.
-    /// </summary>
-    /// <owner>Anton Petrenko</owner>
-    public enum SortType
-    {
-        InsertionSorter,
-        SelectionSorter,
-        QuickSorter
+
+        /// <summary>
+        /// Notifies about changing unsorted list.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private void UpdateUnsortedBox()
+        {
+            this.OnPropertyChanged(UnSortedCollectionOfNumbers.ToString());
+        }
+
+        /// <summary>
+        /// Notifies about changing sorted list.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private void UpdateSortedBox()
+        {
+            this.OnPropertyChanged(SortedCollectionOfNumbers.ToString());
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace BusinessLayer.DataParser
         public ArrayParser()
         {
             this.listOfItemsFromFile = new T[1];
-            this.separators = new char[] { ';', '/', '|' };
+            this.separators = new char[] { ';', '/', '|', ' ' };
         }
 
         /// <summary>
