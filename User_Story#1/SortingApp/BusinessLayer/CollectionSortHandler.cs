@@ -64,13 +64,12 @@ namespace BusinessLayer
         /// <param name="writer">The writer instance.</param>
         /// <param name="sorter">The sorter instance.</param>
         /// <param name="parser">The parser instance.</param>
-        public CollectionSortHandler(DataReader reader, DataWriter<T> writer, CollectionSorter<T> sorter, IDataParser<T> parser)
+        public CollectionSortHandler(DataReader reader, DataWriter<T> writer, IDataParser<T> parser)
         {
-            if (reader != null && writer != null && sorter != null && parser != null)
+            if (reader != null && writer != null && parser != null)
             {
                 this.parser = parser;
                 this.reader = reader;
-                this.sorter = sorter;
                 this.writer = writer;
             }
         }
@@ -84,6 +83,30 @@ namespace BusinessLayer
             this.SortedCollection = new T[UnSortedCollection.Length];
             this.UnSortedCollection.CopyTo(SortedCollection, 0);
             this.sorter.Sort(SortedCollection);
+        }
+
+        /// <summary>
+        /// Generates the sorter.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <param name="type">The type.</param>
+        public void GenerateSorter(string type)
+        {
+            switch (type)
+            {
+                case "InsertionSort":
+                    creator = new InsertionSortCreator<T>();
+                    break;
+                case "SelectionSort":
+                    creator = new SelectionSortCreator<T>();
+                    break;
+                case "QuickSort":
+                    creator = new QuickSortCreator<T>();
+                    break;
+                default:
+                    return;
+            }
+            sorter = creator.Create();
         }
 
         /// <summary>

@@ -128,7 +128,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private bool GetCanSortArray(object obj)
         {
-            return this.UnSortedCollectionOfNumbers.Count != 0;
+            return (this.UnSortedCollectionOfNumbers.Count != 0 && this.SortType is SortType valueOfSortType);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace ViewModel
         public CollectionSortingViewModel()
         {
             this.handler = new CollectionSortHandler<T>
-                (new DataReader(new LocalFileValidator()), new DataWriter<T>(), new InsertionSorter<T>(), new ArrayParser<T>());
+                (new DataReader(new LocalFileValidator()), new DataWriter<T>(), new ArrayParser<T>());
             UnSortedCollectionOfNumbers = new ObservableCollection<T>();
             SortedCollectionOfNumbers = new ObservableCollection<T>();
         }
@@ -180,6 +180,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void SortArray(object obj)
         {
+            this.handler.GenerateSorter(SortType.ToString());
             this.handler.Execute();
             this.SortedCollectionOfNumbers.Clear();
             foreach (var number in handler.SortedCollection)
