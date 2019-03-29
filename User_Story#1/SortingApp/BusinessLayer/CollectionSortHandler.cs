@@ -3,6 +3,7 @@ using BusinessLayer.Reader;
 using BusinessLayer.SortingAlgorithms;
 using BusinessLayer.Writer;
 using System;
+using BusinessLayer.SorterFactory;
 
 namespace BusinessLayer
 {
@@ -13,6 +14,12 @@ namespace BusinessLayer
     /// <typeparam name="T"></typeparam>
     public class CollectionSortHandler<T> where T : IComparable
     {
+        /// <summary>
+        /// Holds the creator.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private CollectionSortCreator<T> creator;
+
         /// <summary>
         /// Holds the parser.
         /// </summary>

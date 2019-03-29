@@ -43,6 +43,10 @@
   <ItemGroup>
     <Compile Include="CollectionSortHandler.cs" />
     <Compile Include="Extensions\TypeParser.cs" />
+    <Compile Include="SorterFactory\CollectionSortCreator.cs" />
+    <Compile Include="SorterFactory\InsertionSortCreator.cs" />
+    <Compile Include="SorterFactory\QuickSortCreator.cs" />
+    <Compile Include="SorterFactory\SelectionSortCreator.cs" />
     <Compile Include="Utilities\Parser\Interfaces\IDataParser.cs" />
     <Compile Include="Utilities\Parser\ArrayParser.cs" />
     <Compile Include="Utilities\DataReader.cs" />
