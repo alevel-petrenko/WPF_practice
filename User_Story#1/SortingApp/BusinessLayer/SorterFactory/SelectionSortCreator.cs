@@ -14,7 +14,7 @@ namespace BusinessLayer.SorterFactory
         /// Returns instanse of SelectionSorter.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public override CollectionSorter<T> Create()
+        public override CollectionSorterBase<T> Create()
         {
             return new SelectionSorter<T>();
         }

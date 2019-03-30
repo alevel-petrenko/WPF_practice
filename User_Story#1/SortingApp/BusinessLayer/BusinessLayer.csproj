@@ -56,7 +56,7 @@
     <Compile Include="Utilities\DataWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortingAlgorithms\InsertionSorter.cs" />
-    <Compile Include="SortingAlgorithms\CollectionSorter.cs" />
+    <Compile Include="SortingAlgorithms\CollectionSorterBase.cs" />
     <Compile Include="SortingAlgorithms\QuickSorter.cs" />
     <Compile Include="SortingAlgorithms\SelectionSorter.cs" />
   </ItemGroup>

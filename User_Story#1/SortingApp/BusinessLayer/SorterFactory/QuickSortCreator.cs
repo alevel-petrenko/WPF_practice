@@ -14,7 +14,7 @@ namespace BusinessLayer.SorterFactory
         /// Returns instanse of QuickSorter.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public override CollectionSorter<T> Create()
+        public override CollectionSorterBase<T> Create()
         {
             return new QuickSorter<T>();
         }

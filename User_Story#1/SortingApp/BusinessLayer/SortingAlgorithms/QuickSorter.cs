@@ -7,8 +7,8 @@ namespace BusinessLayer.SortingAlgorithms
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
-    /// <seealso cref="BusinessLayer.SortingAlgorithms.CollectionSorter{T}" />
-    public class QuickSorter<T> : CollectionSorter<T> where T : IComparable
+    /// <seealso cref="BusinessLayer.SortingAlgorithms.CollectionSorterBase{T}" />
+    public class QuickSorter<T> : CollectionSorterBase<T> where T : IComparable
     {
         /// <summary>
         /// Sorts the specified input collection.

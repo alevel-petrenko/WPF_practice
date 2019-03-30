@@ -42,7 +42,7 @@ namespace BusinessLayer
         /// Holds the sorter.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private CollectionSorter<T> sorter;
+        private CollectionSorterBase<T> sorter;
 
         /// <summary>
         /// Holds the unsorted collection.
@@ -95,18 +95,18 @@ namespace BusinessLayer
             switch (type)
             {
                 case "InsertionSort":
-                    creator = new InsertionSortCreator<T>();
+                    this.creator = new InsertionSortCreator<T>();
                     break;
                 case "SelectionSort":
-                    creator = new SelectionSortCreator<T>();
+                    this.creator = new SelectionSortCreator<T>();
                     break;
                 case "QuickSort":
-                    creator = new QuickSortCreator<T>();
+                    this.creator = new QuickSortCreator<T>();
                     break;
                 default:
                     return;
             }
-            sorter = creator.Create();
+            this.sorter = this.creator.Create();
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Read()
         {
-            this.UnSortedCollection = parser.DataConverter(reader.ReadContent());
+            this.UnSortedCollection = this.parser.DataConverter(this.reader.ReadContent());
         }
 
         /// <summary>

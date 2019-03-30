@@ -11,9 +11,9 @@ namespace BusinessLayer.SorterFactory
     abstract public class CollectionSortCreator<T> where T : IComparable
     {
         /// <summary>
-        /// Returns instanse of CollectionSorter.
+        /// Returns instanse of CollectionSorterBase.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        abstract public CollectionSorter<T> Create();
+        abstract public CollectionSorterBase<T> Create();
     }
 }

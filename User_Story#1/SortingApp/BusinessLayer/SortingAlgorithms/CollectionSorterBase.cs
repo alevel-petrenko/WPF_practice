@@ -7,7 +7,7 @@ namespace BusinessLayer.SortingAlgorithms
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>
-    abstract public class CollectionSorter<T> where T : IComparable
+    abstract public class CollectionSorterBase<T> where T : IComparable
     {
         /// <summary>
         /// Sorts the specified input collection.
