@@ -18,7 +18,7 @@ namespace BusinessLayer
         /// Holds the creator.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private CollectionSortCreator<T> creator;
+        private CollectionSortCreatorBase<T> creator;
 
         /// <summary>
         /// Holds the parser.

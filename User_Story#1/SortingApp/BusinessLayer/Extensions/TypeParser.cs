@@ -3,7 +3,7 @@
 namespace BusinessLayer.Extensions
 {
     /// <summary>
-    /// Parses input value type of object in specific type.
+    /// Provides functionality that parses input value type of object in specific type.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public static class TypeParser

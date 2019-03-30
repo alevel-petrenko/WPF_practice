@@ -8,7 +8,7 @@ namespace BusinessLayer.SorterFactory
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T">Certain input type</type
-    public class QuickSortCreator<T> : CollectionSortCreator<T> where T : IComparable
+    public class QuickSortCreator<T> : CollectionSortCreatorBase<T> where T : IComparable
     {
         /// <summary>
         /// Returns instanse of QuickSorter.

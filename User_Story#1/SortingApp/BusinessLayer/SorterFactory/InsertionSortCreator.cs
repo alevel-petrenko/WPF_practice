@@ -8,7 +8,7 @@ namespace BusinessLayer.SorterFactory
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T">Certain input type</typeparam>
-    public class InsertionSortCreator<T> : CollectionSortCreator<T> where T : IComparable
+    public class InsertionSortCreator<T> : CollectionSortCreatorBase<T> where T : IComparable
     {
         /// <summary>
         /// Returns instanse of InsertionSorter.
