@@ -17,6 +17,8 @@ namespace BusinessLayer.Extensions
         /// <returns>Specific type.</returns>
         public static T ChangeType<T>(this object obj)
         {
+            if (obj is null)
+                throw new ArgumentNullException(nameof(obj));
             return (T)Convert.ChangeType(obj, typeof(T));
         }
     }

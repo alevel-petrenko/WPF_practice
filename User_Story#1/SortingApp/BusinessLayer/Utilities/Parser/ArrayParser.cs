@@ -41,14 +41,21 @@ namespace BusinessLayer.DataParser
         /// <owner>Anton Petrenko</owner>
         public T[] DataConverter(string content)
         {
-            List<T> numbers = new List<T>();
-            string[] items = content.Split(separators);
-            for (int i = 0; i < items.Length; i++)
+            try
             {
-                numbers.Add(TypeParser.ChangeType<T>(items[i].Trim()));
+                List<T> numbers = new List<T>();
+                string[] items = content.Split(separators);
+                for (int i = 0; i < items.Length; i++)
+                {
+                    numbers.Add(TypeParser.ChangeType<T>(items[i].Trim()));
+                }
+                this.listOfItemsFromFile = numbers.ToArray();
+                return this.listOfItemsFromFile;
             }
-            this.listOfItemsFromFile = numbers.ToArray();
-            return this.listOfItemsFromFile;
+            catch(ArgumentNullException)
+            {
+                return this.listOfItemsFromFile;
+            }
         }
     }
 }
