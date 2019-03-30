@@ -1,10 +1,9 @@
-﻿using BusinessLayer;
+﻿using System;
+using BusinessLayer;
 using BusinessLayer.DataParser;
 using BusinessLayer.Reader;
-using BusinessLayer.SortingAlgorithms;
 using BusinessLayer.Validator;
 using BusinessLayer.Writer;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -41,9 +40,9 @@ namespace ViewModel
         {
             get
             {
-                if (this.read is null)
-                    this.read = new RelayCommand(this.ReadArray);
-                return this.read;
+                if (read is null)
+                    read = new RelayCommand(ReadArray);
+                return read;
             }
         }
 
@@ -62,9 +61,9 @@ namespace ViewModel
         {
             get
             {
-                if (this.save is null)
-                    this.save = new RelayCommand(this.SaveArray, this.GetCanSaveArray);
-                return this.save;
+                if (save is null)
+                    save = new RelayCommand(SaveArray, GetCanSaveArray);
+                return save;
             }
         }
 
@@ -83,9 +82,9 @@ namespace ViewModel
         {
             get
             {
-                if (this.sort is null)
-                    this.sort = new RelayCommand(this.SortArray, this.GetCanSortArray);
-                return this.sort;
+                if (sort is null)
+                    sort = new RelayCommand(SortArray, GetCanSortArray);
+                return sort;
             }
         }
 
@@ -117,7 +116,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private bool GetCanSaveArray(object obj)
         {
-            return !(this.SortedCollectionOfNumbers.Count == 0);
+            return !(SortedCollectionOfNumbers.Count == 0);
         }
 
         /// <summary>
@@ -137,7 +136,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         public CollectionSortingViewModel()
         {
-            this.handler = new CollectionSortHandler<T>
+            handler = new CollectionSortHandler<T>
                 (new DataReader(new LocalFileValidator()), new DataWriter<T>(), new ArrayParser<T>());
             UnSortedCollectionOfNumbers = new ObservableCollection<T>();
             SortedCollectionOfNumbers = new ObservableCollection<T>();
@@ -149,7 +148,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         /// <summary>
@@ -165,8 +164,8 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void ReadArray(object obj)
         {
-            this.handler.Read();
-            this.UnSortedCollectionOfNumbers.Clear();
+            handler.Read();
+            UnSortedCollectionOfNumbers.Clear();
             foreach (var number in handler.UnSortedCollection)
             {
                 UnSortedCollectionOfNumbers.Add(number);
@@ -180,9 +179,9 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void SortArray(object obj)
         {
-            this.handler.GenerateSorter(SortType.ToString());
-            this.handler.Execute();
-            this.SortedCollectionOfNumbers.Clear();
+            handler.GenerateSorter(SortType.ToString());
+            handler.Execute();
+            SortedCollectionOfNumbers.Clear();
             foreach (var number in handler.SortedCollection)
             {
                 SortedCollectionOfNumbers.Add(number);
@@ -196,7 +195,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void SaveArray(object obj)
         {
-            this.handler.Write();
+            handler.Write();
         }
     }
 }

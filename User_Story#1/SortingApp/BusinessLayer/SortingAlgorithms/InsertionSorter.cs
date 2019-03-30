@@ -7,7 +7,7 @@ namespace BusinessLayer.SortingAlgorithms
     /// Sorts elements in an ascending order by Insertion type.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Certain input type</typeparam>
     /// <seealso cref="BusinessLayer.SortingAlgorithms.CollectionSorterBase{T}" />
     public class InsertionSorter<T> : CollectionSorterBase<T> where T : IComparable
     {

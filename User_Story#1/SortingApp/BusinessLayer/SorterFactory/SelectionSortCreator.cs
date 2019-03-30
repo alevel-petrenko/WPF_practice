@@ -1,5 +1,5 @@
-﻿using BusinessLayer.SortingAlgorithms;
-using System;
+﻿using System;
+using BusinessLayer.SortingAlgorithms;
 
 namespace BusinessLayer.SorterFactory
 {
@@ -7,7 +7,7 @@ namespace BusinessLayer.SorterFactory
     /// Generates selection sort class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Certain input type</typeparam>
     public class SelectionSortCreator<T> : CollectionSortCreator<T> where T : IComparable
     {
         /// <summary>

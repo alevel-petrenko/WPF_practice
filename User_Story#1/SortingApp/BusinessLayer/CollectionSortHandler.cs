@@ -1,8 +1,8 @@
-﻿using BusinessLayer.Utilities.Parser.Interfaces;
+﻿using System;
+using BusinessLayer.Utilities.Parser.Interfaces;
 using BusinessLayer.Reader;
 using BusinessLayer.SortingAlgorithms;
 using BusinessLayer.Writer;
-using System;
 using BusinessLayer.SorterFactory;
 
 namespace BusinessLayer

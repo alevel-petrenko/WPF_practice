@@ -1,6 +1,6 @@
-﻿using BusinessLayer.Extensions;
+﻿using System;
+using BusinessLayer.Extensions;
 using BusinessLayer.Utilities.Parser.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace BusinessLayer.DataParser

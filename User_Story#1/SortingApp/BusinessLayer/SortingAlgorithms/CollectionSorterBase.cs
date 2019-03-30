@@ -6,7 +6,7 @@ namespace BusinessLayer.SortingAlgorithms
     /// Sorts elements in an ascending order.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Certain input type</typeparam>
     abstract public class CollectionSorterBase<T> where T : IComparable
     {
         /// <summary>
