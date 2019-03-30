@@ -4,7 +4,7 @@ using System.IO;
 namespace BusinessLayer.Writer
 {
     /// <summary>
-    /// Writes content to file.
+    /// Provides functionality that writes content to file.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public class DataWriter<T> where T : IComparable

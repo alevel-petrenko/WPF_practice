@@ -3,7 +3,7 @@
 namespace BusinessLayer.Utilities.Parser.Interfaces
 {
     /// <summary>
-    /// Parses data.
+    /// Provides functionality that parses data.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public interface IDataParser<T> where T : IComparable

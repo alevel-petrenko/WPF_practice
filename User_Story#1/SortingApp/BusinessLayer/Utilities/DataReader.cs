@@ -4,7 +4,7 @@ using System.IO;
 namespace BusinessLayer.Reader
 {
     /// <summary>
-    /// Reads content from file and store it.
+    /// Provides functionality that reads content from file and store it.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public class DataReader

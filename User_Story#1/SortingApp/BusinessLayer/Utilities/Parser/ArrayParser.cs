@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace BusinessLayer.DataParser
 {
     /// <summary>
-    /// Parses string into array of srecific type.
+    /// Provides functionality that parses string into array of srecific type.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T"></typeparam>

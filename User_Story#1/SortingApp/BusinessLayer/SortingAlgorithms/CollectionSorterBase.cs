@@ -3,7 +3,7 @@
 namespace BusinessLayer.SortingAlgorithms
 {
     /// <summary>
-    /// Sorts elements in an ascending order.
+    /// Provides functionality that sorts elements in an ascending order.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T">Certain input type</typeparam>

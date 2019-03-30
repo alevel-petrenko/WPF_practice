@@ -4,7 +4,7 @@ using System.Linq;
 namespace BusinessLayer.SortingAlgorithms
 {
     /// <summary>
-    /// Sorts elements in an ascending order by Insertion type.
+    /// Provides functionality that sorts elements in an ascending order by Insertion type.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T">Certain input type</typeparam>

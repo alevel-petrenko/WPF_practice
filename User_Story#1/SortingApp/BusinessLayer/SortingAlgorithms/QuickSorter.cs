@@ -3,7 +3,7 @@
 namespace BusinessLayer.SortingAlgorithms
 {
     /// <summary>
-    /// Sort elements in an ascending order by Quick sort type.
+    /// Provides functionality that sort elements in an ascending order by Quick sort type.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T">Certain input type</typeparam>
