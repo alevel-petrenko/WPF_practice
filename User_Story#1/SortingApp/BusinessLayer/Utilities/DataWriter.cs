@@ -27,6 +27,8 @@ namespace BusinessLayer.Writer
         /// <owner>Anton Petrenko</owner>
         public void WriteContent(T[] collection)
         {
+            if(collection is null)
+            throw new ArgumentNullException(nameof(collection));
             try
             {
                 using (StreamWriter writer = new StreamWriter(Path))

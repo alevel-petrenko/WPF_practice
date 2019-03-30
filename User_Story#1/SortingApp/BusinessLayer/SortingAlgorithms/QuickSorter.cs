@@ -11,13 +11,21 @@ namespace BusinessLayer.SortingAlgorithms
     public class QuickSorter<T> : CollectionSorterBase<T> where T : IComparable
     {
         /// <summary>
+        /// Constant to store value for first element to find in array.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private const int startElement = 0;
+
+        /// <summary>
         /// Sorts the specified input collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <param name="inputCollection">The input collection.</param>
         public override void Sort(T[] inputCollection)
         {
-            SortSubArray(inputCollection, 0, inputCollection.Length);
+            if (inputCollection is null)
+                throw new ArgumentNullException(nameof(inputCollection));
+            this.SortSubArray(inputCollection, startElement, inputCollection.Length);
         }
 
         /// <summary>
@@ -39,7 +47,7 @@ namespace BusinessLayer.SortingAlgorithms
             {
                 if (inputCollection[currentIndex].CompareTo(inputCollection[pivot]) <= 0)
                 {
-                    SwapElements(inputCollection, currentIndex, wall);
+                    this.SwapElements(inputCollection, currentIndex, wall);
                     wall++;
                 }
             }

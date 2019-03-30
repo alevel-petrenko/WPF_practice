@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Utilities.Validator.Interfaces;
+﻿using System;
+using BusinessLayer.Utilities.Validator.Interfaces;
 using System.IO;
 
 namespace BusinessLayer.Validator
@@ -33,16 +34,17 @@ namespace BusinessLayer.Validator
         /// </returns>
         private bool IsFileInValidFormat(string content)
         {
-            if (content != null)
+            if (content is null)
+                throw new ArgumentNullException(nameof(content));
+
+            string[] subArray = content.Split('.');
+            string format = subArray[subArray.Length - 1];
+            if (format == "txt" || format == "doc" || format == "docx")
             {
-                string[] subArray = content.Split('.');
-                string format = subArray[subArray.Length - 1];
-                if (format == "txt" || format == "doc" || format == "docx")
-                {
-                    return true;
-                }
+                return true;
             }
-            return false;
+            else
+                return false;
         }
     }
 }

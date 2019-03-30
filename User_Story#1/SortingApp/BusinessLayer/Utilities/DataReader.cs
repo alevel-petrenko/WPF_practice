@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Utilities.Validator.Interfaces;
+﻿using System;
+using BusinessLayer.Utilities.Validator.Interfaces;
 using System.IO;
 
 namespace BusinessLayer.Reader
@@ -36,8 +37,13 @@ namespace BusinessLayer.Reader
         /// <param name="validator">The validator.</param>
         public DataReader(IValidator validator)
         {
-            this.validator = validator;
-            this.Path = @"D:\Git\WPF_practice\User_Story#1\collectionToRead.txt";
+            if(validator != null)
+            {
+                this.validator = validator;
+                this.Path = @"D:\Git\WPF_practice\User_Story#1\collectionToRead.txt";
+            }
+            else
+                throw new ArgumentNullException(nameof(validator));
         }
 
         /// <summary>

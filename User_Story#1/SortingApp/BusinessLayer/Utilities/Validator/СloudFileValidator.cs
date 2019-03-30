@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Utilities.Validator.Interfaces;
+﻿using System;
+using BusinessLayer.Utilities.Validator.Interfaces;
 using System.Net;
 
 namespace BusinessLayer.Validator
@@ -20,6 +21,8 @@ namespace BusinessLayer.Validator
         /// </returns>
         public bool IsDataExist(string url)
         {
+            if (url is null)
+                throw new ArgumentNullException(nameof(url));
             try
             {
                 HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;

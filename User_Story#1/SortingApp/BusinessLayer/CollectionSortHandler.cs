@@ -72,6 +72,8 @@ namespace BusinessLayer
                 this.reader = reader;
                 this.writer = writer;
             }
+            else
+                throw new ArgumentNullException();
         }
 
         /// <summary>
