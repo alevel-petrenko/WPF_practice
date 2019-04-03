@@ -13,13 +13,13 @@ namespace BusinessLayer.Extensions
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <typeparam name="T">Certain input type.</typeparam>
-        /// <param name="obj">The input object.</param>
+        /// <param name="item">The input object.</param>
         /// <returns>Specific type.</returns>
-        public static T ChangeType<T>(this object obj)
+        public static T ChangeType<T>(this object item)
         {
-            if (obj is null)
-                throw new ArgumentNullException(nameof(obj));
-            return (T)Convert.ChangeType(obj, typeof(T));
+            if (item is null)
+                throw new ArgumentNullException(nameof(item));
+            return (T)Convert.ChangeType(item, typeof(T));
         }
     }
 }

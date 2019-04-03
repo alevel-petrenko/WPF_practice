@@ -32,25 +32,86 @@ namespace ViewModel
         private string message;
 
         /// <summary>
+        /// Stores the read.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private RelayCommand read;
+
+        /// <summary>
+        /// Stores the save.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private RelayCommand save;
+
+        /// <summary>
+        /// Stores the sort.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private RelayCommand sort;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CollectionSortingViewModel{T}"/> class.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public CollectionSortingViewModel()
+        {
+            this.handler = new CollectionSortHandler<T>
+                (new DataReader(new LocalFileValidator()), new DataWriter<T>(), new ArrayParser<T>());
+            this.UnSortedCollectionOfNumbers = new ObservableCollection<T>();
+            this.SortedCollectionOfNumbers = new ObservableCollection<T>();
+        }
+
+        /// <summary>
+        /// Gets the can save array.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        /// <owner>Anton Petrenko</owner>
+        private bool GetCanSaveArray(object obj)
+        {
+            return this.SortedCollectionOfNumbers.Count != 0;
+        }
+
+        /// <summary>
+        /// Gets the can sort array.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        /// <owner>Anton Petrenko</owner>
+        private bool GetCanSortArray(object obj)
+        {
+            return (this.UnSortedCollectionOfNumbers.Count != 0 && this.SortType is SortType valueOfSortType);
+        }
+
+        /// <summary>
         /// Gets or sets the error message.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <value>The message received from exception.</value>
         public string Message
         {
-            get { return message; }
+            get { return this.message; }
             set
             {
-                message = value;
-                OnPropertyChanged("Message");
+                this.message = value;
+                this.OnPropertyChanged("Message");
             }
         }
 
         /// <summary>
-        /// Stores the read.
+        /// Calls PropertyChanged event.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private RelayCommand read;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets the read command.
@@ -61,17 +122,34 @@ namespace ViewModel
         {
             get
             {
-                if (read is null)
-                    read = new RelayCommand(ReadArray);
-                return read;
+                if (this.read is null)
+                    this.read = new RelayCommand(ReadArray);
+                return this.read;
             }
         }
 
         /// <summary>
-        /// Stores the save.
+        /// Reads the array.
         /// </summary>
+        /// <param name="obj">The object.</param>
         /// <owner>Anton Petrenko</owner>
-        private RelayCommand save;
+        private void ReadArray(object obj)
+        {
+            try
+            {
+                this.handler.Read();
+                this.UnSortedCollectionOfNumbers.Clear();
+                foreach (var number in this.handler.UnSortedCollection)
+                {
+                    this.UnSortedCollectionOfNumbers.Add(number);
+                }
+                this.Message = "Array successfully read.";
+            }
+            catch (Exception e)
+            {
+                this.Message = e.Message;
+            }
+        }
 
         /// <summary>
         /// Gets the save command.
@@ -82,17 +160,29 @@ namespace ViewModel
         {
             get
             {
-                if (save is null)
-                    save = new RelayCommand(SaveArray, GetCanSaveArray);
-                return save;
+                if (this.save is null)
+                    this.save = new RelayCommand(this.SaveArray, this.GetCanSaveArray);
+                return this.save;
             }
         }
 
         /// <summary>
-        /// Stores the sort.
+        /// Saves the array.
         /// </summary>
+        /// <param name="obj">The object.</param>
         /// <owner>Anton Petrenko</owner>
-        private RelayCommand sort;
+        private void SaveArray(object obj)
+        {
+            try
+            {
+                this.handler.Write();
+                this.Message = "Successfully saved to file.";
+            }
+            catch (Exception e)
+            {
+                this.Message = e.Message;
+            }
+        }
 
         /// <summary>
         /// Gets the sort command.
@@ -103,9 +193,33 @@ namespace ViewModel
         {
             get
             {
-                if (sort is null)
-                    sort = new RelayCommand(SortArray, GetCanSortArray);
-                return sort;
+                if (this.sort is null)
+                    this.sort = new RelayCommand(this.SortArray, this.GetCanSortArray);
+                return this.sort;
+            }
+        }
+
+        /// <summary>
+        /// Sorts the array.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <owner>Anton Petrenko</owner>
+        private void SortArray(object obj)
+        {
+            try
+            {
+                this.handler.GenerateSorter(SortType.ToString());
+                this.handler.Execute();
+                this.SortedCollectionOfNumbers.Clear();
+                foreach (var number in this.handler.SortedCollection)
+                {
+                    this.SortedCollectionOfNumbers.Add(number);
+                }
+                this.Message = "Array successfully sorted.";
+            }
+            catch (Exception e)
+            {
+                this.Message = e.Message;
             }
         }
 
@@ -128,119 +242,5 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         /// <returns>The collection of numbers.</returns>
         public ObservableCollection<T> UnSortedCollectionOfNumbers { get; set; }
-
-        /// <summary>
-        /// Gets the can save array.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        /// <owner>Anton Petrenko</owner>
-        private bool GetCanSaveArray(object obj)
-        {
-            return !(this.SortedCollectionOfNumbers.Count == 0);
-        }
-
-        /// <summary>
-        /// Gets the can sort array.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        /// <owner>Anton Petrenko</owner>
-        private bool GetCanSortArray(object obj)
-        {
-            return (this.UnSortedCollectionOfNumbers.Count != 0 && this.SortType is SortType valueOfSortType);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CollectionSortingViewModel{T}"/> class.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public CollectionSortingViewModel()
-        {
-            this.handler = new CollectionSortHandler<T>
-                (new DataReader(new LocalFileValidator()), new DataWriter<T>(), new ArrayParser<T>());
-            this.UnSortedCollectionOfNumbers = new ObservableCollection<T>();
-            this.SortedCollectionOfNumbers = new ObservableCollection<T>();
-        }
-
-        /// <summary>
-        /// Calls PropertyChanged event.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Reads the array.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <owner>Anton Petrenko</owner>
-        private void ReadArray(object obj)
-        {
-            try
-            {
-                this.handler.Read();
-                this.UnSortedCollectionOfNumbers.Clear();
-                foreach (var number in handler.UnSortedCollection)
-                {
-                    this.UnSortedCollectionOfNumbers.Add(number);
-                }
-                this.Message = "Array successfully read.";
-            }
-            catch (Exception e)
-            {
-                this.Message = e.Message;
-            }
-        }
-
-        /// <summary>
-        /// Sorts the array.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <owner>Anton Petrenko</owner>
-        private void SortArray(object obj)
-        {
-            try
-            {
-                this.handler.GenerateSorter(SortType.ToString());
-                this.handler.Execute();
-                this.SortedCollectionOfNumbers.Clear();
-                foreach (var number in handler.SortedCollection)
-                {
-                    this.SortedCollectionOfNumbers.Add(number);
-                }
-                this.Message = "Array successfully sorted.";
-            }
-            catch (Exception e)
-            {
-                this.Message = e.Message;
-            }
-        }
-
-        /// <summary>
-        /// Saves the array.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <owner>Anton Petrenko</owner>
-        private void SaveArray(object obj)
-        {
-            try
-            {
-                this.handler.Write();
-                this.Message = "Successfully saved to file.";
-            }
-            catch (Exception e)
-            {
-                this.Message = e.Message;
-            }
-        }
     }
 }

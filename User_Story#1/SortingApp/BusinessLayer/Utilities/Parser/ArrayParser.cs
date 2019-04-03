@@ -42,7 +42,6 @@ namespace BusinessLayer.DataParser
                 {
                     numbers.Add(TypeParser.ChangeType<T>(items[i].Trim()));
                 }
-
                 return numbers.ToArray();
             }
             catch(ArgumentNullException)

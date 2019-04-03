@@ -25,19 +25,13 @@ namespace BusinessLayer
         /// Holds the parser.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private IDataParser<T> parser;
+        private readonly IDataParser<T> parser;
 
         /// <summary>
         /// Holds the reader.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private DataReader reader;
-
-        /// <summary>
-        /// Holds the sorted collection.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public T[] SortedCollection { get; private set; }
+        private readonly DataReader reader;
 
         /// <summary>
         /// Holds the sorter.
@@ -46,16 +40,10 @@ namespace BusinessLayer
         private CollectionSorterBase<T> sorter;
 
         /// <summary>
-        /// Holds the unsorted collection.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public T[] UnSortedCollection { get; private set; }
-
-        /// <summary>
         /// Holds the writer.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private DataWriter<T> writer;
+        private readonly DataWriter<T> writer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CollectionSortHandler{T}"/> class.
@@ -138,6 +126,18 @@ namespace BusinessLayer
                 throw new Exception("Reading from the file failed.");
             }
         }
+
+        /// <summary>
+        /// Holds the sorted collection.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public T[] SortedCollection { get; private set; }
+
+        /// <summary>
+        /// Holds the unsorted collection.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public T[] UnSortedCollection { get; private set; }
 
         /// <summary>
         /// Writes sorted collection to file.
