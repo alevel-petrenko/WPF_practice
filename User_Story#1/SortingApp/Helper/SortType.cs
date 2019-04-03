@@ -1,4 +1,4 @@
-﻿namespace ViewModel.Enum
+﻿namespace Helper
 {
     /// <summary>
     /// Stores types of sort.

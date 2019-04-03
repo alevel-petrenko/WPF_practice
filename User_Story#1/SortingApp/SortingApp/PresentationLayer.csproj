@@ -98,6 +98,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Helper\Helper.csproj">
+      <Project>{bf7d8f1c-e861-47df-b417-98b3e3f0ab4b}</Project>
+      <Name>Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
       <Project>{5128c802-cc1c-469f-a688-a6a0b96e34a7}</Project>
       <Name>ViewModel</Name>

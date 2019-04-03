@@ -5,7 +5,7 @@ using System.Windows.Markup;
 namespace SortingApp.Helpers
 {
     /// <summary>
-    /// EnumToItemsSource.
+    /// Represents enum items as source value.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <seealso cref="System.Windows.Markup.MarkupExtension" />

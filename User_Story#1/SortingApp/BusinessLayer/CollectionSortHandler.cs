@@ -5,6 +5,7 @@ using BusinessLayer.SortingAlgorithms;
 using BusinessLayer.Writer;
 using BusinessLayer.SorterFactory;
 using System.IO;
+using Helper;
 
 namespace BusinessLayer
 {
@@ -15,12 +16,6 @@ namespace BusinessLayer
     /// <typeparam name="T">Certain input type.</typeparam>
     public class CollectionSortHandler<T> where T : IComparable
     {
-        /// <summary>
-        /// Holds the creator.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private CollectionSortCreatorBase<T> creator;
-
         /// <summary>
         /// Holds the parser.
         /// </summary>
@@ -88,23 +83,20 @@ namespace BusinessLayer
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <param name="type">The type.</param>
-        public void GenerateSorter(string type)
+        public void GenerateSorter(SortType type)
         {
             switch (type)
             {
-                case "InsertionSort":
-                    this.creator = new InsertionSortCreator<T>();
+                case SortType.InsertionSort:
+                    this.sorter = new InsertionSortCreator<T>().Create();
                     break;
-                case "SelectionSort":
-                    this.creator = new SelectionSortCreator<T>();
+                case SortType.SelectionSort:
+                    this.sorter = new SelectionSortCreator<T>().Create();
                     break;
-                case "QuickSort":
-                    this.creator = new QuickSortCreator<T>();
+                case SortType.QuickSort:
+                    this.sorter = new QuickSortCreator<T>().Create();
                     break;
-                default:
-                    return;
             }
-            this.sorter = this.creator.Create();
         }
 
         /// <summary>
@@ -147,7 +139,7 @@ namespace BusinessLayer
         {
             try
             {
-                this.writer.WriteContent(SortedCollection);
+                this.writer.WriteContent(this.SortedCollection);
             }
             catch(ArgumentNullException e)
             {

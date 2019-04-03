@@ -7,7 +7,8 @@ using BusinessLayer.Writer;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using ViewModel.Enum;
+using Helper;
+using System.Linq;
 
 namespace ViewModel
 {
@@ -32,19 +33,19 @@ namespace ViewModel
         private string message;
 
         /// <summary>
-        /// Stores the read.
+        /// Stores the read command.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private RelayCommand read;
 
         /// <summary>
-        /// Stores the save.
+        /// Stores the save command.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private RelayCommand save;
 
         /// <summary>
-        /// Stores the sort.
+        /// Stores the sort command.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private RelayCommand sort;
@@ -69,7 +70,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private bool GetCanSaveArray(object obj)
         {
-            return this.SortedCollectionOfNumbers.Count != 0;
+            return this.SortedCollectionOfNumbers.Any();
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private bool GetCanSortArray(object obj)
         {
-            return (this.UnSortedCollectionOfNumbers.Count != 0 && this.SortType is SortType valueOfSortType);
+            return (this.UnSortedCollectionOfNumbers.Any() && this.SortType is SortType valueOfSortType);
         }
 
         /// <summary>
@@ -102,6 +103,7 @@ namespace ViewModel
         /// Calls PropertyChanged event.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
+        /// <param name="prop">Value, which need to be updated.</param>
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
@@ -124,6 +126,7 @@ namespace ViewModel
             {
                 if (this.read is null)
                     this.read = new RelayCommand(ReadArray);
+
                 return this.read;
             }
         }
@@ -131,8 +134,8 @@ namespace ViewModel
         /// <summary>
         /// Reads the array.
         /// </summary>
-        /// <param name="obj">The object.</param>
         /// <owner>Anton Petrenko</owner>
+        /// <param name="obj">The object.</param>
         private void ReadArray(object obj)
         {
             try
@@ -140,9 +143,8 @@ namespace ViewModel
                 this.handler.Read();
                 this.UnSortedCollectionOfNumbers.Clear();
                 foreach (var number in this.handler.UnSortedCollection)
-                {
                     this.UnSortedCollectionOfNumbers.Add(number);
-                }
+
                 this.Message = "Array successfully read.";
             }
             catch (Exception e)
@@ -162,6 +164,7 @@ namespace ViewModel
             {
                 if (this.save is null)
                     this.save = new RelayCommand(this.SaveArray, this.GetCanSaveArray);
+
                 return this.save;
             }
         }
@@ -195,6 +198,7 @@ namespace ViewModel
             {
                 if (this.sort is null)
                     this.sort = new RelayCommand(this.SortArray, this.GetCanSortArray);
+
                 return this.sort;
             }
         }
@@ -208,13 +212,12 @@ namespace ViewModel
         {
             try
             {
-                this.handler.GenerateSorter(SortType.ToString());
+                this.handler.GenerateSorter(SortType);
                 this.handler.Execute();
                 this.SortedCollectionOfNumbers.Clear();
                 foreach (var number in this.handler.SortedCollection)
-                {
                     this.SortedCollectionOfNumbers.Add(number);
-                }
+
                 this.Message = "Array successfully sorted.";
             }
             catch (Exception e)
@@ -231,7 +234,7 @@ namespace ViewModel
         public ObservableCollection<T> SortedCollectionOfNumbers { get; set; }
 
         /// <summary>
-        /// The type of sort from enum.
+        /// Gets or sets the type of a sort algorithm.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public SortType SortType { get; set; }

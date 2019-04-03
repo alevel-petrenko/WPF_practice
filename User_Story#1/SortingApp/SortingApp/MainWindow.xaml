@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:enumHelper="clr-namespace:SortingApp.Helpers"
-        xmlns:enumType="clr-namespace:ViewModel.Enum;assembly=ViewModel"
+        xmlns:enumType="clr-namespace:Helper;assembly=Helper"
         mc:Ignorable="d"
         Title="Sorting Application" Height="450" Width="800">
     <Window.Resources>
