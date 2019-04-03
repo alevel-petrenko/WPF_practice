@@ -193,7 +193,7 @@ namespace ViewModel
                 {
                     this.UnSortedCollectionOfNumbers.Add(number);
                 }
-                this.Message = String.Empty;
+                this.Message = "Array successfully read.";
             }
             catch (Exception e)
             {
@@ -217,7 +217,7 @@ namespace ViewModel
                 {
                     this.SortedCollectionOfNumbers.Add(number);
                 }
-                this.Message = String.Empty;
+                this.Message = "Array successfully sorted.";
             }
             catch (Exception e)
             {
@@ -235,7 +235,7 @@ namespace ViewModel
             try
             {
                 this.handler.Write();
-                this.Message = String.Empty;
+                this.Message = "Successfully saved to file.";
             }
             catch (Exception e)
             {
