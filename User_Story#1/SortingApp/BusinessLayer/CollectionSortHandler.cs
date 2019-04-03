@@ -4,6 +4,7 @@ using BusinessLayer.Reader;
 using BusinessLayer.SortingAlgorithms;
 using BusinessLayer.Writer;
 using BusinessLayer.SorterFactory;
+using System.IO;
 
 namespace BusinessLayer
 {
@@ -132,6 +133,10 @@ namespace BusinessLayer
             {
                 throw new Exception(e.Message + " was empty.");
             }
+            catch (IOException)
+            {
+                throw new Exception("Reading from the file failed.");
+            }
         }
 
         /// <summary>
@@ -140,7 +145,18 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Write()
         {
-            this.writer.WriteContent(SortedCollection);
+            try
+            {
+                this.writer.WriteContent(SortedCollection);
+            }
+            catch(ArgumentNullException e)
+            {
+                throw new Exception(e.Message + " was empty.");
+            }
+            catch(IOException)
+            {
+                throw new Exception("Writing to the file failed.");
+            }
         }
     }
 }

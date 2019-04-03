@@ -26,11 +26,25 @@ namespace ViewModel
         private readonly CollectionSortHandler<T> handler;
 
         /// <summary>
-        /// Gets or sets the message for display.
+        /// Stores the error message.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private string message;
+
+        /// <summary>
+        /// Gets or sets the error message.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <value>The message received from exception.</value>
-        public string Message { get; private set; }
+        public string Message
+        {
+            get { return message; }
+            set
+            {
+                message = value;
+                OnPropertyChanged("Message");
+            }
+        }
 
         /// <summary>
         /// Stores the read.
@@ -123,7 +137,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private bool GetCanSaveArray(object obj)
         {
-            return !(SortedCollectionOfNumbers.Count == 0);
+            return !(this.SortedCollectionOfNumbers.Count == 0);
         }
 
         /// <summary>
@@ -143,10 +157,10 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         public CollectionSortingViewModel()
         {
-            handler = new CollectionSortHandler<T>
+            this.handler = new CollectionSortHandler<T>
                 (new DataReader(new LocalFileValidator()), new DataWriter<T>(), new ArrayParser<T>());
-            UnSortedCollectionOfNumbers = new ObservableCollection<T>();
-            SortedCollectionOfNumbers = new ObservableCollection<T>();
+            this.UnSortedCollectionOfNumbers = new ObservableCollection<T>();
+            this.SortedCollectionOfNumbers = new ObservableCollection<T>();
         }
 
         /// <summary>
@@ -155,7 +169,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         /// <summary>
@@ -173,17 +187,17 @@ namespace ViewModel
         {
             try
             {
-                handler.Read();
-                UnSortedCollectionOfNumbers.Clear();
+                this.handler.Read();
+                this.UnSortedCollectionOfNumbers.Clear();
                 foreach (var number in handler.UnSortedCollection)
                 {
-                    UnSortedCollectionOfNumbers.Add(number);
-            
+                    this.UnSortedCollectionOfNumbers.Add(number);
                 }
+                this.Message = String.Empty;
             }
-            catch (ArgumentNullException e)
+            catch (Exception e)
             {
-                Message = e.Message;
+                this.Message = e.Message;
             }
         }
 
@@ -194,12 +208,20 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void SortArray(object obj)
         {
-            handler.GenerateSorter(SortType.ToString());
-            handler.Execute();
-            SortedCollectionOfNumbers.Clear();
-            foreach (var number in handler.SortedCollection)
+            try
             {
-                SortedCollectionOfNumbers.Add(number);
+                this.handler.GenerateSorter(SortType.ToString());
+                this.handler.Execute();
+                this.SortedCollectionOfNumbers.Clear();
+                foreach (var number in handler.SortedCollection)
+                {
+                    this.SortedCollectionOfNumbers.Add(number);
+                }
+                this.Message = String.Empty;
+            }
+            catch (Exception e)
+            {
+                this.Message = e.Message;
             }
         }
 
@@ -210,7 +232,15 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void SaveArray(object obj)
         {
-            handler.Write();
+            try
+            {
+                this.handler.Write();
+                this.Message = String.Empty;
+            }
+            catch (Exception e)
+            {
+                this.Message = e.Message;
+            }
         }
     }
 }

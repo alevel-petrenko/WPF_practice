@@ -15,15 +15,10 @@
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="22"></Setter>
-            <!--<Setter Property="FontWeight" Value="Black"></Setter>-->
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        </Style>
-        <Style TargetType="ComboBoxItem">
-            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="20"></Setter>
-            <!--<Setter Property="VerticalContentAlignment" Value="Top"></Setter>-->
             <Setter Property="Width" Value="100"></Setter>
             <Setter Property="Height" Value="30"></Setter>
             <Setter Property="Background" Value="GhostWhite" ></Setter>
@@ -48,10 +43,12 @@
                     ItemsSource="{enumHelper:EnumToItemsSource {x:Type enumType:SortType}}"
                     SelectedValue="{Binding Path=SortType}"
                     SelectedValuePath="Value" 
-                    Margin="30, 125" 
                     Grid.Column="2" 
-                    Grid.Row="0" 
-                    ToolTip="Sort type"/>
+                    Grid.Row="0"
+                    FontSize="20"
+                    ToolTip="Sort type"
+                    Margin="20"
+                    Height="35"/>
         <ListBox Grid.Column="0" ItemsSource="{Binding UnSortedCollectionOfNumbers}"/>
         <ListBox Grid.Column="1" ItemsSource="{Binding SortedCollectionOfNumbers}" IsSynchronizedWithCurrentItem="True"/>
         <TextBlock Grid.Column="0" Text="Input array:" Margin="0,50,0,190"/>
@@ -61,6 +58,13 @@
             <Button Content="Save" Command="{Binding Save}"/>
             <Button Content="Sort" Command="{Binding Sort}" Background="MediumPurple"/>
         </WrapPanel>
-        <TextBlock HorizontalAlignment="Left" Margin="30,55,10,55" Grid.Row="1" Text="{Binding Message}" FontSize="16" Foreground="Purple"/>
+        <StatusBar HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="25" Grid.Row="1" Grid.ColumnSpan="3">
+            <StatusBarItem>
+                <TextBlock Text="{Binding Message}"  FontSize="15" Foreground="Purple"/>
+            </StatusBarItem>
+            <Separator Grid.Column="1" />
+            <StatusBarItem>
+                </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>

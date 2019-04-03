@@ -65,7 +65,7 @@ namespace BusinessLayer.Reader
             }
             catch (ArgumentNullException e)
             {
-                throw new Exception(e.Message + " causes exception");
+                throw new IOException(e.Message + " was empty.");
             }
         }
     }

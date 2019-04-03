@@ -18,7 +18,7 @@ namespace BusinessLayer.Writer
 
         public DataWriter()
         {
-            Path = @"D:\Git\WPF_practice\User_Story#1\collectionToWrite.txt";
+            this.Path = @"D:\Git\WPF_practice\User_Story#1\collectionToWrite.txt";
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace BusinessLayer.Writer
             }
             catch
             {
-                return;
+                throw new IOException();
             }
         }
     }
