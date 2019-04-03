@@ -51,8 +51,8 @@ namespace BusinessLayer.SortingAlgorithms
                     wall++;
                 }
             }
-            SortSubArray(inputCollection, start, wall - 1);
-            SortSubArray(inputCollection, wall + 1, end);
+            this.SortSubArray(inputCollection, start, wall - 1);
+            this.SortSubArray(inputCollection, wall + 1, end);
         }
 
         /// <summary>

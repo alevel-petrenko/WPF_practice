@@ -20,11 +20,10 @@ namespace BusinessLayer.SortingAlgorithms
         {
             if (inputCollection is null)
                 throw new ArgumentNullException(nameof(inputCollection));
-            for (int i = 0; i < inputCollection.Length; i++)
+            for (int i = 0; i < inputCollection.Length - 1; i++)
             {
                 var min = inputCollection[i];
-                int j = i + 1;
-                for (; j < inputCollection.Length; j++)
+                for (int j = i + 1; j < inputCollection.Length; j++)
                 {
                     if (min.CompareTo(inputCollection[j]) > 0)
                     {

@@ -15,13 +15,13 @@ namespace BusinessLayer.Validator
         /// Determines whether data exists.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <param name="content">The content.</param>
+        /// <param name="content">The content of the file.</param>
         /// <returns>
         ///   <c>true</c> if data exists; otherwise, <c>false</c>.
         /// </returns>
         public bool IsDataExist(string content)
         {
-            return File.Exists(content) ? IsFileInValidFormat(content) : false;
+            return File.Exists(content) && this.IsFileInValidFormat(content);
         }
 
         /// <summary>
@@ -37,12 +37,10 @@ namespace BusinessLayer.Validator
             if (content is null)
                 throw new ArgumentNullException(nameof(content));
 
-            string[] subArray = content.Split('.');
-            string format = subArray[subArray.Length - 1];
-            if (format == "txt" || format == "doc" || format == "docx")
-            {
+            string format = Path.GetExtension(content);
+            if (format == ".txt" || format == ".doc" || format == ".docx")
                 return true;
-            }
+
             else
                 return false;
         }

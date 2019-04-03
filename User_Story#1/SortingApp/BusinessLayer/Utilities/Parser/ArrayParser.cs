@@ -14,12 +14,6 @@ namespace BusinessLayer.DataParser
     public class ArrayParser<T> : IDataParser<T> where T : IComparable
     {
         /// <summary>
-        /// The list of items from file.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private T[] listOfItemsFromFile;
-
-        /// <summary>
         /// The array with separator values.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -31,7 +25,6 @@ namespace BusinessLayer.DataParser
         /// <owner>Anton Petrenko</owner>
         public ArrayParser()
         {
-            this.listOfItemsFromFile = new T[1];
             this.separators = new char[] { ';', '/', '|', ' ' };
         }
 
@@ -41,20 +34,20 @@ namespace BusinessLayer.DataParser
         /// <owner>Anton Petrenko</owner>
         public T[] DataConverter(string content)
         {
+            List<T> numbers = new List<T>();
             try
             {
-                List<T> numbers = new List<T>();
                 string[] items = content.Split(separators);
                 for (int i = 0; i < items.Length; i++)
                 {
                     numbers.Add(TypeParser.ChangeType<T>(items[i].Trim()));
                 }
-                this.listOfItemsFromFile = numbers.ToArray();
-                return this.listOfItemsFromFile;
+
+                return numbers.ToArray();
             }
             catch(ArgumentNullException)
             {
-                return this.listOfItemsFromFile;
+                return numbers.ToArray();
             }
         }
     }
