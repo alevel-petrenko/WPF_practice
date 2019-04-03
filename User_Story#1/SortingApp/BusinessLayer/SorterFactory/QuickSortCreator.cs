@@ -7,7 +7,7 @@ namespace BusinessLayer.SorterFactory
     /// Provides functionality that generates quick sort class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T">Certain input type</type
+    /// <typeparam name="T">Certain input type.</type
     public class QuickSortCreator<T> : CollectionSortCreatorBase<T> where T : IComparable
     {
         /// <summary>

@@ -15,7 +15,7 @@ namespace ViewModel
     /// Represents a ViewModel layer with all fields from View and logic how to handle requests from UI.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Certain input type.</typeparam>
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public class CollectionSortingViewModel<T> : INotifyPropertyChanged where T : IComparable
     {
@@ -24,6 +24,13 @@ namespace ViewModel
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private readonly CollectionSortHandler<T> handler;
+
+        /// <summary>
+        /// Gets or sets the message for display.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <value>The message received from exception.</value>
+        public string Message { get; private set; }
 
         /// <summary>
         /// Stores the read.
@@ -164,11 +171,19 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void ReadArray(object obj)
         {
-            handler.Read();
-            UnSortedCollectionOfNumbers.Clear();
-            foreach (var number in handler.UnSortedCollection)
+            try
             {
-                UnSortedCollectionOfNumbers.Add(number);
+                handler.Read();
+                UnSortedCollectionOfNumbers.Clear();
+                foreach (var number in handler.UnSortedCollection)
+                {
+                    UnSortedCollectionOfNumbers.Add(number);
+            
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                Message = e.Message;
             }
         }
 

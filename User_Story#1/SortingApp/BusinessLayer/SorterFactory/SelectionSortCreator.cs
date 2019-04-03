@@ -7,7 +7,7 @@ namespace BusinessLayer.SorterFactory
     /// Provides functionality that generates selection sort class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T">Certain input type</typeparam>
+    /// <typeparam name="T">Certain input type.</typeparam>
     public class SelectionSortCreator<T> : CollectionSortCreatorBase<T> where T : IComparable
     {
         /// <summary>

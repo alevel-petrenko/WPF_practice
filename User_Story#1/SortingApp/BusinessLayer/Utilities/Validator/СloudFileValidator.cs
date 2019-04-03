@@ -5,7 +5,7 @@ using System.Net;
 namespace BusinessLayer.Validator
 {
     /// <summary>
-    /// Checks whether content from cloud doc is valid.
+    /// Checks whether content of cloud doc is valid.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <seealso cref="BusinessLayer.Interfaces.IValidator" />
@@ -15,7 +15,7 @@ namespace BusinessLayer.Validator
         /// Determines whether data exists.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <param name="content">The content.</param>
+        /// <param name="content">The content of cloud doc.</param>
         /// <returns>
         ///   <c>true</c> if data exists; otherwise, <c>false</c>.
         /// </returns>

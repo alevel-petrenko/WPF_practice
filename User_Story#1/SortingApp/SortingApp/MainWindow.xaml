@@ -15,18 +15,18 @@
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="22"></Setter>
-            <Setter Property="FontWeight" Value="Black"></Setter>
+            <!--<Setter Property="FontWeight" Value="Black"></Setter>-->
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         </Style>
         <Style TargetType="ComboBoxItem">
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="FontSize" Value="22"></Setter>
-            <Setter Property="VerticalContentAlignment" Value="Top"></Setter>
-            <Setter Property="Width" Value="90"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <!--<Setter Property="VerticalContentAlignment" Value="Top"></Setter>-->
+            <Setter Property="Width" Value="100"></Setter>
             <Setter Property="Height" Value="30"></Setter>
-            <Setter Property="Background" Value="CadetBlue" ></Setter>
+            <Setter Property="Background" Value="GhostWhite" ></Setter>
         </Style>
     </Window.Resources>
     <Grid>
@@ -61,5 +61,6 @@
             <Button Content="Save" Command="{Binding Save}"/>
             <Button Content="Sort" Command="{Binding Sort}" Background="MediumPurple"/>
         </WrapPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="30,55,10,55" Grid.Row="1" Text="{Binding Message}" FontSize="16" Foreground="Purple"/>
     </Grid>
 </Window>

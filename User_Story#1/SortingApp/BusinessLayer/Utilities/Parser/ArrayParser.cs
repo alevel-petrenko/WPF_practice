@@ -9,7 +9,7 @@ namespace BusinessLayer.DataParser
     /// Provides functionality that parses string into array of srecific type.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Certain input type.</typeparam>
     /// <seealso cref="BusinessLayer.DataParser.Interfaces.IDataParser" />
     public class ArrayParser<T> : IDataParser<T> where T : IComparable
     {

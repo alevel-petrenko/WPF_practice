@@ -7,7 +7,7 @@ namespace BusinessLayer.SorterFactory
     /// Provides functionality that generates insertion sort class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T">Certain input type</typeparam>
+    /// <typeparam name="T">Certain input type.</typeparam>
     public class InsertionSortCreator<T> : CollectionSortCreatorBase<T> where T : IComparable
     {
         /// <summary>

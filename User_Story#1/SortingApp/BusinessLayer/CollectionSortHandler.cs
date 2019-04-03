@@ -11,7 +11,7 @@ namespace BusinessLayer
     /// Handles all requests regarding reading, sorting collection and writing it to the file.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Certain input type.</typeparam>
     public class CollectionSortHandler<T> where T : IComparable
     {
         /// <summary>
@@ -82,9 +82,16 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Execute()
         {
-            this.SortedCollection = new T[UnSortedCollection.Length];
-            this.UnSortedCollection.CopyTo(SortedCollection, 0);
-            this.sorter.Sort(SortedCollection);
+            try
+            {
+                this.SortedCollection = new T[UnSortedCollection.Length];
+                this.UnSortedCollection.CopyTo(SortedCollection, 0);
+                this.sorter.Sort(SortedCollection);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new Exception(e.Message + " was empty.");
+            }
         }
 
         /// <summary>
@@ -117,7 +124,14 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Read()
         {
-            this.UnSortedCollection = this.parser.DataConverter(this.reader.ReadContent());
+            try
+            {
+                this.UnSortedCollection = this.parser.DataConverter(this.reader.ReadContent());
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new Exception(e.Message + " was empty.");
+            }
         }
 
         /// <summary>

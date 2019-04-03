@@ -6,7 +6,7 @@ namespace BusinessLayer.SortingAlgorithms
     /// Provides functionality that sort elements in an ascending order by Quick sort type.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    /// <typeparam name="T">Certain input type</typeparam>
+    /// <typeparam name="T">Certain input type.</typeparam>
     /// <seealso cref="BusinessLayer.SortingAlgorithms.CollectionSorterBase{T}" />
     public class QuickSorter<T> : CollectionSorterBase<T> where T : IComparable
     {

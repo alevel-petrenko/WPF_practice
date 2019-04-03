@@ -12,6 +12,7 @@ namespace BusinessLayer.Utilities.Parser.Interfaces
         /// Converts data to collection of srecific type.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
+        /// 
         T[] DataConverter(string content);
     }
 }

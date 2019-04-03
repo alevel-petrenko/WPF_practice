@@ -5,7 +5,7 @@ using System.IO;
 namespace BusinessLayer.Validator
 {
     /// <summary>
-    /// Checks whether content from file is valid.
+    /// Checks whether content of file is valid.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <seealso cref="BusinessLayer.Interfaces.IValidator" />
@@ -21,6 +21,8 @@ namespace BusinessLayer.Validator
         /// </returns>
         public bool IsDataExist(string content)
         {
+            if (content is null)
+                throw new ArgumentNullException(nameof(content));
             return File.Exists(content) && this.IsFileInValidFormat(content);
         }
 
@@ -28,17 +30,14 @@ namespace BusinessLayer.Validator
         /// Determines whether file is in valid format.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <param name="content">The content.</param>
+        /// <param name="content">The content of the file.</param>
         /// <returns>
         ///   <c>true</c> if file is in valid format; otherwise, <c>false</c>.
         /// </returns>
         private bool IsFileInValidFormat(string content)
         {
-            if (content is null)
-                throw new ArgumentNullException(nameof(content));
-
             string format = Path.GetExtension(content);
-            if (format == ".txt" || format == ".doc" || format == ".docx")
+            if (format == ".txt")
                 return true;
 
             else
