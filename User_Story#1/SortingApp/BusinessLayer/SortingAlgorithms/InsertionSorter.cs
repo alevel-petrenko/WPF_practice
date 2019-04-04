@@ -19,6 +19,7 @@ namespace BusinessLayer.SortingAlgorithms
         {
             if (inputCollection is null)
                 throw new ArgumentNullException(nameof(inputCollection));
+
             for (int i = 1; i < inputCollection.Length; i++)
             {
                 var temp = inputCollection[i];

@@ -19,6 +19,7 @@ namespace BusinessLayer.Extensions
         {
             if (item is null)
                 throw new ArgumentNullException(nameof(item));
+
             return (T)Convert.ChangeType(item, typeof(T));
         }
     }

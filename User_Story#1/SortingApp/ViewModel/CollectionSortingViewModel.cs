@@ -150,9 +150,9 @@ namespace ViewModel
                 this.ShowDialogWindow();
                 this.handler.Read(path);
                 this.UnSortedCollectionOfNumbers.Clear();
+
                 foreach (var number in this.handler.UnSortedCollection)
                     this.UnSortedCollectionOfNumbers.Add(number);
-
                 this.Message = "Array was successfully read.";
             }
             catch (Exception e)
@@ -237,9 +237,9 @@ namespace ViewModel
                 this.handler.GenerateSorter(SortType);
                 this.handler.Execute();
                 this.SortedCollectionOfNumbers.Clear();
+
                 foreach (var number in this.handler.SortedCollection)
                     this.SortedCollectionOfNumbers.Add(number);
-
                 this.Message = "Array was successfully sorted.";
             }
             catch (Exception e)

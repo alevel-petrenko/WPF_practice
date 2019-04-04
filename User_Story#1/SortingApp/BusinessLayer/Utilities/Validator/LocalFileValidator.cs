@@ -23,6 +23,7 @@ namespace BusinessLayer.Validator
         {
             if (content is null)
                 throw new ArgumentNullException(nameof(content));
+
             return File.Exists(content) && this.IsFileInValidFormat(content);
         }
 

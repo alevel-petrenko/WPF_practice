@@ -25,6 +25,7 @@ namespace BusinessLayer.Writer
         {
             if(collection is null || !collection.Any())
             throw new ArgumentNullException(nameof(collection));
+
             try
             {
                 string temp = string.Empty;

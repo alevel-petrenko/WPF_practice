@@ -29,6 +29,7 @@ namespace BusinessLayer.Validator
                 request.Method = "HEAD";
                 var response = request.GetResponse() as HttpWebResponse;
                 response.Close();
+
                 return (response.StatusCode == HttpStatusCode.OK);
             }
             catch

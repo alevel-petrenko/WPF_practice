@@ -15,7 +15,7 @@ namespace BusinessLayer.SortingAlgorithms
         /// Stores value for first element to find in array.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private const int startElement = 0;
+        private const int StartElement = 0;
 
         /// <summary>
         /// Sorts the specified input collection.
@@ -26,7 +26,8 @@ namespace BusinessLayer.SortingAlgorithms
         {
             if (inputCollection is null || !inputCollection.Any())
                 throw new ArgumentNullException(nameof(inputCollection));
-            this.Sort(inputCollection, startElement, inputCollection.Length - 1);
+
+            this.Sort(inputCollection, StartElement, inputCollection.Length - 1);
         }
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace BusinessLayer.SortingAlgorithms
                 }
             }
             this.SwapElements(inputCollection, ++wall, pivot);
+
             return wall;
         }
 

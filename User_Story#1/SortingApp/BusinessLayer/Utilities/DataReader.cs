@@ -52,6 +52,7 @@ namespace BusinessLayer.Reader
                 {
                     content = reader.ReadToEnd();
                 }
+
                 return content;
             }
             catch (ArgumentNullException e)
