@@ -25,7 +25,7 @@ namespace BusinessLayer.DataParser
         /// <owner>Anton Petrenko</owner>
         public ArrayParser()
         {
-            this.separators = new char[] { ';', '/', '|', ' ' };
+            this.separators = new char[] { ';', '/', '|'};
         }
 
         /// <summary>

@@ -4,11 +4,12 @@ using BusinessLayer.DataParser;
 using BusinessLayer.Reader;
 using BusinessLayer.Validator;
 using BusinessLayer.Writer;
+using Helper;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Helper;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 namespace ViewModel
 {
@@ -31,6 +32,12 @@ namespace ViewModel
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private string message;
+
+        /// <summary>
+        /// The path for the source.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private string path;
 
         /// <summary>
         /// Stores the read command.
@@ -63,7 +70,7 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Gets the can save array.
+        /// Gets the possibility of saving array.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns></returns>
@@ -140,12 +147,13 @@ namespace ViewModel
         {
             try
             {
-                this.handler.Read();
+                this.ShowDialogWindow();
+                this.handler.Read(path);
                 this.UnSortedCollectionOfNumbers.Clear();
                 foreach (var number in this.handler.UnSortedCollection)
                     this.UnSortedCollectionOfNumbers.Add(number);
 
-                this.Message = "Array successfully read.";
+                this.Message = "Array was successfully read.";
             }
             catch (Exception e)
             {
@@ -178,12 +186,26 @@ namespace ViewModel
         {
             try
             {
-                this.handler.Write();
+                this.ShowDialogWindow();
+                this.handler.Write(path);
                 this.Message = "Successfully saved to file.";
             }
             catch (Exception e)
             {
                 this.Message = e.Message;
+            }
+        }
+
+        /// <summary>
+        /// Shows the dialog window.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private void ShowDialogWindow()
+        {
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    path = openFileDialog.FileName;
             }
         }
 
@@ -218,7 +240,7 @@ namespace ViewModel
                 foreach (var number in this.handler.SortedCollection)
                     this.SortedCollectionOfNumbers.Add(number);
 
-                this.Message = "Array successfully sorted.";
+                this.Message = "Array was successfully sorted.";
             }
             catch (Exception e)
             {

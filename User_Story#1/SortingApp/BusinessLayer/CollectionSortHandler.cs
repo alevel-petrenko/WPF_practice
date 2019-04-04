@@ -1,11 +1,11 @@
 ﻿using System;
-using BusinessLayer.Utilities.Parser.Interfaces;
 using BusinessLayer.Reader;
-using BusinessLayer.SortingAlgorithms;
-using BusinessLayer.Writer;
 using BusinessLayer.SorterFactory;
-using System.IO;
+using BusinessLayer.SortingAlgorithms;
+using BusinessLayer.Utilities.Parser.Interfaces;
+using BusinessLayer.Writer;
 using Helper;
+using System.IO;
 
 namespace BusinessLayer
 {
@@ -103,10 +103,11 @@ namespace BusinessLayer
         /// Executes reading for collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public void Read()
+        public void Read(string path)
         {
             try
             {
+                this.reader.Path = path;
                 this.UnSortedCollection = this.parser.DataConverter(this.reader.ReadContent());
             }
             catch (ArgumentNullException e)
@@ -135,17 +136,18 @@ namespace BusinessLayer
         /// Writes sorted collection to file.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public void Write()
+        public void Write(string path)
         {
             try
             {
+                this.writer.Path = path;
                 this.writer.WriteContent(this.SortedCollection);
             }
-            catch(ArgumentNullException e)
+            catch (ArgumentNullException e)
             {
                 throw new Exception(e.Message + " was empty.");
             }
-            catch(IOException)
+            catch (IOException)
             {
                 throw new Exception("Writing to the file failed.");
             }

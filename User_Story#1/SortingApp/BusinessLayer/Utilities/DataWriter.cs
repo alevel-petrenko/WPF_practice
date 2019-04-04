@@ -11,15 +11,6 @@ namespace BusinessLayer.Writer
     public class DataWriter<T> where T : IComparable
     {
         /// <summary>
-        /// Initializes a new instance of the class.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public DataWriter()
-        {
-            this.Path = @"D:\Git\WPF_practice\User_Story#1\collectionToWrite.txt";
-        }
-
-        /// <summary>
         /// Gets or sets the path.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -36,12 +27,14 @@ namespace BusinessLayer.Writer
             throw new ArgumentNullException(nameof(collection));
             try
             {
+                string temp = string.Empty;
                 using (var writer = new StreamWriter(Path))
                 {
                     foreach (var value in collection)
                     {
-                        string.Join(";", collection.Select(item => item));
+                        temp = string.Join(";", collection.Select(item => item));
                     }
+                    writer.Write(temp);
                 }
             }
             catch

@@ -59,7 +59,7 @@
             <Button Content="Sort" Command="{Binding Sort}" Background="MediumPurple"/>
         </WrapPanel>
         <StatusBar HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="25" Grid.Row="1" Grid.ColumnSpan="3">
-            <StatusBarItem>
+            <StatusBarItem Width="300">
                 <TextBlock Text="{Binding Message}"  FontSize="15" Foreground="Purple"/>
             </StatusBarItem>
             <Separator Grid.Column="1" />

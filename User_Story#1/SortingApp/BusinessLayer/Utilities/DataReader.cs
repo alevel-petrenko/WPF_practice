@@ -27,7 +27,6 @@ namespace BusinessLayer.Reader
                 throw new ArgumentNullException(nameof(validator));
 
                 this.validator = validator;
-                this.Path = @"D:\Git\WPF_practice\User_Story#1\collectionToRead.txt";
         }
 
         /// <summary>
@@ -57,7 +56,7 @@ namespace BusinessLayer.Reader
             }
             catch (ArgumentNullException e)
             {
-                throw new IOException(e.Message + " was empty.");
+                throw new ArgumentNullException(e.Message + " was empty.");
             }
         }
     }
