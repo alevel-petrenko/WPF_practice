@@ -32,7 +32,8 @@ namespace BusinessLayer.DataParser
         /// Convert data to collection of type T.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public T[] DataConverter(string content)
+        /// <param name="content">Content of the file.</param>
+        public T[] ConvertData(string content)
         {
             List<T> numbers = new List<T>();
             try

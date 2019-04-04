@@ -25,9 +25,9 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush ImageSource="D:\Git\WPF_practice\User_Story#1\unsplash.jpg"/>
-        </Grid.Background>
+        </Grid.Background>-->
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>

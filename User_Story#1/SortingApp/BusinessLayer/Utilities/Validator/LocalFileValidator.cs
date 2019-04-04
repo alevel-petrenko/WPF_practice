@@ -15,29 +15,29 @@ namespace BusinessLayer.Validator
         /// Determines whether data exists.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <param name="content">The content of the file.</param>
+        /// <param name="path">The path to the file.</param>
         /// <returns>
         ///   <c>true</c> if data exists; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsDataExist(string content)
+        public bool IsDataExist(string path)
         {
-            if (content is null)
-                throw new ArgumentNullException(nameof(content));
+            if (path is null)
+                throw new ArgumentNullException(nameof(path));
 
-            return File.Exists(content) && this.IsFileInValidFormat(content);
+            return File.Exists(path) && this.IsFileInValidFormat(path);
         }
 
         /// <summary>
         /// Determines whether file is in valid format.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <param name="content">The content of the file.</param>
+        /// <param name="path">The path to the file.</param>
         /// <returns>
         ///   <c>true</c> if file is in valid format; otherwise, <c>false</c>.
         /// </returns>
-        private bool IsFileInValidFormat(string content)
+        private bool IsFileInValidFormat(string path)
         {
-            string format = Path.GetExtension(content);
+            string format = Path.GetExtension(path);
             if (format == ".txt")
                 return true;
 

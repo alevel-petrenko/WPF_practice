@@ -37,14 +37,14 @@ namespace BusinessLayer.SortingAlgorithms
         /// <param name="inputCollection">The input collection.</param>
         /// <param name="startElement">The start element.</param>
         /// <param name="endElement">The end element.</param>
-        public void Sort(T[] inputCollection, int startElement, int endElement)
+        private void Sort(T[] inputCollection, int startElement, int endElement)
         {
-            if (startElement < endElement)
-            {
+            if (startElement > endElement)
+                return;
+
                 int wall = this.Separate(inputCollection, startElement, endElement);
                 this.Sort(inputCollection, startElement, wall - 1);
                 this.Sort(inputCollection, wall + 1, endElement);
-            }
         }
 
         /// <summary>
@@ -76,8 +76,8 @@ namespace BusinessLayer.SortingAlgorithms
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <param name="collection">The collection.</param>
-        /// <param name="rightIndex">Index of right element in array.</param>
         /// <param name="leftIndex">Index of left element in array.</param>
+        /// <param name="rightIndex">Index of right element in array.</param>
         private void SwapElements(T[] collection, int leftIndex, int rightIndex)
         {
             if (collection != null && rightIndex >= 0 || leftIndex >= 0)

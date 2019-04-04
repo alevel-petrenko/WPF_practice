@@ -9,10 +9,10 @@ namespace BusinessLayer.Utilities.Parser.Interfaces
     public interface IDataParser<T> where T : IComparable
     {
         /// <summary>
-        /// Converts data to collection of srecific type.
+        /// Converts data to collection of specific type.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// 
-        T[] DataConverter(string content);
+        /// <param name="content">Content of the file.</param>
+        T[] ConvertData(string content);
     }
 }
