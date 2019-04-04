@@ -15,14 +15,15 @@ namespace BusinessLayer.Validator
         /// Determines whether data exists.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <param name="content">The content of cloud doc.</param>
+        /// <param name="url">The path to the cloud doc.</param>
         /// <returns>
         ///   <c>true</c> if data exists; otherwise, <c>false</c>.
         /// </returns>
         public bool IsDataExist(string url)
         {
-            if (url is null)
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
+
             try
             {
                 var request = WebRequest.Create(url) as HttpWebRequest;

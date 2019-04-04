@@ -35,19 +35,20 @@ namespace BusinessLayer.DataParser
         /// <param name="content">Content of the file.</param>
         public T[] ConvertData(string content)
         {
-            List<T> numbers = new List<T>();
             try
             {
+                var numbers = new List<T>();
                 string[] items = content.Split(separators);
                 for (int i = 0; i < items.Length; i++)
                 {
                     numbers.Add(TypeParser.ChangeType<T>(items[i].Trim()));
                 }
+
                 return numbers.ToArray();
             }
             catch(ArgumentNullException)
             {
-                return numbers.ToArray();
+                throw new ArgumentNullException();
             }
         }
     }

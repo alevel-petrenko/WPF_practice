@@ -25,9 +25,6 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="D:\Git\WPF_practice\User_Story#1\unsplash.jpg"/>
-        </Grid.Background>-->
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
@@ -60,7 +57,7 @@
         </WrapPanel>
         <StatusBar HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="25" Grid.Row="1" Grid.ColumnSpan="3">
             <StatusBarItem Width="300">
-                <TextBlock Text="{Binding Message}"  FontSize="15" Foreground="Purple"/>
+                <TextBlock Text="{Binding Message}" FontSize="15" Foreground="Purple"/>
             </StatusBarItem>
             <Separator Grid.Column="1" />
             <StatusBarItem>

@@ -24,7 +24,7 @@ namespace BusinessLayer.Validator
             if (path is null)
                 throw new ArgumentNullException(nameof(path));
 
-            return File.Exists(path) && this.IsFileInValidFormat(path);
+            return File.Exists(path) && this.IsValidFormat(path);
         }
 
         /// <summary>
@@ -35,12 +35,11 @@ namespace BusinessLayer.Validator
         /// <returns>
         ///   <c>true</c> if file is in valid format; otherwise, <c>false</c>.
         /// </returns>
-        private bool IsFileInValidFormat(string path)
+        private bool IsValidFormat(string path)
         {
             string format = Path.GetExtension(path);
             if (format == ".txt")
                 return true;
-
             else
                 return false;
         }

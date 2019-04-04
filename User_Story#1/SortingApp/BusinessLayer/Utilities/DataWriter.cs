@@ -24,7 +24,7 @@ namespace BusinessLayer.Writer
         public void WriteContent(T[] collection)
         {
             if(collection is null || !collection.Any())
-            throw new ArgumentNullException(nameof(collection));
+                throw new ArgumentNullException(nameof(collection));
 
             try
             {
@@ -38,9 +38,13 @@ namespace BusinessLayer.Writer
                     writer.Write(temp);
                 }
             }
-            catch
+            catch (NullReferenceException e)
             {
-                throw new IOException();
+                throw new NullReferenceException(e.Message);
+            }
+            catch (IOException e)
+            {
+                throw new IOException(e.Message);
             }
         }
     }

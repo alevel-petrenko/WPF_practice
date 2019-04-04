@@ -102,7 +102,7 @@ namespace ViewModel
             set
             {
                 this.message = value;
-                this.OnPropertyChanged("Message");
+                this.OnPropertyChanged(nameof(Message));
             }
         }
 

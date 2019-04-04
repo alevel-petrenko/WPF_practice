@@ -50,14 +50,19 @@ namespace BusinessLayer
         /// <param name="parser">The parser instance.</param>
         public CollectionSortHandler(DataReader reader, DataWriter<T> writer, IDataParser<T> parser)
         {
-            if (reader != null && writer != null && parser != null)
-            {
-                this.parser = parser;
-                this.reader = reader;
-                this.writer = writer;
+            if (reader is null)
+                throw new ArgumentNullException(nameof(reader));
+
+            if (parser is null)
+                throw new ArgumentNullException(nameof(parser));
+
+            if (writer is null)
+                throw new ArgumentNullException(nameof(writer));
+
+            this.parser = parser;
+            this.reader = reader;
+            this.writer = writer;
             }
-            else
-                throw new ArgumentNullException();
         }
 
         /// <summary>
