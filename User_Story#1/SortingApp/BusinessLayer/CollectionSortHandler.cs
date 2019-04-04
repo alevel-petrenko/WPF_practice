@@ -68,9 +68,9 @@ namespace BusinessLayer
         {
             try
             {
-                this.SortedCollection = new T[UnSortedCollection.Length];
-                this.UnSortedCollection.CopyTo(SortedCollection, 0);
-                this.sorter.Sort(SortedCollection);
+                this.SortedCollection = new T[this.UnSortedCollection.Length];
+                this.UnSortedCollection.CopyTo(this.SortedCollection, 0);
+                this.sorter.Sort(this.SortedCollection);
             }
             catch (ArgumentNullException e)
             {

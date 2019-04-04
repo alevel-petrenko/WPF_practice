@@ -205,7 +205,7 @@ namespace ViewModel
             using (var openFileDialog = new OpenFileDialog())
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    path = openFileDialog.FileName;
+                    this.path = openFileDialog.FileName;
             }
         }
 
