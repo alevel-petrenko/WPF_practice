@@ -12,7 +12,7 @@ namespace BusinessLayer.SortingAlgorithms
     public class QuickSorter<T> : CollectionSorterBase<T> where T : IComparable
     {
         /// <summary>
-        /// Constant to store value for first element to find in array.
+        /// Stores value for first element to find in array.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         private const int startElement = 0;
@@ -47,7 +47,7 @@ namespace BusinessLayer.SortingAlgorithms
         }
 
         /// <summary>
-        /// Sorts the sub array.
+        /// Separates the array by "wall" value.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <param name="inputCollection">The input collection.</param>
