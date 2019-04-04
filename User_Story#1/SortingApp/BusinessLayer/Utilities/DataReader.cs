@@ -26,7 +26,7 @@ namespace BusinessLayer.Reader
             if (validator is null)
                 throw new ArgumentNullException(nameof(validator));
 
-                this.validator = validator;
+            this.validator = validator;
         }
 
         /// <summary>
@@ -45,12 +45,12 @@ namespace BusinessLayer.Reader
             try
             {
                 string content = string.Empty;
-                if (validator.IsDataExist(this.Path))
+                if (!validator.IsDataExist(this.Path))
+                    return content;
+
+                using (var reader = new StreamReader(this.Path))
                 {
-                    using (var reader = new StreamReader(this.Path))
-                    {
-                        content = reader.ReadToEnd();
-                    }
+                    content = reader.ReadToEnd();
                 }
                 return content;
             }

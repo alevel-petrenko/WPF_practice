@@ -35,10 +35,6 @@ namespace BusinessLayer.Validator
             {
                 return false;
             }
-            finally
-            {
-                //response.Close();
-            }
         }
     }
 }

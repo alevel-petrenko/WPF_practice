@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 using BusinessLayer;
 using BusinessLayer.DataParser;
 using BusinessLayer.Reader;
 using BusinessLayer.Validator;
 using BusinessLayer.Writer;
 using Helper;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows.Forms;
 
 namespace ViewModel
 {

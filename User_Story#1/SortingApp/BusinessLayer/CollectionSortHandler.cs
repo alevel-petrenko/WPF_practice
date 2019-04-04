@@ -1,11 +1,11 @@
 ﻿using System;
+using System.IO;
 using BusinessLayer.Reader;
 using BusinessLayer.SorterFactory;
 using BusinessLayer.SortingAlgorithms;
 using BusinessLayer.Utilities.Parser.Interfaces;
 using BusinessLayer.Writer;
 using Helper;
-using System.IO;
 
 namespace BusinessLayer
 {
