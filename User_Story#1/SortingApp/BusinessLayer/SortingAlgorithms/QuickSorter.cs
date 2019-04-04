@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BusinessLayer.SortingAlgorithms
 {
@@ -23,9 +24,26 @@ namespace BusinessLayer.SortingAlgorithms
         /// <param name="inputCollection">The input collection.</param>
         public override void Sort(T[] inputCollection)
         {
-            if (inputCollection is null)
+            if (inputCollection is null || !inputCollection.Any())
                 throw new ArgumentNullException(nameof(inputCollection));
-            this.SortSubArray(inputCollection, startElement, inputCollection.Length);
+            this.Sort(inputCollection, startElement, inputCollection.Length - 1);
+        }
+
+        /// <summary>
+        /// Sorts the specified input collection by start and end elements.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <param name="inputCollection">The input collection.</param>
+        /// <param name="startElement">The start element.</param>
+        /// <param name="endElement">The end element.</param>
+        public void Sort(T[] inputCollection, int startElement, int endElement)
+        {
+            if (startElement < endElement)
+            {
+                int wall = this.Separate(inputCollection, startElement, endElement);
+                this.Sort(inputCollection, startElement, wall - 1);
+                this.Sort(inputCollection, wall + 1, endElement);
+            }
         }
 
         /// <summary>
@@ -35,24 +53,20 @@ namespace BusinessLayer.SortingAlgorithms
         /// <param name="inputCollection">The input collection.</param>
         /// <param name="start">The first index of array.</param>
         /// <param name="end">The last index of array.</param>
-        private void SortSubArray(T[] inputCollection, int start, int end)
+        private int Separate(T[] inputCollection, int start, int end)
         {
-            if (start >= end)
-            {
-                return;
-            }
-            var pivot = end - 1;
-            int wall = start;
+            var pivot = end;
+            int wall = start - 1;
             for (int currentIndex = start; currentIndex < end; currentIndex++)
             {
                 if (inputCollection[currentIndex].CompareTo(inputCollection[pivot]) <= 0)
                 {
-                    this.SwapElements(inputCollection, currentIndex, wall);
                     wall++;
+                    this.SwapElements(inputCollection, currentIndex, wall);
                 }
             }
-            this.SortSubArray(inputCollection, start, wall - 1);
-            this.SortSubArray(inputCollection, wall + 1, end);
+            this.SwapElements(inputCollection, ++wall, pivot);
+            return wall;
         }
 
         /// <summary>
@@ -62,7 +76,7 @@ namespace BusinessLayer.SortingAlgorithms
         /// <param name="collection">The collection.</param>
         /// <param name="rightIndex">Index of right element in array.</param>
         /// <param name="leftIndex">Index of left element in array.</param>
-        private void SwapElements(T[] collection, int rightIndex, int leftIndex)
+        private void SwapElements(T[] collection, int leftIndex, int rightIndex)
         {
             if (collection != null && rightIndex >= 0 || leftIndex >= 0)
             {

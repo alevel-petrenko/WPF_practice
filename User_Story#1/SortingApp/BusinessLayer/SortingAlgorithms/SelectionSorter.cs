@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace BusinessLayer.SortingAlgorithms
 {
@@ -22,16 +21,17 @@ namespace BusinessLayer.SortingAlgorithms
                 throw new ArgumentNullException(nameof(inputCollection));
             for (int i = 0; i < inputCollection.Length - 1; i++)
             {
-                var min = inputCollection[i];
+                var min = i;
                 for (int j = i + 1; j < inputCollection.Length; j++)
                 {
-                    if (min.CompareTo(inputCollection[j]) > 0)
+                    if (inputCollection[min].CompareTo(inputCollection[j]) > 0)
                     {
-                        min = inputCollection[j];
+                        min = j;
                     }
                 }
-                inputCollection[Array.IndexOf(inputCollection, min)] = inputCollection[i];
-                inputCollection[i] = min;
+                var temp = inputCollection[min];
+                inputCollection[min] = inputCollection[i];
+                inputCollection[i] = temp;
             }
         }
     }
