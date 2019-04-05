@@ -62,8 +62,8 @@ namespace BusinessLayer
             this.parser = parser;
             this.reader = reader;
             this.writer = writer;
-            }
         }
+
 
         /// <summary>
         /// Executes sorting for collection.
@@ -110,6 +110,9 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Read(string path)
         {
+            if (string.IsNullOrWhiteSpace(path))
+                throw new ArgumentNullException(nameof(path));
+
             try
             {
                 this.reader.Path = path;
@@ -143,6 +146,9 @@ namespace BusinessLayer
         /// <owner>Anton Petrenko</owner>
         public void Write(string path)
         {
+            if (string.IsNullOrWhiteSpace(path))
+                throw new ArgumentNullException(nameof(path));
+
             try
             {
                 this.writer.Path = path;
