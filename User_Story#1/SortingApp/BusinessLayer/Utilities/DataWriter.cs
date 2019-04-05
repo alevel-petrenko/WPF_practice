@@ -23,18 +23,19 @@ namespace BusinessLayer.Writer
         /// <owner>Anton Petrenko</owner>
         public void WriteContent(T[] collection)
         {
-            if(collection is null || !collection.Any())
+            if (collection is null || !collection.Any())
                 throw new ArgumentNullException(nameof(collection));
 
             try
             {
                 string temp = string.Empty;
+                foreach (var value in collection)
+                {
+                    temp = string.Join(";", collection.Select(item => item));
+                }
+
                 using (var writer = new StreamWriter(Path))
                 {
-                    foreach (var value in collection)
-                    {
-                        temp = string.Join(";", collection.Select(item => item));
-                    }
                     writer.Write(temp);
                 }
             }

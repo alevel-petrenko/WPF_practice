@@ -88,7 +88,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private bool GetCanSortArray(object obj)
         {
-            return (this.UnSortedCollectionOfNumbers.Any() && this.SortType is SortType valueOfSortType);
+            return (this.UnSortedCollectionOfNumbers.Any() && (SortType!= null));
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace ViewModel
         {
             try
             {
-                this.handler.GenerateSorter(SortType);
+                this.handler.GenerateSorter(SortType.Value);
                 this.handler.Execute();
                 this.SortedCollectionOfNumbers.Clear();
 
@@ -259,7 +259,7 @@ namespace ViewModel
         /// Gets or sets the type of a sort algorithm.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public SortType SortType { get; set; }
+        public SortType? SortType { get; set; }
 
         /// <summary>
         /// Gets or sets the unsorted collection of numbers.
