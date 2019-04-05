@@ -1,0 +1,51 @@
+﻿using System;
+using System.IO;
+using System.Linq;
+
+namespace BusinessLayer.Writer
+{
+    /// <summary>
+    /// Provides functionality that writes content to file.
+    /// </summary>
+    /// <owner>Anton Petrenko</owner>
+    public class DataWriter<T> where T : IComparable
+    {
+        /// <summary>
+        /// Gets or sets the path.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <returns>The path.</returns>
+        public string Path { get; set; }
+
+        /// <summary>
+        /// Writes the collection by specified path.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public void WriteContent(T[] collection)
+        {
+            if(collection is null || !collection.Any())
+                throw new ArgumentNullException(nameof(collection));
+
+            try
+            {
+                string temp = string.Empty;
+                using (var writer = new StreamWriter(Path))
+                {
+                    foreach (var value in collection)
+                    {
+                        temp = string.Join(";", collection.Select(item => item));
+                    }
+                    writer.Write(temp);
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                throw new NullReferenceException(e.Message);
+            }
+            catch (IOException e)
+            {
+                throw new IOException(e.Message);
+            }
+        }
+    }
+}
