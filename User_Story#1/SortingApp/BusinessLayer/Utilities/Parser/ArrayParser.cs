@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using BusinessLayer.Extensions;
 using BusinessLayer.Utilities.Parser.Interfaces;
-using System.Collections.Generic;
 
 namespace BusinessLayer.DataParser
 {

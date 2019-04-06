@@ -1,6 +1,6 @@
 ﻿using System;
-using BusinessLayer.Utilities.Validator.Interfaces;
 using System.Net;
+using BusinessLayer.Utilities.Validator.Interfaces;
 
 namespace BusinessLayer.Validator
 {

@@ -153,6 +153,7 @@ namespace ViewModel
 
                 foreach (var number in this.handler.UnSortedCollection)
                     this.UnSortedCollectionOfNumbers.Add(number);
+
                 this.Message = "Array was successfully read.";
             }
             catch (Exception e)
