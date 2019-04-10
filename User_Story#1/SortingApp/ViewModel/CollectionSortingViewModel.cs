@@ -203,7 +203,12 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void ShowDialogWindow()
         {
-            using (var openFileDialog = new OpenFileDialog())
+            using (var openFileDialog = new OpenFileDialog()
+            {
+                FileName = "Select a text file",
+                Filter = "Text files (*.txt)|*.txt",
+                Title = "Open text file"
+            })
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                     this.path = openFileDialog.FileName;
