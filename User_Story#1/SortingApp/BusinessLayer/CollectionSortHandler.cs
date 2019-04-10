@@ -108,6 +108,7 @@ namespace BusinessLayer
         /// Executes reading for collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
+        /// <param name="path">Path to the file.</param>
         public void Read(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -144,6 +145,7 @@ namespace BusinessLayer
         /// Writes sorted collection to file.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
+        /// <param name="path">Path to the file.</param>
         public void Write(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
