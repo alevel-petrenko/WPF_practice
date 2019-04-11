@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\View
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Helper\Helper.csproj", "{BF7D8F1C-E861-47DF-B417-98B3E3F0AB4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortinfApp.UnitTests", "SortinfApp.UnitTests\SortinfApp.UnitTests.csproj", "{19701CE9-C0B0-4947-802B-F8DCF31B5D0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortingApp.UnitTests", "SortinfApp.UnitTests\SortingApp.UnitTests.csproj", "{19701CE9-C0B0-4947-802B-F8DCF31B5D0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

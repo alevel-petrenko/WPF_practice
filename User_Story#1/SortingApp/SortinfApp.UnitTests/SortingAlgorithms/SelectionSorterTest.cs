@@ -3,53 +3,53 @@ using System.Linq;
 using BusinessLayer.SortingAlgorithms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SortinfApp.UnitTests
+namespace SortingApp.UnitTests
 {
     /// <summary>
-    /// Tests for InsertionSorter class.
+    /// Tests for SelectionSorter class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     [TestClass]
-    public class InsertionSorterTest
+    public class SelectionSorterTest
     {
         /// <summary>
         /// Tests Sort method if pass null collection it will throw argument null exception.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void InsertionSorter_Sort_PassNullCollection_ThrowArgumentNullException()
+        public void SelectionSorter_Sort_PassNullCollection_ThrowArgumentNullException()
         {
             //
             // Arrange.
             //
             double[] array = null;
-            var insertionSorter = new InsertionSorter<double>();
+            var selectionSorter = new SelectionSorter<double>();
 
             //
             // Assert.
             //
-            Assert.ThrowsException<ArgumentNullException>(() => insertionSorter.Sort(array));
+            Assert.ThrowsException<ArgumentNullException>(() => selectionSorter.Sort(array));
         }
 
         /// <summary>
-        /// Tests Sort method if pass unsorted collection it will get sorted collection.
+        /// Tests Sort method if pass unsorted collection it will make sorted collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void InsertionSorter_Sort_PassUnsortedCollection_GetSortedCollection()
+        public void SelectionSorter_Sort_PassUnsortedCollection_GetSortedCollection()
         {
             //
             // Arrange.
             //
             var actualArray = new double[] { 1.56, 0.2, 376.0, 0.15};
             var expectedArray = new double[] { 0.15, 0.2, 1.56, 376.0 };
-            var insertionSorter = new InsertionSorter<double>();
+            var selectionSorter = new SelectionSorter<double>();
             bool result;
 
             //
             // Act.
             //
-            insertionSorter.Sort(actualArray);
+            selectionSorter.Sort(actualArray);
             result = actualArray.SequenceEqual(expectedArray);
 
             //
@@ -59,24 +59,24 @@ namespace SortinfApp.UnitTests
         }
 
         /// <summary>
-        /// Tests Sort method if pass sorted collection it will get sorted collection.
+        /// Tests Sort method if pass sorted collection it will leave sorted collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void InsertionSorter_Sort_PassSortedCollection_GetSortedCollection()
+        public void SelectionSorter_Sort_PassSortedCollection_GetSortedCollection()
         {
             //
             // Arrange.
             //
             var actualArray = new double[] { 0.15, 0.2, 1.56, 5.0, 9.99 };
             var expectedArray = new double[] { 0.15, 0.2, 1.56, 5.0, 9.99 };
-            var insertionSorter = new InsertionSorter<double>();
+            var selectionSorter = new SelectionSorter<double>();
             bool result;
 
             //
             // Act.
             //
-            insertionSorter.Sort(actualArray);
+            selectionSorter.Sort(actualArray);
             result = actualArray.SequenceEqual(expectedArray);
 
             //

@@ -2,7 +2,7 @@
 using BusinessLayer.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SortinfApp.UnitTests
+namespace SortingApp.UnitTests
 {
     /// <summary>
     /// Tests for TypeParser class.
@@ -65,11 +65,12 @@ namespace SortinfApp.UnitTests
             //
             var inputValue = "10";
             var expectedType = typeof(int);
+            int actualResult;
 
             //
             // Act.
             //
-            var actualResult = TypeParser.ChangeType<int>(inputValue);
+            actualResult = TypeParser.ChangeType<int>(inputValue);
 
             //
             // Assert.
