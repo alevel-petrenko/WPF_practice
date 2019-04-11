@@ -16,14 +16,18 @@ namespace SortinfApp.UnitTests
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void ChangeType_PassNullValue_ThrowArgumentNullException()
+        public void TypeParser_ChangeType_PassNullValue_ThrowArgumentNullException()
         {
-            //Arrange
+            /// <summary>
+            /// Arrange.
+            /// </summary>
+            /// <owner>Anton Petrenko</owner>
             object integer = null;
 
-            //Act
-
-            //Assert
+            /// <summary>
+            /// Assert.
+            /// </summary>
+            /// <owner>Anton Petrenko</owner>
             Assert.ThrowsException<ArgumentNullException>( () => TypeParser.ChangeType<int>(integer));
         }
 
@@ -32,17 +36,26 @@ namespace SortinfApp.UnitTests
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void ChangeType_PassStringWithInt_MakeInt()
+        public void TypeParser_ChangeType_PassStringWithInt_MakeInt()
         {
-            //Arrange
+            /// <summary>
+            /// Arrange.
+            /// </summary>
+            /// <owner>Anton Petrenko</owner>
             var inputValue = "150";
-            var number = 150;
+            var expectedResult = 150;
 
-            //Act
-            var outputNumber = TypeParser.ChangeType<int>(inputValue);
+            /// <summary>
+            /// Act.
+            /// </summary>
+            /// <owner>Anton Petrenko</owner>
+            var actualResult = TypeParser.ChangeType<int>(inputValue);
 
-            //Assert
-            Assert.AreEqual(number, outputNumber);
+            /// <summary>
+            /// Assert.
+            /// </summary>
+            /// <owner>Anton Petrenko</owner>
+            Assert.AreEqual(expectedResult, actualResult);
         }
 
         /// <summary>
@@ -50,17 +63,26 @@ namespace SortinfApp.UnitTests
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void ChangeType_PassStringWithInt_MakeValueTypeOfInt()
+        public void TypeParser_ChangeType_PassStringWithInt_MakeValueTypeOfInt()
         {
-            //Arrange
+            /// <summary>
+            /// Arrange.
+            /// </summary>
+            /// <owner>Anton Petrenko</owner>
             var inputValue = "10";
-            var type = typeof(int);
+            var expectedType = typeof(int);
 
-            //Act
-            var outputNumber = TypeParser.ChangeType<int>(inputValue);
+            /// <summary>
+            /// Act.
+            /// </summary>
+            /// <owner>Anton Petrenko</owner>
+            var actualResult = TypeParser.ChangeType<int>(inputValue);
 
-            //Assert
-            Assert.AreEqual(type, outputNumber.GetType());
+            /// <summary>
+            /// Assert.
+            /// </summary>
+            /// <owner>Anton Petrenko</owner>
+            Assert.AreEqual(expectedType, actualResult.GetType());
         }
     }
 }
