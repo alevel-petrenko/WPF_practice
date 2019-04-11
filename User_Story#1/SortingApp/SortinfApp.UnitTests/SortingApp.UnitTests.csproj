@@ -49,6 +49,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SorterFactory\SelectionSortCreatorTest.cs" />
+    <Compile Include="SorterFactory\QuickSortCreatorTest.cs" />
+    <Compile Include="SorterFactory\InsertionSortCreatorTest.cs" />
     <Compile Include="SortingAlgorithms\SelectionSorterTest.cs" />
     <Compile Include="SortingAlgorithms\QuickSorterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,7 +68,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SorterFactory\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

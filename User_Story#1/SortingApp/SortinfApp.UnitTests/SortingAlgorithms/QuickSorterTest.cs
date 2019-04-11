@@ -3,7 +3,7 @@ using System.Linq;
 using BusinessLayer.SortingAlgorithms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SortingApp.UnitTests
+namespace SortingApp.UnitTests.SortingAlgorithms
 {
     /// <summary>
     /// Tests for QuickSorter class.
