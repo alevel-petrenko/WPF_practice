@@ -15,7 +15,6 @@
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="Background" Value="GhostWhite" ></Setter>
-            
         </Style>
     </Window.Resources>
     <Grid>
