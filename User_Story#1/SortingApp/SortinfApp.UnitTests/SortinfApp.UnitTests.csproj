@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeParserTest.cs" />
+    <Compile Include="InsertionSorterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

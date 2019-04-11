@@ -18,16 +18,14 @@ namespace SortinfApp.UnitTests
         [TestMethod]
         public void TypeParser_ChangeType_PassNullValue_ThrowArgumentNullException()
         {
-            /// <summary>
-            /// Arrange.
-            /// </summary>
-            /// <owner>Anton Petrenko</owner>
+            //
+            // Arrange.
+            //
             object integer = null;
 
-            /// <summary>
-            /// Assert.
-            /// </summary>
-            /// <owner>Anton Petrenko</owner>
+            //
+            // Assert.
+            //
             Assert.ThrowsException<ArgumentNullException>( () => TypeParser.ChangeType<int>(integer));
         }
 
@@ -38,23 +36,20 @@ namespace SortinfApp.UnitTests
         [TestMethod]
         public void TypeParser_ChangeType_PassStringWithInt_MakeInt()
         {
-            /// <summary>
-            /// Arrange.
-            /// </summary>
-            /// <owner>Anton Petrenko</owner>
+            //
+            // Arrange.
+            //
             var inputValue = "150";
             var expectedResult = 150;
 
-            /// <summary>
-            /// Act.
-            /// </summary>
-            /// <owner>Anton Petrenko</owner>
+            //
+            // Act.
+            //
             var actualResult = TypeParser.ChangeType<int>(inputValue);
 
-            /// <summary>
-            /// Assert.
-            /// </summary>
-            /// <owner>Anton Petrenko</owner>
+            //
+            // Assert.
+            //
             Assert.AreEqual(expectedResult, actualResult);
         }
 
@@ -65,23 +60,20 @@ namespace SortinfApp.UnitTests
         [TestMethod]
         public void TypeParser_ChangeType_PassStringWithInt_MakeValueTypeOfInt()
         {
-            /// <summary>
-            /// Arrange.
-            /// </summary>
-            /// <owner>Anton Petrenko</owner>
+            //
+            // Arrange.
+            //
             var inputValue = "10";
             var expectedType = typeof(int);
 
-            /// <summary>
-            /// Act.
-            /// </summary>
-            /// <owner>Anton Petrenko</owner>
+            //
+            // Act.
+            //
             var actualResult = TypeParser.ChangeType<int>(inputValue);
 
-            /// <summary>
-            /// Assert.
-            /// </summary>
-            /// <owner>Anton Petrenko</owner>
+            //
+            // Assert.
+            //
             Assert.AreEqual(expectedType, actualResult.GetType());
         }
     }
