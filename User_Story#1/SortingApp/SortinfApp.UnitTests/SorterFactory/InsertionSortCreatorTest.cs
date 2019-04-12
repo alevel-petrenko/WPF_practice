@@ -22,7 +22,8 @@ namespace SortinfApp.UnitTests.SorterFactory
             // Arrange.
             //
             var insertionSortCreator = new InsertionSortCreator<string>();
-            var type = typeof(InsertionSorter<string>);
+            var typeExpected = typeof(InsertionSorter<string>);
+
             //
             // Act.
             //
@@ -31,7 +32,7 @@ namespace SortinfApp.UnitTests.SorterFactory
             //
             // Assert.
             //
-            Assert.AreEqual(type, insertionSorterActual.GetType());
+            Assert.AreEqual(typeExpected, insertionSorterActual.GetType());
         }
     }
 }
