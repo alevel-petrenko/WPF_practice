@@ -59,7 +59,7 @@ namespace SortinfApp.UnitTests.Utilities.Parser
         }
 
         /// <summary>
-        /// Tests ConvertData if pass string with bool values it will get array of bool values.
+        /// Tests ConvertData if pass string with one empty value between separators it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
