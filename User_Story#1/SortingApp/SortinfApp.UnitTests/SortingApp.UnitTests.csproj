@@ -58,6 +58,8 @@
     <Compile Include="Extensions\TypeParserTest.cs" />
     <Compile Include="SortingAlgorithms\InsertionSorterTest.cs" />
     <Compile Include="Utilities\Parser\ArrayParserTest.cs" />
+    <Compile Include="Utilities\Validator\LocalFileValidatorTest.cs" />
+    <Compile Include="Utilities\Validator\СloudFileValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

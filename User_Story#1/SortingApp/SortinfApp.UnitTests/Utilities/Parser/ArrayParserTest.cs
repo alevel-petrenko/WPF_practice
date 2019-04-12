@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.DataParser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 
 namespace SortinfApp.UnitTests.Utilities.Parser
 {
@@ -16,13 +17,13 @@ namespace SortinfApp.UnitTests.Utilities.Parser
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void ArrayParser_ConvertData_PassNullContent_GetArgumentNullException()
+        public void ArrayParser_ConvertData_PassNullContent_ThrowArgumentNullException()
         {
             //
             // Arrange.
             //
             var arrayParser = new ArrayParser<bool>();
-            string dataToConvert = null;
+            string dataToConvert = "     ";
 
             //
             // Assert.
@@ -31,7 +32,7 @@ namespace SortinfApp.UnitTests.Utilities.Parser
         }
 
         /// <summary>
-        /// Arrays the parser convert data pass null content get argument null exception.
+        /// Tests ConvertData if pass string with bool values it will get array of bool values.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -41,11 +42,34 @@ namespace SortinfApp.UnitTests.Utilities.Parser
             // Arrange.
             //
             var arrayParser = new ArrayParser<bool>();
-            string dataToConvert = "true, false, false, true, false";
+            string dataToConvert = "true, false;false/true|false";
+            var expectedArray = new bool[] { true, false, false, true, false };
+            bool actualResult;
 
             //
             // Act.
             //
+            var actualArray = arrayParser.ConvertData(dataToConvert);
+            actualResult = actualArray.SequenceEqual(expectedArray);
+
+            //
+            // Assert.
+            //
+            Assert.IsTrue(actualResult);
+        }
+
+        /// <summary>
+        /// Tests ConvertData if pass string with bool values it will get array of bool values.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void ArrayParser_ConvertData_PassStringWithOneEmptyValue_ThrowArgumentNullException()
+        {
+            //
+            // Arrange.
+            //
+            var arrayParser = new ArrayParser<bool>();
+            string dataToConvert = "true,;false/true|false";
 
             //
             // Assert.
