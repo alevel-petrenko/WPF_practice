@@ -56,7 +56,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         }
 
         /// <summary>
-        /// Tests IsDataExist if pass nonexistent url it will get false.
+        /// Tests IsDataExist if pass exist url it will get true.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
