@@ -12,7 +12,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
     public class LocalFileValidatorTest
     {
         /// <summary>
-        /// Tests IsDataExist if pass empty path it will throw ArgumentNullException.
+        /// IsDataExist if pass empty path it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -31,7 +31,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         }
 
         /// <summary>
-        /// Tests IsDataExist if pass incorect format it will get false.
+        /// IsDataExist if pass incorect format it will get false.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -56,7 +56,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         }
 
         /// <summary>
-        /// Tests IsDataExist if pass nonexistent file it will get false.
+        /// IsDataExist if pass nonexistent file it will get false.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -81,7 +81,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         }
 
         /// <summary>
-        /// Tests IsDataExist if pass exist file it will get true.
+        /// IsDataExist if pass exist file it will get true.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]

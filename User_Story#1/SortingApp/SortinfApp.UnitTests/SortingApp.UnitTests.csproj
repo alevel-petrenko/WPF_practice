@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BusinessLayer.Fakes">
+      <HintPath>FakesAssemblies\BusinessLayer.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
@@ -57,11 +63,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\TypeParserTest.cs" />
     <Compile Include="SortingAlgorithms\InsertionSorterTest.cs" />
+    <Compile Include="CollectionSortHandlerTest.cs" />
     <Compile Include="Utilities\Parser\ArrayParserTest.cs" />
+    <Compile Include="Utilities\DataReaderTest.cs" />
+    <Compile Include="Utilities\DataWriterTest.cs" />
     <Compile Include="Utilities\Validator\LocalFileValidatorTest.cs" />
     <Compile Include="Utilities\Validator\СloudFileValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Fakes Include="Fakes\BusinessLayer.fakes" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
