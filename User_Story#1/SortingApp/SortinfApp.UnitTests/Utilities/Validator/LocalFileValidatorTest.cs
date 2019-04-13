@@ -5,14 +5,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SortinfApp.UnitTests.Utilities.Validator
 {
     /// <summary>
-    /// Tests for LocalFileValidator class. 
+    /// Represents tests for LocalFileValidator class. 
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     [TestClass]
     public class LocalFileValidatorTest
     {
         /// <summary>
-        /// IsDataExist if pass empty path it will throw ArgumentNullException.
+        /// Tests IsDataExist if pass empty path it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -31,7 +31,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         }
 
         /// <summary>
-        /// IsDataExist if pass incorect format it will get false.
+        /// Tests IsDataExist if pass incorect format it will get false.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -56,7 +56,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         }
 
         /// <summary>
-        /// IsDataExist if pass nonexistent file it will get false.
+        /// Tests IsDataExist if pass nonexistent file it will get false.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -81,7 +81,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         }
 
         /// <summary>
-        /// IsDataExist if pass exist file it will get true.
+        /// Tests IsDataExist if pass exist file it will get true.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
