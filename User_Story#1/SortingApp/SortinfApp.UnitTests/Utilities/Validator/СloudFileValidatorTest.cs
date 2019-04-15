@@ -31,31 +31,6 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         }
 
         /// <summary>
-        /// Tests IsDataExist if pass nonexistent url it will get false.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        [TestMethod]
-        public void СloudFileValidator_IsDataExist_PassNonexistentUrl_GetFalse()
-        {
-            //
-            // Arrange.
-            //
-            var cloudFileValidator = new СloudFileValidator();
-            string url = "https://abcd";
-            bool actualResult;
-
-            //
-            // Act.
-            //
-            actualResult = cloudFileValidator.IsDataExist(url);
-
-            //
-            // Assert.
-            //
-            Assert.IsFalse(actualResult);
-        }
-
-        /// <summary>
         /// Tests IsDataExist if pass exist url it will get true.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -78,6 +53,31 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             // Assert.
             //
             Assert.IsTrue(actualResult);
+        }
+
+        /// <summary>
+        /// Tests IsDataExist if pass nonexistent url it will get false.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void СloudFileValidator_IsDataExist_PassNonexistentUrl_GetFalse()
+        {
+            //
+            // Arrange.
+            //
+            var cloudFileValidator = new СloudFileValidator();
+            string url = "https://abcd";
+            bool actualResult;
+
+            //
+            // Act.
+            //
+            actualResult = cloudFileValidator.IsDataExist(url);
+
+            //
+            // Assert.
+            //
+            Assert.IsFalse(actualResult);
         }
     }
 }

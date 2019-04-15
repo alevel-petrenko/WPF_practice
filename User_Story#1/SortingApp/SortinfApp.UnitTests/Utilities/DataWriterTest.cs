@@ -23,8 +23,29 @@ namespace SortinfApp.UnitTests.Utilities
             //
             // Arrange.
             //
-            double[] collection = default;
             var dataWriter = new DataWriter<double>();
+
+            //
+            // Assert.
+            //
+            Assert.ThrowsException<ArgumentNullException>(() => dataWriter.WriteContent(null));
+        }
+
+        /// <summary>
+        /// Tests WriteContent if pass empty path to the file it will throw ArgumentNullException.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void DataWriter_WriteContent_PassEmptyPathToTheFile_ThrowArgumentNullException()
+        {
+            //
+            // Arrange.
+            //
+            var collection = new double[] { 1.01, 5.2, 10.131 };
+            var dataWriter = new DataWriter<double>
+            {
+                Path = null
+            };
 
             //
             // Assert.
@@ -69,29 +90,6 @@ namespace SortinfApp.UnitTests.Utilities
             // Assert.
             //
             Assert.AreEqual(expectedCollection, actualCollection);
-        }
-
-        /// <summary>
-        /// Tests WriteContent if pass empty path to the file it will throw ArgumentNullException.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        [TestMethod]
-        public void DataWriter_WriteContent_PassEmptyPathToTheFile_ThrowArgumentNullException()
-        {
-            //
-            // Arrange.
-            //
-            string path = default;
-            var collection = new double[] { 1.01, 5.2, 10.131 };
-            var dataWriter = new DataWriter<double>
-            {
-                Path = path
-            };
-
-            //
-            // Assert.
-            //
-            Assert.ThrowsException<ArgumentNullException>(() => dataWriter.WriteContent(collection));
         }
     }
 }

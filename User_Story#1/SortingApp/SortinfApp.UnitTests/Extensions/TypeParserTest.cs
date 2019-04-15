@@ -26,11 +26,11 @@ namespace SortingApp.UnitTests.Extensions
             //
             // Assert.
             //
-            Assert.ThrowsException<ArgumentNullException>( () => TypeParser.ChangeType<int>(integer));
+            Assert.ThrowsException<ArgumentNullException>(() => TypeParser.ChangeType<int>(integer));
         }
 
         /// <summary>
-        /// Tests ChangeType method if pass string with number it will make integer value.
+        /// Tests ChangeType method if pass string with integer it will make integer value.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -55,7 +55,7 @@ namespace SortingApp.UnitTests.Extensions
         }
 
         /// <summary>
-        /// Tests ChangeType method if pass string with int it will make value type of int.
+        /// Tests ChangeType method if pass string with integer it will make value type of int.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]

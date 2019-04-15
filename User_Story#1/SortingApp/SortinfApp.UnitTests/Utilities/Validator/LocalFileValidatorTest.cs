@@ -31,6 +31,31 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         }
 
         /// <summary>
+        /// Tests IsDataExist if pass exist file it will get true.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void LocalFileValidator_IsDataExist_PassExistFile_GetTrue()
+        {
+            //
+            // Arrange.
+            //
+            var localFileValidator = new LocalFileValidator();
+            string path = @"D:\Git\WPF_practice\User_Story#1\collectionToRead.txt";
+            bool actualResult;
+
+            //
+            // Act.
+            //
+            actualResult = localFileValidator.IsDataExist(path);
+
+            //
+            // Assert.
+            //
+            Assert.IsTrue(actualResult);
+        }
+
+        /// <summary>
         /// Tests IsDataExist if pass incorect format it will get false.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -78,31 +103,6 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             // Assert.
             //
             Assert.IsFalse(actualResult);
-        }
-
-        /// <summary>
-        /// Tests IsDataExist if pass exist file it will get true.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        [TestMethod]
-        public void LocalFileValidator_IsDataExist_PassExistFile_GetTrue()
-        {
-            //
-            // Arrange.
-            //
-            var localFileValidator = new LocalFileValidator();
-            string path = @"D:\Git\WPF_practice\User_Story#1\collectionToRead.txt";
-            bool actualResult;
-
-            //
-            // Act.
-            //
-            actualResult = localFileValidator.IsDataExist(path);
-
-            //
-            // Assert.
-            //
-            Assert.IsTrue(actualResult);
         }
     }
 }

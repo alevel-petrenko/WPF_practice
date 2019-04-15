@@ -32,17 +32,17 @@ namespace SortingApp.UnitTests.SortingAlgorithms
         }
 
         /// <summary>
-        /// Tests Sort method if pass unsorted collection it will make sorted collection.
+        /// Tests Sort method if pass sorted collection it will leave sorted collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void QuickSorter_Sort_PassUnsortedCollection_GetSortedCollection()
+        public void QuickSorter_Sort_PassSortedCollection_GetSortedCollection()
         {
             //
             // Arrange.
             //
-            var actualArray = new double[] { 1.56, 0.2, 376.0, 0.15};
-            var expectedArray = new double[] { 0.15, 0.2, 1.56, 376.0 };
+            var actualArray = new double[] { 0.15, 0.2, 1.56, 5.0, 9.99 };
+            var expectedArray = new double[] { 0.15, 0.2, 1.56, 5.0, 9.99 };
             var quickSorter = new QuickSorter<double>();
             bool result;
 
@@ -59,17 +59,17 @@ namespace SortingApp.UnitTests.SortingAlgorithms
         }
 
         /// <summary>
-        /// Tests Sort method if pass sorted collection it will leave sorted collection.
+        /// Tests Sort method if pass unsorted collection it will make sorted collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void QuickSorter_Sort_PassSortedCollection_GetSortedCollection()
+        public void QuickSorter_Sort_PassUnsortedCollection_GetSortedCollection()
         {
             //
             // Arrange.
             //
-            var actualArray = new double[] { 0.15, 0.2, 1.56, 5.0, 9.99 };
-            var expectedArray = new double[] { 0.15, 0.2, 1.56, 5.0, 9.99 };
+            var actualArray = new double[] { 1.56, 0.2, 376.0, 0.15};
+            var expectedArray = new double[] { 0.15, 0.2, 1.56, 376.0 };
             var quickSorter = new QuickSorter<double>();
             bool result;
 
