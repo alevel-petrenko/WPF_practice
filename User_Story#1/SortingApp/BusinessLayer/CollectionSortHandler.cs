@@ -76,7 +76,7 @@ namespace BusinessLayer
                 this.UnSortedCollection.CopyTo(this.SortedCollection, 0);
                 this.sorter.Sort(this.SortedCollection);
             }
-            catch (ArgumentNullException e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message + " was empty.");
             }
@@ -153,7 +153,7 @@ namespace BusinessLayer
             }
             catch (ArgumentNullException e)
             {
-                throw new Exception(e.Message + " was empty.");
+                throw new ArgumentNullException(e.Message);
             }
         }
     }
