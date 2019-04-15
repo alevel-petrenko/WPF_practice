@@ -45,7 +45,7 @@ namespace SortinfApp.UnitTests.Utilities
         }
 
         /// <summary>
-        /// Tests ReadContent if pass correct path to the file it will get correct content of the file.
+        /// Tests ReadContent if pass incorrect path to the file it will get empty result.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -74,7 +74,7 @@ namespace SortinfApp.UnitTests.Utilities
         }
 
         /// <summary>
-        /// Tests ReadContent if pass correct path to the file it will get correct content of the file.
+        /// Tests ReadContent if pass empty path to the file it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]

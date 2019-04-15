@@ -160,10 +160,6 @@ namespace BusinessLayer
             {
                 throw new Exception(e.Message + " was empty.");
             }
-            catch (IOException)
-            {
-                throw new Exception("Writing to the file failed.");
-            }
         }
     }
 }

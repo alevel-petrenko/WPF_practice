@@ -34,18 +34,14 @@ namespace BusinessLayer.Writer
                     temp = string.Join(";", collection.Select(item => item));
                 }
 
-                using (var writer = new StreamWriter(Path))
+                using (var writer = new StreamWriter(this.Path))
                 {
                     writer.Write(temp);
                 }
             }
-            catch (NullReferenceException e)
+            catch (ArgumentNullException e)
             {
-                throw new NullReferenceException(e.Message);
-            }
-            catch (IOException e)
-            {
-                throw new IOException(e.Message);
+                throw new ArgumentNullException(e.Message);
             }
         }
     }
