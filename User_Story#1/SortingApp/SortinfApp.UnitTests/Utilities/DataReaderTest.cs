@@ -45,38 +45,6 @@ namespace SortinfApp.UnitTests.Utilities
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        //[TestMethod]
-        //public void DataReader_ReadContent_PassEmptyValidator_ThrowArgumentNullException()
-        //{
-        //    //
-        //    // Arrange.
-        //    //
-        //    StubIValidator validator = null;
-        //    ArgumentNullException expectedException = new ArgumentNullException("validator");
-        //    Exception actualException = new Exception();
-
-        //    //
-        //    // Act.
-        //    //
-        //    try
-        //    {
-        //        var dataReader = new DataReader(validator);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        actualException = e;
-        //    }
-
-        //    //
-        //    // Assert.
-        //    //
-        //    Assert.AreEqual(expectedException, actualException);
-        //}
-
-        /// <summary>
         /// Tests ReadContent if pass correct path to the file it will get correct content of the file.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -115,7 +83,10 @@ namespace SortinfApp.UnitTests.Utilities
             //
             // Arrange.
             //
-            var validator = new StubIValidator();
+            var validator = new StubIValidator()
+            {
+                IsDataExistString = (string str) => throw new ArgumentNullException(nameof(str))
+            };
             var dataReader = new DataReader(validator)
             {
                 Path = null
