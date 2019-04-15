@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SortinfApp.UnitTests.Utilities.Validator
 {
     /// <summary>
-    /// Tests for СloudFileValidator class. 
+    /// Represents tests for СloudFileValidator class. 
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     [TestClass]

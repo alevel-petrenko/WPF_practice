@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SortingApp.UnitTests.Extensions
 {
     /// <summary>
-    /// Tests for TypeParser class.
+    /// Represents tests for TypeParser class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     [TestClass]

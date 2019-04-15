@@ -1,12 +1,12 @@
-﻿using BusinessLayer.DataParser;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Linq;
+using BusinessLayer.DataParser;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SortinfApp.UnitTests.Utilities.Parser
 {
     /// <summary>
-    /// 
+    /// Represents tests for ArrayParser class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     [TestClass]
@@ -17,7 +17,7 @@ namespace SortinfApp.UnitTests.Utilities.Parser
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void ArrayParser_ConvertData_PassNullContent_ThrowArgumentNullException()
+        public void ArrayParser_ConvertData_PassEmptyContent_ThrowArgumentNullException()
         {
             //
             // Arrange.

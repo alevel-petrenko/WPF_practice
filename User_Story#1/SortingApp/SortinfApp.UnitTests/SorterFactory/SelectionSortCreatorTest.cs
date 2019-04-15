@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SortinfApp.UnitTests.SorterFactory
 {
     /// <summary>
-    /// Tests for SelectionSortCreator class.
+    /// Represents tests for SelectionSortCreator class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     [TestClass]

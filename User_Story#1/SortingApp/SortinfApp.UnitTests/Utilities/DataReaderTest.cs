@@ -6,7 +6,7 @@ using System;
 namespace SortinfApp.UnitTests.Utilities
 {
     /// <summary>
-    /// Tests for DataReader class.
+    /// Represents tests for DataReader class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     [TestClass]

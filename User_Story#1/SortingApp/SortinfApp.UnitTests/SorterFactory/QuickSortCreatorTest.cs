@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SortinfApp.UnitTests.SorterFactory
 {
     /// <summary>
-    /// Tests for QuickSortCreator class.
+    /// Represents tests for QuickSortCreator class.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     [TestClass]
