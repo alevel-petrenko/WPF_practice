@@ -44,6 +44,9 @@
     <Reference Include="BusinessLayer.Fakes">
       <HintPath>FakesAssemblies\BusinessLayer.Fakes.dll</HintPath>
     </Reference>
+    <Reference Include="Helper.Fakes">
+      <HintPath>FakesAssemblies\Helper.Fakes.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -74,12 +77,17 @@
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\BusinessLayer.fakes" />
+    <Fakes Include="Fakes\Helper.fakes" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
       <Project>{b672fb6c-605d-405d-a13c-f1cdd2c93752}</Project>
       <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helper\Helper.csproj">
+      <Project>{bf7d8f1c-e861-47df-b417-98b3e3f0ab4b}</Project>
+      <Name>Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using BusinessLayer.Reader;
 using BusinessLayer.SorterFactory;
 using BusinessLayer.SortingAlgorithms;
@@ -122,10 +121,6 @@ namespace BusinessLayer
             catch (ArgumentNullException e)
             {
                 throw new Exception(e.Message + " was empty.");
-            }
-            catch (IOException)
-            {
-                throw new Exception("Reading from the file failed.");
             }
         }
 
