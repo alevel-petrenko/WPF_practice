@@ -12,6 +12,24 @@ namespace SortingApp.UnitTests.Extensions
     public class TypeParserTest
     {
         /// <summary>
+        /// Tests ChangeType method if pass empty value it will throw ArgumentNullException.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void TypeParser_ChangeType_PassEmptyValue_ThrowArgumentNullException()
+        {
+            //
+            // Arrange.
+            //
+            string value = "";
+
+            //
+            // Assert.
+            //
+            Assert.ThrowsException<ArgumentNullException>(() => TypeParser.ChangeType<string>(value));
+        }
+
+        /// <summary>
         /// Tests ChangeType method if pass null value it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>

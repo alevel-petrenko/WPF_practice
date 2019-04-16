@@ -12,11 +12,11 @@ namespace SortinfApp.UnitTests.SorterFactory
     public class InsertionSortCreatorTest
     {
         /// <summary>
-        /// Tests Create method if call method it will get new instance InsertionSorter.
+        /// Tests Create method and gets new instance of InsertionSorter class.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void InsertionSortCreator_Create_CallMethod_GetNewInstanceInsertionSorter()
+        public void InsertionSortCreator_Create_GetNewInstanceInsertionSorter()
         {
             //
             // Arrange.

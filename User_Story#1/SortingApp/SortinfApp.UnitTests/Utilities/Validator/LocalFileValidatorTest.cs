@@ -13,11 +13,30 @@ namespace SortinfApp.UnitTests.Utilities.Validator
     public class LocalFileValidatorTest
     {
         /// <summary>
-        /// Tests IsDataExist if pass empty path it will throw ArgumentNullException.
+        /// Tests IsDataExist if pass empty value it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void LocalFileValidator_IsDataExist_PassEmtptyPath_ThrowArgumentNullException()
+        public void LocalFileValidator_IsDataExist_PassEmptyValue_ThrowArgumentNullException()
+        {
+            //
+            // Arrange.
+            //
+            var localFileValidator = new LocalFileValidator();
+            string path = "   ";
+
+            //
+            // Assert.
+            //
+            Assert.ThrowsException<ArgumentNullException>(() => localFileValidator.IsDataExist(path));
+        }
+
+        /// <summary>
+        /// Tests IsDataExist if pass null value it will throw ArgumentNullException.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void LocalFileValidator_IsDataExist_PassNullValue_ThrowArgumentNullException()
         {
             //
             // Arrange.

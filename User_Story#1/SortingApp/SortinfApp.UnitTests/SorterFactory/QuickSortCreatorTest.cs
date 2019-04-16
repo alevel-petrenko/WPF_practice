@@ -12,11 +12,11 @@ namespace SortinfApp.UnitTests.SorterFactory
     public class QuickSortCreatorTest
     {
         /// <summary>
-        /// Tests Create method if call method it will get new instance QuickSorter.
+        /// Tests Create method and gets new instance of QuickSorter class.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void QuickSortCreator_Create_CallMethod_GetNewInstanceSelectionSort()
+        public void QuickSortCreator_Create_GetNewInstanceSelectionSort()
         {
             //
             // Arrange.

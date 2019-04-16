@@ -13,7 +13,7 @@ namespace SortinfApp.UnitTests.Utilities.Parser
     public class ArrayParserTest
     {
         /// <summary>
-        /// Tests ConvertData if pass null content it will throw ArgumentNullException.
+        /// Tests ConvertData if pass empty content it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
@@ -24,6 +24,25 @@ namespace SortinfApp.UnitTests.Utilities.Parser
             //
             var arrayParser = new ArrayParser<bool>();
             string dataToConvert = "     ";
+
+            //
+            // Assert.
+            //
+            Assert.ThrowsException<ArgumentNullException>(() => arrayParser.ConvertData(dataToConvert));
+        }
+
+        /// <summary>
+        /// Tests ConvertData if pass null content it will throw ArgumentNullException.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void ArrayParser_ConvertData_PassNullContent_ThrowArgumentNullException()
+        {
+            //
+            // Arrange.
+            //
+            var arrayParser = new ArrayParser<bool>();
+            string dataToConvert = null;
 
             //
             // Assert.

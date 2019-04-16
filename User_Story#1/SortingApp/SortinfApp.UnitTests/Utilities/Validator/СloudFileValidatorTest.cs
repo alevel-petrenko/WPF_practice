@@ -16,7 +16,26 @@ namespace SortinfApp.UnitTests.Utilities.Validator
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void СloudFileValidator_IsDataExist_PassEmtptyUrl_ThrowArgumentNullException()
+        public void СloudFileValidator_IsDataExist_PassEmptyUrl_ThrowArgumentNullException()
+        {
+            //
+            // Arrange.
+            //
+            var cloudFileValidator = new СloudFileValidator();
+            string url = "   ";
+
+            //
+            // Assert.
+            //
+            Assert.ThrowsException<ArgumentNullException>(() => cloudFileValidator.IsDataExist(url));
+        }
+
+        /// <summary>
+        /// Tests IsDataExist if pass null url it will throw ArgumentNullException.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void СloudFileValidator_IsDataExist_PassNullUrl_ThrowArgumentNullException()
         {
             //
             // Arrange.
