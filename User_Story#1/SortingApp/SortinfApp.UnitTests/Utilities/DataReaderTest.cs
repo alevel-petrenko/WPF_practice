@@ -96,7 +96,7 @@ namespace SortinfApp.UnitTests.Utilities
             //
             string actualResult;
             string expectedResult = "166/ 11/ 56/ 4 / 1.5/ 1/ 0.99/ 4.95/ 487/ 1000/ 1.45/ 0.99";
-            var path = Path.GetTempPath();
+            string path = Path.GetTempPath() + @"\collectionToRead.txt";
             var validator = new StubIValidator()
             {
                 IsDataExistString = (string str) => true

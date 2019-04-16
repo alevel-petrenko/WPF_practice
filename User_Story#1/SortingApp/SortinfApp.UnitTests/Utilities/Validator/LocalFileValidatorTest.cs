@@ -61,7 +61,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             // Arrange.
             //
             var localFileValidator = new LocalFileValidator();
-            string path = Path.GetTempPath();
+            string path = Path.GetTempPath() + @"\collectionToRead.txt";
             bool actualResult;
 
             //
@@ -88,7 +88,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             // Arrange.
             //
             var localFileValidator = new LocalFileValidator();
-            string path = @"D:\collectionToRead.csv";
+            string path = Path.GetTempPath() + @"\collectionToRead.csv";
             bool actualResult;
 
             //

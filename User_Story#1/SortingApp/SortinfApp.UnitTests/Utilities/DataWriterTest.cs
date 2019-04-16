@@ -85,7 +85,7 @@ namespace SortinfApp.UnitTests.Utilities
             // Arrange.
             //
             string actualCollection;
-            var path = Path.GetTempPath();
+            var path = Path.GetTempPath() + @"\collectionToWrite.txt";
             var collection = new double[] { 1.01, 5.2, 10.131 };
             var dataWriter = new DataWriter<double>
             {

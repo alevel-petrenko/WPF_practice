@@ -63,7 +63,6 @@ namespace BusinessLayer
             this.writer = writer;
         }
 
-
         /// <summary>
         /// Executes sorting for collection.
         /// </summary>
