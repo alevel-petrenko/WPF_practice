@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using BusinessLayer;
 using BusinessLayer.Reader.Fakes;
@@ -118,7 +119,7 @@ namespace SortinfApp.UnitTests
                 //
                 var expectedCollection = new double[] { 1.5, 4, 11, 56, 166 };
                 var sorterType = SortType.InsertionSort;
-                var path = @"D:\collectionToRead.txt";
+                var path = Path.GetTempPath();
                 var parser = new StubIDataParser<double>()
                 {
                     ConvertDataString = (str) => new double[] { 166, 11, 56, 4, 1.5 }
@@ -158,7 +159,7 @@ namespace SortinfApp.UnitTests
                 //
                 var expectedCollection = new double[] { 1.5, 4, 11, 56, 166 };
                 var sorterType = SortType.QuickSort;
-                var path = @"D:\collectionToRead.txt";
+                var path = Path.GetTempPath();
                 var parser = new StubIDataParser<double>()
                 {
                     ConvertDataString = (str) => new double[] { 166, 11, 56, 4, 1.5 }
@@ -198,7 +199,7 @@ namespace SortinfApp.UnitTests
                 //
                 var expectedCollection = new double[] { 1.5, 4, 11, 56, 166 };
                 var sorterType = SortType.SelectionSort;
-                var path = @"D:\collectionToRead.txt";
+                var path = Path.GetTempPath();
                 var parser = new StubIDataParser<double>()
                 {
                     ConvertDataString = (str) => new double[] { 166, 11, 56, 4, 1.5 }
@@ -242,7 +243,7 @@ namespace SortinfApp.UnitTests
                 {
                     ConvertDataString = (str) => expectedCollection
                 };
-                var path = @"D:\collectionToRead.txt";
+                var path = Path.GetTempPath();
                 var reader = new ShimDataReader();
                 var writer = new StubDataWriter<int>();
                 CollectionSortHandler<int> collectionSortHandler;
@@ -274,7 +275,7 @@ namespace SortinfApp.UnitTests
                 // Arrange.
                 //
                 CollectionSortHandler<int> collectionSortHandler;
-                var path = @"D:\collectionToRead.txt";
+                var path = Path.GetTempPath();
                 var parser = new StubIDataParser<int>()
                 {
                     ConvertDataString = (str) => throw new ArgumentNullException()
@@ -335,7 +336,7 @@ namespace SortinfApp.UnitTests
                 //
                 // Arrange.
                 //
-                var path = @"D:\collectionToRead.txt";
+                var path = Path.GetTempPath();
                 var parser = new StubIDataParser<double>();
                 var reader = new ShimDataReader();
                 var writer = new ShimDataWriter<double>()

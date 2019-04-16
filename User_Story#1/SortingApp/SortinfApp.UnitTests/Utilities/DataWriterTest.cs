@@ -24,12 +24,32 @@ namespace SortinfApp.UnitTests.Utilities
             //
             // Arrange.
             //
+            var collection = new double[] { };
             var dataWriter = new DataWriter<double>();
 
             //
             // Assert.
             //
-            Assert.ThrowsException<ArgumentNullException>(() => dataWriter.WriteContent(null));
+            Assert.ThrowsException<ArgumentNullException>(() => dataWriter.WriteContent(collection));
+        }
+
+        /// <summary>
+        /// Tests WriteContent if pass null collection it will throw ArgumentNullException.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void DataWriter_WriteContent_PassNullCollection_ThrowArgumentNullException()
+        {
+            //
+            // Arrange.
+            //
+            double[] collection = null;
+            var dataWriter = new DataWriter<double>();
+
+            //
+            // Assert.
+            //
+            Assert.ThrowsException<ArgumentNullException>(() => dataWriter.WriteContent(collection));
         }
 
         /// <summary>
@@ -65,7 +85,7 @@ namespace SortinfApp.UnitTests.Utilities
             // Arrange.
             //
             string actualCollection;
-            string path = @"D:\collectionToWrite.txt";
+            var path = Path.GetTempPath();
             var collection = new double[] { 1.01, 5.2, 10.131 };
             var dataWriter = new DataWriter<double>
             {
@@ -76,17 +96,14 @@ namespace SortinfApp.UnitTests.Utilities
             {
                 IsDataExistString = (str) => true
             };
-            var dataReader = new DataReader(validator)
-            {
-                Path = path
-            };
+            var dataReader = new DataReader(validator);
 
             //
             // Act.
             //
             using (File.Create(path)) { }
             dataWriter.WriteContent(collection);
-            actualCollection = dataReader.ReadContent();
+            actualCollection = dataReader.ReadContent(path);
             File.Delete(path);
 
             //

@@ -115,8 +115,7 @@ namespace BusinessLayer
 
             try
             {
-                this.reader.Path = path;
-                this.UnSortedCollection = this.parser.ConvertData(this.reader.ReadContent());
+                this.UnSortedCollection = this.parser.ConvertData(this.reader.ReadContent(path));
             }
             catch (ArgumentNullException e)
             {

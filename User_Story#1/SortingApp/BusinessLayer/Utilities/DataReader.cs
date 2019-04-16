@@ -30,25 +30,18 @@ namespace BusinessLayer.Reader
         }
 
         /// <summary>
-        /// Gets or sets the path.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <returns>The path.</returns>
-        public string Path { get; set; }
-
-        /// <summary>
         /// Reads the content from specified path through specified validator.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public string ReadContent()
+        public string ReadContent(string path)
         {
             try
             {
                 string content = string.Empty;
-                if (!validator.IsDataExist(this.Path))
+                if (!validator.IsDataExist(path))
                     return content;
 
-                using (var reader = new StreamReader(this.Path))
+                using (var reader = new StreamReader(path))
                 {
                     content = reader.ReadToEnd();
                 }
