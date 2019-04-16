@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using BusinessLayer.Validator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -41,13 +42,15 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             // Arrange.
             //
             var localFileValidator = new LocalFileValidator();
-            string path = @"D:\Git\WPF_practice\User_Story#1\collectionToRead.txt";
+            string path = @"D:\collectionToRead.txt";
             bool actualResult;
 
             //
             // Act.
             //
+            using (File.Create(path)) { }
             actualResult = localFileValidator.IsDataExist(path);
+            File.Delete(path);
 
             //
             // Assert.
@@ -66,13 +69,15 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             // Arrange.
             //
             var localFileValidator = new LocalFileValidator();
-            string path = @"D:\Git\WPF_practice\User_Story#1\collectionToRead.csv";
+            string path = @"D:\collectionToRead.csv";
             bool actualResult;
 
             //
             // Act.
             //
+            using (File.Create(path)) { }
             actualResult = localFileValidator.IsDataExist(path);
+            File.Delete(path);
 
             //
             // Assert.

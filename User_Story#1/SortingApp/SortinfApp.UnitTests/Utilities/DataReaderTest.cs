@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using BusinessLayer.Reader;
 using BusinessLayer.Utilities.Validator.Interfaces.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -91,19 +92,22 @@ namespace SortinfApp.UnitTests.Utilities
             //
             string actualResult;
             string expectedResult = "166/ 11/ 56/ 4 / 1.5/ 1/ 0.99/ 4.95/ 487/ 1000/ 1.45/ 0.99";
+            var path = @"D:\collectionToRead.txt";
             var validator = new StubIValidator()
             {
                 IsDataExistString = (string str) => true
             };
             var dataReader = new DataReader(validator)
             {
-                Path = @"D:\Git\WPF_practice\User_Story#1\collectionToRead.txt"
+                Path = path
             };
 
             //
             // Act.
             //
+            File.WriteAllText(path, expectedResult);
             actualResult = dataReader.ReadContent();
+            File.Delete(path);
 
             //
             // Assert.

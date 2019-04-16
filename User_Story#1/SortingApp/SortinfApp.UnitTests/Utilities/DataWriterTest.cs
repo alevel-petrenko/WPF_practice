@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using BusinessLayer.Reader;
 using BusinessLayer.Utilities.Validator.Interfaces.Fakes;
 using BusinessLayer.Writer;
@@ -83,8 +84,10 @@ namespace SortinfApp.UnitTests.Utilities
             //
             // Act.
             //
+            using (File.Create(path)) { }
             dataWriter.WriteContent(collection);
             actualCollection = dataReader.ReadContent();
+            File.Delete(path);
 
             //
             // Assert.

@@ -13,7 +13,7 @@ namespace SortingApp.UnitTests.SortingAlgorithms
     public class QuickSorterTest
     {
         /// <summary>
-        /// Tests Sort method if pass null collection it will throw argument null exception.
+        /// Tests Sort method if pass null collection it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]

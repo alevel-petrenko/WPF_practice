@@ -13,7 +13,7 @@ namespace SortinfApp.UnitTests.Utilities.Parser
     public class ArrayParserTest
     {
         /// <summary>
-        /// Tests ConvertData if pass null content it will get ArgumentNullException.
+        /// Tests ConvertData if pass null content it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
