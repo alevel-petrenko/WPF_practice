@@ -29,13 +29,14 @@ namespace SortinfApp.UnitTests
             //
             // Arrange.
             //
-            var reader = new StubDataReader(new StubIValidator());
-            var writer = new StubDataWriter<double>();
+            StubIDataParser parser = null;
+            var reader = new ShimDataReader(new StubIValidator());
+            var writer = new ShimDataWriter<double>();
 
             //
             // Assert.
             //
-            Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, parser));
         }
 
         /// <summary>
@@ -49,12 +50,13 @@ namespace SortinfApp.UnitTests
             // Arrange.
             //
             var parser = new StubIDataParser<double>();
-            var writer = new StubDataWriter<double>();
+            ShimDataReader reader = null;
+            var writer = new ShimDataWriter<double>();
 
             //
             // Assert.
             //
-            Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(null, writer, parser));
+            Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, parser));
         }
 
         /// <summary>
@@ -68,12 +70,13 @@ namespace SortinfApp.UnitTests
             // Arrange.
             //
             var parser = new StubIDataParser<double>();
-            var reader = new StubDataReader(new StubIValidator());
+            var reader = new ShimDataReader(new StubIValidator());
+            ShimDataWriter writer = null;
 
             //
             // Assert.
             //
-            Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, null, parser));
+            Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, parser));
         }
 
         /// <summary>
@@ -90,7 +93,7 @@ namespace SortinfApp.UnitTests
                 //
                 var parser = new StubIDataParser<double>();
                 var reader = new ShimDataReader();
-                var writer = new StubDataWriter<double>();
+                var writer = new ShimDataWriter<double>();
                 CollectionSortHandler<double> collectionSortHandler;
 
                 //
@@ -125,7 +128,7 @@ namespace SortinfApp.UnitTests
                     ConvertDataString = (str) => new double[] { 166, 11, 56, 4, 1.5 }
                 };
                 var reader = new ShimDataReader();
-                var writer = new StubDataWriter<double>();
+                var writer = new ShimDataWriter<double>();
                 CollectionSortHandler<double> collectionSortHandler;
                 bool result;
 
@@ -165,7 +168,7 @@ namespace SortinfApp.UnitTests
                     ConvertDataString = (str) => new double[] { 166, 11, 56, 4, 1.5 }
                 };
                 var reader = new ShimDataReader();
-                var writer = new StubDataWriter<double>();
+                var writer = new ShimDataWriter<double>();
                 CollectionSortHandler<double> collectionSortHandler;
                 bool result;
 
@@ -205,7 +208,7 @@ namespace SortinfApp.UnitTests
                     ConvertDataString = (str) => new double[] { 166, 11, 56, 4, 1.5 }
                 };
                 var reader = new ShimDataReader();
-                var writer = new StubDataWriter<double>();
+                var writer = new ShimDataWriter<double>();
                 CollectionSortHandler<double> collectionSortHandler;
                 bool result;
 
@@ -245,7 +248,7 @@ namespace SortinfApp.UnitTests
                 };
                 var path = Path.GetTempPath();
                 var reader = new ShimDataReader();
-                var writer = new StubDataWriter<int>();
+                var writer = new ShimDataWriter<int>();
                 CollectionSortHandler<int> collectionSortHandler;
 
                 //
@@ -280,7 +283,7 @@ namespace SortinfApp.UnitTests
                 {
                     ConvertDataString = (str) => throw new ArgumentNullException()
                 };
-                var writer = new StubDataWriter<int>();
+                var writer = new ShimDataWriter<int>();
                 var reader = new ShimDataReader();
 
                 //
@@ -309,7 +312,7 @@ namespace SortinfApp.UnitTests
                 //
                 var parser = new StubIDataParser<int>();
                 var reader = new ShimDataReader();
-                var writer = new StubDataWriter<int>();
+                var writer = new ShimDataWriter<int>();
                 CollectionSortHandler<int> collectionSortHandler;
 
                 //
@@ -371,7 +374,7 @@ namespace SortinfApp.UnitTests
                 //
                 var parser = new StubIDataParser<double>();
                 var reader = new ShimDataReader();
-                var writer = new StubDataWriter<double>();
+                var writer = new ShimDataWriter<double>();
                 CollectionSortHandler<double> collectionSortHandler;
 
                 //

@@ -34,25 +34,6 @@ namespace SortinfApp.UnitTests.Utilities
         }
 
         /// <summary>
-        /// Tests WriteContent if pass null collection it will throw ArgumentNullException.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        [TestMethod]
-        public void DataWriter_WriteContent_PassNullCollection_ThrowArgumentNullException()
-        {
-            //
-            // Arrange.
-            //
-            double[] collection = null;
-            var dataWriter = new DataWriter<double>();
-
-            //
-            // Assert.
-            //
-            Assert.ThrowsException<ArgumentNullException>(() => dataWriter.WriteContent(collection));
-        }
-
-        /// <summary>
         /// Tests WriteContent if pass empty path to the file it will throw ArgumentNullException.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
@@ -67,6 +48,25 @@ namespace SortinfApp.UnitTests.Utilities
             {
                 Path = null
             };
+
+            //
+            // Assert.
+            //
+            Assert.ThrowsException<ArgumentNullException>(() => dataWriter.WriteContent(collection));
+        }
+
+        /// <summary>
+        /// Tests WriteContent if pass null collection it will throw ArgumentNullException.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        [TestMethod]
+        public void DataWriter_WriteContent_PassNullCollection_ThrowArgumentNullException()
+        {
+            //
+            // Arrange.
+            //
+            double[] collection = null;
+            var dataWriter = new DataWriter<double>();
 
             //
             // Assert.
