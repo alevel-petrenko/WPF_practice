@@ -101,8 +101,11 @@ namespace ViewModel
             get { return this.message; }
             set
             {
-                this.message = value;
-                this.OnPropertyChanged(nameof(Message));
+                if (this.message == value)
+                    return;
+
+                    this.message = value;
+                    this.OnPropertyChanged(nameof(Message));
             }
         }
 
@@ -153,6 +156,7 @@ namespace ViewModel
 
                 foreach (var number in this.handler.UnSortedCollection)
                     this.UnSortedCollectionOfNumbers.Add(number);
+
                 this.Message = "Array was successfully read.";
             }
             catch (Exception e)
@@ -202,7 +206,12 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         private void ShowDialogWindow()
         {
-            using (var openFileDialog = new OpenFileDialog())
+            using (var openFileDialog = new OpenFileDialog()
+            {
+                FileName = "Select a text file",
+                Filter = "Text files (*.txt)|*.txt",
+                Title = "Choose text file"
+            })
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                     this.path = openFileDialog.FileName;

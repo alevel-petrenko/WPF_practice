@@ -1,6 +1,6 @@
 ﻿using System;
-using BusinessLayer.Utilities.Validator.Interfaces;
 using System.IO;
+using BusinessLayer.Utilities.Validator.Interfaces;
 
 namespace BusinessLayer.Validator
 {
@@ -21,7 +21,7 @@ namespace BusinessLayer.Validator
         /// </returns>
         public bool IsDataExist(string path)
         {
-            if (path is null)
+            if (string.IsNullOrWhiteSpace(path))
                 throw new ArgumentNullException(nameof(path));
 
             return File.Exists(path) && this.IsValidFormat(path);

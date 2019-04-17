@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using BusinessLayer.Extensions;
 using BusinessLayer.Utilities.Parser.Interfaces;
-using System.Collections.Generic;
 
 namespace BusinessLayer.DataParser
 {
     /// <summary>
-    /// Provides functionality that parses string into array of srecific type.
+    /// Provides functionality that parses string into array of specific type.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     /// <typeparam name="T">Certain input type.</typeparam>
@@ -25,7 +25,7 @@ namespace BusinessLayer.DataParser
         /// <owner>Anton Petrenko</owner>
         public ArrayParser()
         {
-            this.separators = new char[] { ';', '/', '|'};
+            this.separators = new char[] { ';', ',', '/', '|'};
         }
 
         /// <summary>
@@ -35,6 +35,9 @@ namespace BusinessLayer.DataParser
         /// <param name="content">Content of the file.</param>
         public T[] ConvertData(string content)
         {
+            if (string.IsNullOrWhiteSpace(content))
+                throw new ArgumentNullException(nameof(content));
+
             try
             {
                 var numbers = new List<T>();

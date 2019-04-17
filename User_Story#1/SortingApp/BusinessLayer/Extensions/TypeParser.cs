@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BusinessLayer.Extensions
 {
@@ -17,7 +18,7 @@ namespace BusinessLayer.Extensions
         /// <returns>Specific type.</returns>
         public static T ChangeType<T>(this object item)
         {
-            if (item is null)
+            if (item is null || !item.ToString().Any())
                 throw new ArgumentNullException(nameof(item));
 
             return (T)Convert.ChangeType(item, typeof(T));

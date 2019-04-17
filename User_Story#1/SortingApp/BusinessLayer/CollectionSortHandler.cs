@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using BusinessLayer.Reader;
 using BusinessLayer.SorterFactory;
 using BusinessLayer.SortingAlgorithms;
@@ -64,7 +63,6 @@ namespace BusinessLayer
             this.writer = writer;
         }
 
-
         /// <summary>
         /// Executes sorting for collection.
         /// </summary>
@@ -77,7 +75,7 @@ namespace BusinessLayer
                 this.UnSortedCollection.CopyTo(this.SortedCollection, 0);
                 this.sorter.Sort(this.SortedCollection);
             }
-            catch (ArgumentNullException e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message + " was empty.");
             }
@@ -108,6 +106,7 @@ namespace BusinessLayer
         /// Executes reading for collection.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
+        /// <param name="path">Path to the file.</param>
         public void Read(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -115,16 +114,11 @@ namespace BusinessLayer
 
             try
             {
-                this.reader.Path = path;
-                this.UnSortedCollection = this.parser.ConvertData(this.reader.ReadContent());
+                this.UnSortedCollection = this.parser.ConvertData(this.reader.ReadContent(path));
             }
             catch (ArgumentNullException e)
             {
                 throw new Exception(e.Message + " was empty.");
-            }
-            catch (IOException)
-            {
-                throw new Exception("Reading from the file failed.");
             }
         }
 
@@ -144,6 +138,7 @@ namespace BusinessLayer
         /// Writes sorted collection to file.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
+        /// <param name="path">Path to the file.</param>
         public void Write(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -156,11 +151,7 @@ namespace BusinessLayer
             }
             catch (ArgumentNullException e)
             {
-                throw new Exception(e.Message + " was empty.");
-            }
-            catch (IOException)
-            {
-                throw new Exception("Writing to the file failed.");
+                throw new ArgumentNullException(e.Message);
             }
         }
     }

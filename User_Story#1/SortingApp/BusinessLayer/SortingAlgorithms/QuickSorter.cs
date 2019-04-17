@@ -42,9 +42,9 @@ namespace BusinessLayer.SortingAlgorithms
             if (startElement > endElement)
                 return;
 
-                int wall = this.Separate(inputCollection, startElement, endElement);
-                this.Sort(inputCollection, startElement, wall - 1);
-                this.Sort(inputCollection, wall + 1, endElement);
+            int wall = this.Separate(inputCollection, startElement, endElement);
+            this.Sort(inputCollection, startElement, wall - 1);
+            this.Sort(inputCollection, wall + 1, endElement);
         }
 
         /// <summary>
@@ -80,12 +80,9 @@ namespace BusinessLayer.SortingAlgorithms
         /// <param name="rightIndex">Index of right element in array.</param>
         private void SwapElements(T[] collection, int leftIndex, int rightIndex)
         {
-            if (collection != null && rightIndex >= 0 || leftIndex >= 0)
-            {
-                var temp = collection[rightIndex];
-                collection[rightIndex] = collection[leftIndex];
-                collection[leftIndex] = temp;
-            }
+            var temp = collection[rightIndex];
+            collection[rightIndex] = collection[leftIndex];
+            collection[leftIndex] = temp;
         }
     }
 }
