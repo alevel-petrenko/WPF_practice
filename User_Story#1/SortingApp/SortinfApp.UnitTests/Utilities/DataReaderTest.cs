@@ -43,7 +43,7 @@ namespace SortinfApp.UnitTests.Utilities
             //
             var validator = new StubIValidator()
             {
-                IsDataExistString = (string str) => true
+                IsDataExistString = (str) => true
             };
             var dataReader = new DataReader(validator);
             var path = string.Empty;
@@ -68,7 +68,7 @@ namespace SortinfApp.UnitTests.Utilities
             var expectedResult = string.Empty;
             var validator = new StubIValidator()
             {
-                IsDataExistString = (string str) => false
+                IsDataExistString = (str) => false
             };
             var dataReader = new DataReader(validator);
             var path = Path.GetTempPath();
@@ -99,7 +99,7 @@ namespace SortinfApp.UnitTests.Utilities
             string path = Path.GetTempPath() + @"\collectionToRead.txt";
             var validator = new StubIValidator()
             {
-                IsDataExistString = (string str) => true
+                IsDataExistString = (str) => true
             };
             var dataReader = new DataReader(validator);
 

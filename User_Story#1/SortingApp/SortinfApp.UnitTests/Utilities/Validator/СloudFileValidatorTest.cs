@@ -61,17 +61,17 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             //
             var cloudFileValidator = new СloudFileValidator();
             string url = "https://www.microsoft.com/uk-ua/";
-            bool actualResult;
+            bool isResourceValid;
 
             //
             // Act.
             //
-            actualResult = cloudFileValidator.IsDataExist(url);
+            isResourceValid = cloudFileValidator.IsDataExist(url);
 
             //
             // Assert.
             //
-            Assert.IsTrue(actualResult);
+            Assert.IsTrue(isResourceValid);
         }
 
         /// <summary>
@@ -86,17 +86,17 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             //
             var cloudFileValidator = new СloudFileValidator();
             string url = "https://abcd";
-            bool actualResult;
+            bool isResourceValid;
 
             //
             // Act.
             //
-            actualResult = cloudFileValidator.IsDataExist(url);
+            isResourceValid = cloudFileValidator.IsDataExist(url);
 
             //
             // Assert.
             //
-            Assert.IsFalse(actualResult);
+            Assert.IsFalse(isResourceValid);
         }
     }
 }

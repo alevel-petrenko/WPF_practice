@@ -63,18 +63,18 @@ namespace SortinfApp.UnitTests.Utilities.Parser
             var arrayParser = new ArrayParser<bool>();
             string dataToConvert = "true, false;false/true|false";
             var expectedArray = new bool[] { true, false, false, true, false };
-            bool actualResult;
+            bool isArrayParsedCorrectly;
 
             //
             // Act.
             //
             var actualArray = arrayParser.ConvertData(dataToConvert);
-            actualResult = actualArray.SequenceEqual(expectedArray);
+            isArrayParsedCorrectly = actualArray.SequenceEqual(expectedArray);
 
             //
             // Assert.
             //
-            Assert.IsTrue(actualResult);
+            Assert.IsTrue(isArrayParsedCorrectly);
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             // Arrange.
             //
             var localFileValidator = new LocalFileValidator();
-            string path = "   ";
+            string path = string.Empty;
 
             //
             // Assert.
@@ -62,19 +62,19 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             //
             var localFileValidator = new LocalFileValidator();
             string path = Path.GetTempPath() + @"\collectionToRead.txt";
-            bool actualResult;
+            bool isDataValid;
 
             //
             // Act.
             //
             using (File.Create(path)) { }
-            actualResult = localFileValidator.IsDataExist(path);
+            isDataValid = localFileValidator.IsDataExist(path);
             File.Delete(path);
 
             //
             // Assert.
             //
-            Assert.IsTrue(actualResult);
+            Assert.IsTrue(isDataValid);
         }
 
         /// <summary>
@@ -89,19 +89,19 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             //
             var localFileValidator = new LocalFileValidator();
             string path = Path.GetTempPath() + @"\collectionToRead.csv";
-            bool actualResult;
+            bool isDataValid;
 
             //
             // Act.
             //
             using (File.Create(path)) { }
-            actualResult = localFileValidator.IsDataExist(path);
+            isDataValid = localFileValidator.IsDataExist(path);
             File.Delete(path);
 
             //
             // Assert.
             //
-            Assert.IsFalse(actualResult);
+            Assert.IsFalse(isDataValid);
         }
 
         /// <summary>
@@ -116,17 +116,17 @@ namespace SortinfApp.UnitTests.Utilities.Validator
             //
             var localFileValidator = new LocalFileValidator();
             string path = Path.GetTempPath();
-            bool actualResult;
+            bool isDataValid;
 
             //
             // Act.
             //
-            actualResult = localFileValidator.IsDataExist(path);
+            isDataValid = localFileValidator.IsDataExist(path);
 
             //
             // Assert.
             //
-            Assert.IsFalse(actualResult);
+            Assert.IsFalse(isDataValid);
         }
     }
 }

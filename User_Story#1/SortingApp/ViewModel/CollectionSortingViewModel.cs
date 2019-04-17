@@ -101,7 +101,9 @@ namespace ViewModel
             get { return this.message; }
             set
             {
-                if (message != value)
+                if (this.message != value)
+                    return;
+
                     this.message = value;
                     this.OnPropertyChanged(nameof(Message));
             }

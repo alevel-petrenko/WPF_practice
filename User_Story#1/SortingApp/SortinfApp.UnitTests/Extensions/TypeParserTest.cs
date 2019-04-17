@@ -21,7 +21,7 @@ namespace SortingApp.UnitTests.Extensions
             //
             // Arrange.
             //
-            string value = "";
+            var value = string.Empty;
 
             //
             // Assert.
