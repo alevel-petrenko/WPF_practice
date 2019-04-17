@@ -101,7 +101,7 @@ namespace ViewModel
             get { return this.message; }
             set
             {
-                if (this.message != value)
+                if (this.message == value)
                     return;
 
                     this.message = value;
