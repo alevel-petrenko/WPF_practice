@@ -101,8 +101,9 @@ namespace ViewModel
             get { return this.message; }
             set
             {
-                this.message = value;
-                this.OnPropertyChanged(nameof(Message));
+                if (message != value)
+                    this.message = value;
+                    this.OnPropertyChanged(nameof(Message));
             }
         }
 
@@ -207,7 +208,7 @@ namespace ViewModel
             {
                 FileName = "Select a text file",
                 Filter = "Text files (*.txt)|*.txt",
-                Title = "Open text file"
+                Title = "Choose text file"
             })
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)

@@ -26,17 +26,20 @@ namespace SortinfApp.UnitTests
         [TestMethod]
         public void CollectionSortHandler_CollectionSortHandler_PassNullParserInConstructor_ThrowArgumentNullException()
         {
-            //
-            // Arrange.
-            //
-            StubIDataParser parser = null;
-            var reader = new ShimDataReader(new StubIValidator());
-            var writer = new ShimDataWriter<double>();
+            using (ShimsContext.Create())
+            {
+                //
+                // Arrange.
+                //
+                StubIDataParser<double> parser = null;
+                var reader = new StubDataReader(new StubIValidator());
+                var writer = new ShimDataWriter<double>();
 
-            //
-            // Assert.
-            //
-            Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, parser));
+                //
+                // Assert.
+                //
+                Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, parser));
+            }
         }
 
         /// <summary>
@@ -46,17 +49,20 @@ namespace SortinfApp.UnitTests
         [TestMethod]
         public void CollectionSortHandler_CollectionSortHandler_PassNullReaderInConstructor_ThrowArgumentNullException()
         {
-            //
-            // Arrange.
-            //
-            var parser = new StubIDataParser<double>();
-            ShimDataReader reader = null;
-            var writer = new ShimDataWriter<double>();
+            using (ShimsContext.Create())
+            {
+                //
+                // Arrange.
+                //
+                var parser = new StubIDataParser<double>();
+                ShimDataReader reader = null;
+                var writer = new ShimDataWriter<double>();
 
-            //
-            // Assert.
-            //
-            Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, parser));
+                //
+                // Assert.
+                //
+                Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, parser));
+            }
         }
 
         /// <summary>
@@ -66,17 +72,20 @@ namespace SortinfApp.UnitTests
         [TestMethod]
         public void CollectionSortHandler_CollectionSortHandler_PassNullWriterInConstructor_ThrowArgumentNullException()
         {
-            //
-            // Arrange.
-            //
-            var parser = new StubIDataParser<double>();
-            var reader = new ShimDataReader(new StubIValidator());
-            ShimDataWriter writer = null;
+            using (ShimsContext.Create())
+            {
+                //
+                // Arrange.
+                //
+                var parser = new StubIDataParser<double>();
+                var reader = new StubDataReader(new StubIValidator());
+                ShimDataWriter<double> writer = null;
 
-            //
-            // Assert.
-            //
-            Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, parser));
+                //
+                // Assert.
+                //
+                Assert.ThrowsException<ArgumentNullException>(() => new CollectionSortHandler<double>(reader, writer, parser));
+            }
         }
 
         /// <summary>
@@ -120,17 +129,18 @@ namespace SortinfApp.UnitTests
                 //
                 // Arrange.
                 //
+                var actualCollection = new double[] { 166, 11, 56, 4, 1.5 };
                 var expectedCollection = new double[] { 1.5, 4, 11, 56, 166 };
                 var sorterType = SortType.InsertionSort;
                 var path = Path.GetTempPath();
                 var parser = new StubIDataParser<double>()
                 {
-                    ConvertDataString = (str) => new double[] { 166, 11, 56, 4, 1.5 }
+                    ConvertDataString = (str) => actualCollection
                 };
                 var reader = new ShimDataReader();
                 var writer = new ShimDataWriter<double>();
                 CollectionSortHandler<double> collectionSortHandler;
-                bool result;
+                bool isCollectionSorted;
 
                 //
                 // Act.
@@ -139,12 +149,12 @@ namespace SortinfApp.UnitTests
                 collectionSortHandler.GenerateSorter(sorterType);
                 collectionSortHandler.Read(path);
                 collectionSortHandler.Execute();
-                result = collectionSortHandler.SortedCollection.SequenceEqual(expectedCollection);
+                isCollectionSorted = collectionSortHandler.SortedCollection.SequenceEqual(expectedCollection);
 
                 //
                 // Assert.
                 //
-                Assert.IsTrue(result);
+                Assert.IsTrue(isCollectionSorted);
             }
         }
 
@@ -170,7 +180,7 @@ namespace SortinfApp.UnitTests
                 var reader = new ShimDataReader();
                 var writer = new ShimDataWriter<double>();
                 CollectionSortHandler<double> collectionSortHandler;
-                bool result;
+                bool isCollectionSorted;
 
                 //
                 // Act.
@@ -179,12 +189,12 @@ namespace SortinfApp.UnitTests
                 collectionSortHandler.GenerateSorter(sorterType);
                 collectionSortHandler.Read(path);
                 collectionSortHandler.Execute();
-                result = collectionSortHandler.SortedCollection.SequenceEqual(expectedCollection);
+                isCollectionSorted = collectionSortHandler.SortedCollection.SequenceEqual(expectedCollection);
 
                 //
                 // Assert.
                 //
-                Assert.IsTrue(result);
+                Assert.IsTrue(isCollectionSorted);
             }
         }
 
@@ -210,7 +220,7 @@ namespace SortinfApp.UnitTests
                 var reader = new ShimDataReader();
                 var writer = new ShimDataWriter<double>();
                 CollectionSortHandler<double> collectionSortHandler;
-                bool result;
+                bool isCollectionSorted;
 
                 //
                 // Act.
@@ -219,12 +229,12 @@ namespace SortinfApp.UnitTests
                 collectionSortHandler.GenerateSorter(sorterType);
                 collectionSortHandler.Read(path);
                 collectionSortHandler.Execute();
-                result = collectionSortHandler.SortedCollection.SequenceEqual(expectedCollection);
+                isCollectionSorted = collectionSortHandler.SortedCollection.SequenceEqual(expectedCollection);
 
                 //
                 // Assert.
                 //
-                Assert.IsTrue(result);
+                Assert.IsTrue(isCollectionSorted);
             }
         }
 
@@ -266,11 +276,11 @@ namespace SortinfApp.UnitTests
         }
 
         /// <summary>
-        /// Tests Read if pass empty content to parser it will throw ArgumentNullException.
+        /// Tests Read if pass empty content to parser it will throw Exception.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         [TestMethod]
-        public void CollectionSortHandler_Read_PassEmptyContentToParser_ThrowArgumentNullException()
+        public void CollectionSortHandler_Read_PassIncorrectPathToTheFile_ThrowException()
         {
             using (ShimsContext.Create())
             {
@@ -279,12 +289,12 @@ namespace SortinfApp.UnitTests
                 //
                 CollectionSortHandler<int> collectionSortHandler;
                 var path = Path.GetTempPath();
-                var parser = new StubIDataParser<int>()
-                {
-                    ConvertDataString = (str) => throw new ArgumentNullException()
-                };
+                var parser = new StubIDataParser<int>();
                 var writer = new ShimDataWriter<int>();
-                var reader = new ShimDataReader();
+                var reader = new ShimDataReader()
+                {
+                    ReadContentString = (str) => throw new ArgumentNullException()
+                };
 
                 //
                 // Act.
@@ -310,6 +320,7 @@ namespace SortinfApp.UnitTests
                 //
                 // Arrange.
                 //
+                var path = string.Empty;
                 var parser = new StubIDataParser<int>();
                 var reader = new ShimDataReader();
                 var writer = new ShimDataWriter<int>();
@@ -323,7 +334,7 @@ namespace SortinfApp.UnitTests
                 //
                 // Assert.
                 //
-                Assert.ThrowsException<ArgumentNullException>(() => collectionSortHandler.Read("   "));
+                Assert.ThrowsException<ArgumentNullException>(() => collectionSortHandler.Read(path));
             }
         }
 
@@ -359,7 +370,7 @@ namespace SortinfApp.UnitTests
                 Assert.ThrowsException<ArgumentNullException>(() => collectionSortHandler.Write(path));
             }
         }
-    
+
         /// <summary>
         /// Tests Write if pass empty path ut will throw ArgumentNullException.
         /// </summary>

@@ -44,18 +44,18 @@ namespace SortingApp.UnitTests.SortingAlgorithms
             var actualArray = new double[] { 0.15, 0.2, 1.56, 5.0, 9.99 };
             var expectedArray = new double[] { 0.15, 0.2, 1.56, 5.0, 9.99 };
             var selectionSorter = new SelectionSorter<double>();
-            bool result;
+            bool isCollectionSorted;
 
             //
             // Act.
             //
             selectionSorter.Sort(actualArray);
-            result = actualArray.SequenceEqual(expectedArray);
+            isCollectionSorted = actualArray.SequenceEqual(expectedArray);
 
             //
             // Assert.
             //
-            Assert.IsTrue(result);
+            Assert.IsTrue(isCollectionSorted);
         }
 
         /// <summary>
@@ -71,18 +71,18 @@ namespace SortingApp.UnitTests.SortingAlgorithms
             var actualArray = new double[] { 1.56, 0.2, 376.0, 0.15 };
             var expectedArray = new double[] { 0.15, 0.2, 1.56, 376.0 };
             var selectionSorter = new SelectionSorter<double>();
-            bool result;
+            bool isCollectionSorted;
 
             //
             // Act.
             //
             selectionSorter.Sort(actualArray);
-            result = actualArray.SequenceEqual(expectedArray);
+            isCollectionSorted = actualArray.SequenceEqual(expectedArray);
 
             //
             // Assert.
             //
-            Assert.IsTrue(result);
+            Assert.IsTrue(isCollectionSorted);
         }
     }
 }

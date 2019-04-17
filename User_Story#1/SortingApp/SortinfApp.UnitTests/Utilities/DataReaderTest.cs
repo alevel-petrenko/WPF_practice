@@ -46,7 +46,7 @@ namespace SortinfApp.UnitTests.Utilities
                 IsDataExistString = (string str) => true
             };
             var dataReader = new DataReader(validator);
-            var path = Path.GetTempPath();
+            var path = string.Empty;
 
             //
             // Assert.

@@ -48,7 +48,7 @@ namespace BusinessLayer.Reader
 
                 return content;
             }
-            catch (ArgumentNullException e)
+            catch (Exception e)
             {
                 throw new ArgumentNullException(e.Message + " was empty.");
             }
