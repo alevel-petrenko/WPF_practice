@@ -6,7 +6,7 @@
         x:Class="AvaloniaProject.MainWindow"
         Title="AvaloniaProject">
   <Window.Styles>
-    <!--<StyleInclude Source="avares://Moviewer.Styling/AppStyle.xaml"/>-->
+    <StyleInclude Source="avares://Moviewer.Styling/AppStyle.xaml"/>
   </Window.Styles>
 
   <Grid RowDefinitions="Auto, *" Classes="mainContainer">
@@ -17,9 +17,65 @@
         <TextBlock Classes="title"> ER </TextBlock>
       </StackPanel>
     </Border>
-    <StackPanel Grid.Row="1">
-      <TextBlock Text="{Binding Text, Mode=OneWay}"/>
-    </StackPanel>
+    <Grid Classes="contentContainer" Grid.Row="1" 
+          ColumnDefinitions="Auto, *, Auto"
+          RowDefinitions="Auto, *" >
+      <ProgressBar
+          Grid.Column="1" Grid.Row="1"
+          VerticalAlignment="Center"
+          HorizontalAlignment="Center"
+          IsVisible="{Binding InitializationNotifier.IsNotCompleted}"
+          Classes="progressBar" IsIndeterminate="True"/>
+      
+      <TextBlock Grid.Column="1"
+                 HorizontalAlignment="Center"
+                 Margin="4"
+                 FontSize="18"
+                 FontWeight="Bold"
+                 Foreground="#819FFF"
+                 Text="{Binding Path=Page}"/>
+
+      <Button Command="{Binding PrevPage}"
+        Grid.Row="1" Grid.Column="0"
+        Content="PREV"
+        Classes="navigation">
+      </Button>
+
+      <Button Command="{Binding NextPage}"
+            Grid.Row="1" Grid.Column="2"
+            Content="NEXT"
+            Classes="navigation">
+      </Button>
+      
+      <ListBox Classes="movies"
+        Grid.Column="1" Grid.Row="1"
+        IsVisible="{Binding InitializationNotifier.IsCompleted, Mode=TwoWay}"
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        Items="{Binding MyItems}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" MinHeight="48"/>
+              </Grid.RowDefinitions>
+              <Image Grid.Row="0" Stretch="UniformToFill" Source="{Binding Poster}"/>
+              <Border Grid.Row="1" Classes="title">
+                <Grid ColumnDefinitions="*, 0.4*" Margin="4">
+                  <TextBlock FontSize="18" Text="{Binding Title}" />
+                  <TextBlock FontSize="24" Grid.Column="1" Text="{Binding VoteAverage}"/>
+                </Grid>
+              </Border>
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+        <ListBox.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapPanel ItemWidth="340" ItemHeight="480" Orientation="Horizontal"/>
+          </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+      </ListBox>
+    </Grid>
   </Grid>
 
 </Window>
