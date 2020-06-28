@@ -4,11 +4,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaProject", "AvaloniaProject\AvaloniaProject.csproj", "{5CF48A48-123A-4E61-9801-F7DE3642BB6C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FDC9DEF4-3636-424E-B53E-D1F781E74190} = {FDC9DEF4-3636-424E-B53E-D1F781E74190}
-	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moviewer.Styling", "MovieApp.Styling\Moviewer.Styling.csproj", "{FDC9DEF4-3636-424E-B53E-D1F781E74190}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moviewer.Styling", "MovieApp.Styling\Moviewer.Styling.csproj", "{316558C6-B852-4CE0-B30D-C3850EFCD76E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +17,10 @@ Global
 		{5CF48A48-123A-4E61-9801-F7DE3642BB6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CF48A48-123A-4E61-9801-F7DE3642BB6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CF48A48-123A-4E61-9801-F7DE3642BB6C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDC9DEF4-3636-424E-B53E-D1F781E74190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FDC9DEF4-3636-424E-B53E-D1F781E74190}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDC9DEF4-3636-424E-B53E-D1F781E74190}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDC9DEF4-3636-424E-B53E-D1F781E74190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316558C6-B852-4CE0-B30D-C3850EFCD76E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316558C6-B852-4CE0-B30D-C3850EFCD76E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316558C6-B852-4CE0-B30D-C3850EFCD76E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316558C6-B852-4CE0-B30D-C3850EFCD76E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

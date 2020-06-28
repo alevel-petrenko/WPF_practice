@@ -1,7 +1,6 @@
 ﻿using AvaloniaProject.Model;
 using AvaloniaProject.Services;
 using Nito.AsyncEx;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 

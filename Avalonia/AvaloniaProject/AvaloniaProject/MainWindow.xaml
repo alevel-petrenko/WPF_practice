@@ -17,6 +17,7 @@
         <TextBlock Classes="title"> ER </TextBlock>
       </StackPanel>
     </Border>
+    
     <Grid Classes="contentContainer" Grid.Row="1" 
           ColumnDefinitions="Auto, *, Auto"
           RowDefinitions="Auto, *" >
