@@ -11,7 +11,7 @@ namespace QueueImplementation
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new QueueViewModel();
+            DataContext = new QueueViewModel<int>();
         }
     }
 }

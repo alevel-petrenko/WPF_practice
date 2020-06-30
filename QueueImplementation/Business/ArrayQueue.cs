@@ -13,6 +13,11 @@ namespace Business
         private int head = 0;
 
         /// <summary>
+        /// Holds the queue collection to work with.
+        /// </summary>
+        private T[] queue = new T[4];
+
+        /// <summary>
         /// Holds the tail pointer.
         /// </summary>
         private int tail = -1;
@@ -21,11 +26,6 @@ namespace Business
         /// Holds the size of the array.
         /// </summary>
         private int size = 0;
-
-        /// <summary>
-        /// Holds the queue collection to work with.
-        /// </summary>
-        private T[] queue = new T[4];
 
         /// <summary>
         /// Clears this collection instance.
