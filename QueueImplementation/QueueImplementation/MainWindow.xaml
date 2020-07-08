@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Queue window" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -12,15 +12,20 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="AddNumber" Grid.Row="0" Grid.Column="0"/>
-        <Button Content="Add" Grid.Column="0" Grid.Row="1" Command="{Binding Add}"/>
+        <Button Content="Add" Grid.Column="1" Grid.Row="1" Width="100" Height="50"
+                HorizontalAlignment="Left" Command="{Binding Add}"/>
+        <Button Content="Show" Grid.Column="1" Grid.Row="1" Width="100" Height="50"
+                HorizontalAlignment="Center" Command="{Binding Add}"/>
+        <Button Content="Remove" Grid.Column="1" Grid.Row="1" Width="100" Height="50"
+                HorizontalAlignment="Right" Command="{Binding Add}"/>
 
-        <DataGrid Grid.Row="2" Grid.Column="2"
+        <DataGrid Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Margin="50"
                   ItemsSource="{Binding AllNumbers}"/>
 
     </Grid>

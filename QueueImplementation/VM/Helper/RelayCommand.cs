@@ -39,11 +39,7 @@ namespace ViewModel
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
+        public event EventHandler CanExecuteChanged;
 
         /// <summary>
         /// Defines the method to be called when the command is invoked.

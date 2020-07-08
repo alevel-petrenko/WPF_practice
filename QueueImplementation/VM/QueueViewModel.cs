@@ -74,20 +74,7 @@ namespace ViewModel
             }
         }
 
-        public ObservableCollection<int> AllNumbers
-        {
-            set
-            {
-                this.numbers = value;
-            }
-            get
-            {
-                foreach (int number in queue)
-                    this.numbers.Add(number);
-
-                return this.numbers;
-            }
-        }
+        public IQueueCollection<int> AllNumbers => this.queue;
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
