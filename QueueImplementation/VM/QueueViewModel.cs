@@ -2,12 +2,28 @@
 using Business.Interfaces;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using ViewModel.Helper;
 
 namespace ViewModel
 {
     public sealed class QueueViewModel<T> : INotifyPropertyChanged
     {
+        private int currentNumber;
+
+        public int CurrentNumber 
+        {
+            get => this.currentNumber;
+            set
+            {
+                if (this.currentNumber == value)
+                    return;
+
+                this.currentNumber = value;
+                this.OnPropertyChanged(nameof(this.CurrentNumber));
+            }
+        }
+
         /// <summary>
         /// Stores the read command.
         /// </summary>
@@ -55,7 +71,10 @@ namespace ViewModel
 
         private void AddNumber(int number)
         {
+            this.CurrentNumber = number;
             this.queue.Enqueue(number);
+
+            this.OnPropertyChanged(nameof(this.AllNumbers));
         }
 
         public int GetNumber
@@ -76,6 +95,20 @@ namespace ViewModel
 
         public IQueueCollection<int> AllNumbers => this.queue;
 
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Calls PropertyChanged event.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <param name="prop">Value, which need to be updated.</param>
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }
