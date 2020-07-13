@@ -2,6 +2,7 @@
 using Business.Interfaces;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using ViewModel.Helper;
 
@@ -9,9 +10,82 @@ namespace ViewModel
 {
     public sealed class QueueViewModel<T> : INotifyPropertyChanged
     {
-        private int currentNumber;
+        /// <summary>
+        /// Holds the add command.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private RelayCommand add;
 
-        public int CurrentNumber 
+        /// <summary>
+        /// Holds the all numbers.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private ObservableCollection<int> allNumbers;
+
+        /// <summary>
+        /// Holds the current number to be add to the collection.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private int? currentNumber;
+
+        /// <summary>
+        /// Holds the queue collection.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private IQueueCollection<int> queue;
+
+        /// <summary>
+        /// Gets the add command.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <returns>The add command.</returns>
+        public RelayCommand Add
+        {
+            get
+            {
+                if (this.add is null)
+                    this.add = new RelayCommand(this.AddNumber);
+
+                return this.add;
+            }
+        }
+
+        /// <summary>
+        /// Adds the number to the queue collection.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <param name="obj">The object.</param>
+        private void AddNumber(object obj)
+        {
+            int number = RandomNumber.GetValue();
+            this.CurrentNumber = number;
+            this.queue.Enqueue(number);
+
+            this.OnPropertyChanged(nameof(this.AllNumbers));
+        }
+
+        /// <summary>
+        /// Gets or sets the sorted collection of numbers.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <returns>The collection of numbers.</returns>
+        public ObservableCollection<int> AllNumbers
+        {
+            get
+            {
+                if (Enumerable.SequenceEqual(this.allNumbers.OrderBy(number => number), this.queue.OrderBy(t => t)))
+                    return this.allNumbers;
+
+                return this.allNumbers ?? (this.allNumbers = new ObservableCollection<int>(this.queue));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the current number.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <value>The current number.</value>
+        public int? CurrentNumber
         {
             get => this.currentNumber;
             set
@@ -25,58 +99,10 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Stores the read command.
+        /// Gets the number.
         /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private RelayCommand add;
-
-        /// <summary>
-        /// Gets the read command.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <returns>The read command.</returns>
-        public RelayCommand Add
-        {
-            get
-            {
-                if (this.add is null)
-                    this.add = new RelayCommand(this.ReadArray);
-
-                return this.add;
-            }
-        }
-
-        /// <summary>
-        /// Reads the array.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <param name="obj">The object.</param>
-        private void ReadArray(object obj)
-        {
-            this.AddNumber(RandomNumber.GetValue());
-        }
-
-        public QueueViewModel()
-        {
-            this.queue.Enqueue(1);
-            this.queue.Enqueue(2);
-            this.queue.Enqueue(3);
-            this.queue.Enqueue(4);
-            this.queue.Enqueue(5);
-        }
-
-        private ObservableCollection<int> numbers;
-        private IQueueCollection<int> queue = new ArrayQueue<int>();
-        private int queueType;
-
-        private void AddNumber(int number)
-        {
-            this.CurrentNumber = number;
-            this.queue.Enqueue(number);
-
-            this.OnPropertyChanged(nameof(this.AllNumbers));
-        }
-
+        /// <ower>Anton Petrenko</owner>
+        /// <value>The number.</value>
         public int GetNumber
         {
             get
@@ -85,6 +111,11 @@ namespace ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets the number and delete in from the queue.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        /// <value>The number.</value>
         public int GetNumberAndDelete
         {
             get
@@ -92,14 +123,6 @@ namespace ViewModel
                 return this.queue.Dequeue();
             }
         }
-
-        public IQueueCollection<int> AllNumbers => this.queue;
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Calls PropertyChanged event.
@@ -109,6 +132,21 @@ namespace ViewModel
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Setups the queue collection.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        private void SetupQueueCollection()
+        {
+
         }
     }
 }

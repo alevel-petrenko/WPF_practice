@@ -22,29 +22,26 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="0.7*"/>
-            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="New item" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="1" Grid.Row="0" Width="50" Height="25"
-                 Text="{Binding CurrentNumber}"/>
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">
-            <RadioButton Margin="10" Content="Array" IsChecked="True"/>
-            <RadioButton Margin="10" Content="Linked list"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Width="50" Height="25" Text="{Binding CurrentNumber}"/>
+        
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"
+                    IsEnabledChanged="CollectionType_IsEnabledChanged">
+            <RadioButton x:Name="ArrayType" Margin="10" Content="Array" IsChecked="True"/>
+            <RadioButton x:Name="LinkedListType" Margin="10" Content="Linked list"/>
         </StackPanel>
         
-        <Button Content="Add" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" 
-                Command="{Binding Add}"/>
-        <Button Content="Show" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"
-                Command="{Binding Add}"/>
-        <Button Content="Remove" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right"
-                Command="{Binding Add}"/>
+        <Button Content="Add" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Command="{Binding Add}"/>
+        <Button Content="Show" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Command="{Binding Add}"/>
+        <Button Content="Remove" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Command="{Binding Add}"/>
 
-        <ListBox Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Margin="50" FontSize="25"
-                 ItemsSource="{Binding AllNumbers}" />
+        <ListBox Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Margin="50, 50, 0, 50" FontSize="25" ItemsSource="{Binding AllNumbers}" />
 
         <TextBlock Text="Removed item" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
         <TextBox Grid.Column="1" Grid.Row="2" Width="50" Height="25" Text="575"/>
