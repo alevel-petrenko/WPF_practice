@@ -65,18 +65,19 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Gets or sets the sorted collection of numbers.
+        /// Gets the collection of all numbers in queue.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <returns>The collection of numbers.</returns>
+        /// <returns>The collection of all numbers in queue.</returns>
         public ObservableCollection<int> AllNumbers
         {
             get
             {
-                if (Enumerable.SequenceEqual(this.allNumbers.OrderBy(number => number), this.queue.OrderBy(t => t)))
+                if (Enumerable.SequenceEqual(this.allNumbers.OrderBy(number => number), this.queue.OrderBy(num => num)))
                     return this.allNumbers;
 
-                return this.allNumbers ?? (this.allNumbers = new ObservableCollection<int>(this.queue));
+                this.allNumbers = new ObservableCollection<int>(this.queue));
+                return this.allNumbers;
             }
         }
 
@@ -112,10 +113,10 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Gets the number and delete in from the queue.
+        /// Gets the number and delete it from the queue.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <value>The number.</value>
+        /// <value>The number from the queue.</value>
         public int GetNumberAndDelete
         {
             get
