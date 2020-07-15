@@ -24,7 +24,7 @@ namespace QueueImplementation
         {
 
 
-            if (this.ArrayType.IsChecked.Value)
+            //if (this.ArrayType.IsChecked.Value)
 
         }
     }

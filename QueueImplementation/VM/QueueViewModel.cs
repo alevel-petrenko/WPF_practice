@@ -76,7 +76,7 @@ namespace ViewModel
                 if (Enumerable.SequenceEqual(this.allNumbers.OrderBy(number => number), this.queue.OrderBy(num => num)))
                     return this.allNumbers;
 
-                this.allNumbers = new ObservableCollection<int>(this.queue));
+                this.allNumbers = new ObservableCollection<int>(this.queue);
                 return this.allNumbers;
             }
         }
@@ -140,6 +140,12 @@ namespace ViewModel
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public QueueViewModel()
+        {
+            this.queue = new ArrayQueue<int>();
+            this.allNumbers = new ObservableCollection<int>();
+        }
 
         /// <summary>
         /// Setups the queue collection.
