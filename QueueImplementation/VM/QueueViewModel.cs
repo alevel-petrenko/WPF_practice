@@ -1,14 +1,18 @@
 ﻿using Business;
+using Business.Helper;
 using Business.Interfaces;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using ViewModel.Helper;
 
 namespace ViewModel
 {
-    public sealed class QueueViewModel<T> : INotifyPropertyChanged
+	/// <summary>
+	/// Represents the view model used managing th queue collection.
+	/// </summary>
+	/// <owner>Anton Petrenko</owner>
+	public sealed class QueueViewModel<T> : INotifyPropertyChanged
     {
         /// <summary>
         /// Holds the add command.
@@ -141,7 +145,11 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public QueueViewModel()
+		/// <summary>
+		/// Initializes a new instance of the <see cref="QueueViewModel{T}"/> class.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		public QueueViewModel()
         {
             this.queue = new ArrayQueue<int>();
             this.allNumbers = new ObservableCollection<int>();

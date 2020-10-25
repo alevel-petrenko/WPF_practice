@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:QueueImplementation"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
+	<Application.Resources>
+		<ResourceDictionary>
+			<BitmapImage x:Key="dataIcon" UriSource="/Asset/data.png"></BitmapImage>
+		</ResourceDictionary>
+	</Application.Resources>
 </Application>

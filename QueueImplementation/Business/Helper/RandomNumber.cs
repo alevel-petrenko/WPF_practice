@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace ViewModel.Helper
+namespace Business.Helper
 {
     /// <summary>
     /// Class represents functionality for getting random number.

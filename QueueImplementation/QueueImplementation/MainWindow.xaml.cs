@@ -6,9 +6,14 @@ namespace QueueImplementation
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// <owner>Anton Petrenko</owner>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+		/// <summary>
+		/// Initializes a new instance of the <see cref="MainWindow"/> class.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		public MainWindow()
         {
             InitializeComponent();
             DataContext = new QueueViewModel<int>();

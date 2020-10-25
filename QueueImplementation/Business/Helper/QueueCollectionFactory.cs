@@ -1,4 +1,5 @@
 ﻿using Business.Interfaces;
+using System;
 
 namespace Business.Helper
 {
@@ -21,10 +22,12 @@ namespace Business.Helper
             {
                 case CollectionType.Array:
                     return new ArrayQueue<T>();
+
                 case CollectionType.LinkedList:
                     return new LinkedListQueue<T>();
+
                 default:
-                    return null;
+                    throw new InvalidOperationException("There is an invalid operation type");
             }
         }
     }
