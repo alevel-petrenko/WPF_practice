@@ -1,4 +1,5 @@
-﻿using Business;
+﻿using Autofac;
+using Business;
 using Business.Helper;
 using Business.Interfaces;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ using System.Runtime.CompilerServices;
 namespace ViewModel
 {
 	/// <summary>
-	/// Represents the view model used managing th queue collection.
+	/// Represents the view model used for managing the queue collection.
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
 	public sealed class QueueViewModel<T> : INotifyPropertyChanged
@@ -151,7 +152,9 @@ namespace ViewModel
 		/// <owner>Anton Petrenko</owner>
 		public QueueViewModel()
         {
-            this.queue = new ArrayQueue<int>();
+			var container = QueueCollectionConfig<int>.Configure();
+            this.queue = container.Resolve<IQueueCollection<int>>();
+
             this.allNumbers = new ObservableCollection<int>();
         }
 
