@@ -4,8 +4,6 @@
              xmlns:local="clr-namespace:QueueImplementation"
              StartupUri="MainWindow.xaml">
 	<Application.Resources>
-		<ResourceDictionary>
-			<BitmapImage x:Key="dataIcon" UriSource="/Asset/data.png"></BitmapImage>
-		</ResourceDictionary>
+
 	</Application.Resources>
 </Application>
