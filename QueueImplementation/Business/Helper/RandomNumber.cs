@@ -22,7 +22,7 @@ namespace Business.Helper
         /// <returns>The value from the range.</returns>
         public static int GetValue()
         {
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             return random.Next(-1000, 1000);
         }
     }

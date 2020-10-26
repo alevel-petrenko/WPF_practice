@@ -2,10 +2,10 @@
 using Business;
 using Business.Helper;
 using Business.Interfaces;
+using MvvmCross.ViewModels;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace ViewModel
 {
@@ -13,7 +13,7 @@ namespace ViewModel
 	/// Represents the view model used for managing the queue collection.
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
-	public sealed class QueueViewModel<T> : INotifyPropertyChanged
+	public sealed class QueueViewModel<T> : MvxViewModel
     {
         /// <summary>
         /// Holds the add command.
@@ -66,7 +66,7 @@ namespace ViewModel
             this.CurrentNumber = number;
             this.queue.Enqueue(number);
 
-            this.OnPropertyChanged(nameof(this.AllNumbers));
+            this.RaisePropertyChanged(() => this.AllNumbers);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace ViewModel
                     return;
 
                 this.currentNumber = value;
-                this.OnPropertyChanged(nameof(this.CurrentNumber));
+                this.RaisePropertyChanged(() => this.CurrentNumber);
             }
         }
 
@@ -130,22 +130,6 @@ namespace ViewModel
             }
         }
 
-        /// <summary>
-        /// Calls PropertyChanged event.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <param name="prop">Value, which need to be updated.</param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        public event PropertyChangedEventHandler PropertyChanged;
-
 		/// <summary>
 		/// Initializes a new instance of the <see cref="QueueViewModel{T}"/> class.
 		/// </summary>
@@ -156,15 +140,6 @@ namespace ViewModel
             this.queue = container.Resolve<IQueueCollection<int>>();
 
             this.allNumbers = new ObservableCollection<int>();
-        }
-
-        /// <summary>
-        /// Setups the queue collection.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        private void SetupQueueCollection()
-        {
-
         }
     }
 }
