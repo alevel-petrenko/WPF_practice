@@ -73,9 +73,13 @@ namespace ViewModel
 		/// <param name="obj">The object.</param>
 		private void AddNumber(object obj)
 		{
+			int previousCount = this.queue.Count();
 			this.queue.Enqueue(RandomNumber.GetValue());
 
 			this.RaisePropertyChanged(() => this.AllNumbers);
+
+			if (previousCount == 0)
+				this.RestoreRemoveAndShowCommands();
 		}
 
 		/// <summary>
@@ -127,7 +131,7 @@ namespace ViewModel
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="obj">The object.</param>
 		/// <returns>True if getting number is possible; otherwise, false</returns>
-		private bool CanGetNumber(object obj) => false;
+		private bool CanGetNumber(object obj) => this.AllNumbers.Count > 0;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="QueueViewModel{T}"/> class.
@@ -136,7 +140,7 @@ namespace ViewModel
 		public QueueViewModel()
 		{
 			//
-			// TODO: addhandling of choise array/linked list
+			// TODO: add handling of choise array/linked list
 			//
 			var container = QueueCollectionConfig<int>.Configure();
 			this.queue = container.Resolve<IQueueCollection<int>>();
@@ -170,14 +174,31 @@ namespace ViewModel
 			this.CurrentNumber = this.queue.Dequeue();
 
 			this.RaisePropertyChanged(() => this.AllNumbers);
-			this.RaisePropertyChanged(() => this.CurrentNumber);
+
+			if (this.queue.Count() == 0)
+			{
+				this.CurrentNumber = null;
+				this.RestoreRemoveAndShowCommands();
+			}
+		}
+
+		/// <summary>
+		/// Restores the remove and show commands.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private void RestoreRemoveAndShowCommands()
+		{
+			this.show = null;
+			this.remove = null;
+			this.RaisePropertyChanged(() => this.Show);
+			this.RaisePropertyChanged(() => this.Remove);
 		}
 
 		/// <summary>
 		/// Gets the show command.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <value>The get command.</value>
+		/// <value>The show command.</value>
 		public RelayCommand Show
 		{
 			get
@@ -197,8 +218,6 @@ namespace ViewModel
 		private void ShowNumber(object obj)
 		{
 			this.CurrentNumber = this.queue.Peek();
-
-			this.RaisePropertyChanged(() => this.CurrentNumber);
 		}
 	}
 }
