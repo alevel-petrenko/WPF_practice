@@ -9,30 +9,27 @@ namespace ViewModel
     /// <owner>Anton Petrenko</owner>
     public sealed class RelayCommand : ICommand
     {
-        /// <summary>
-        /// Generic delegate to determine whether command can be executed.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <param>Object for the command implementation.</param>
-        /// <returns>The possibility of execution.</returns>
-        private readonly Func<object, bool> canExecute;
+		/// <summary>
+		/// The can execute function.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private readonly Func<object, bool> canExecute;
 
-        /// <summary>
-        /// The implementation of the command.
-        /// </summary>
-        /// <owner>Anton Petrenko</owner>
-        /// <param>Object for the command implementation.</param>
-        private readonly Action<object> execute;
+		/// <summary>
+		/// The execute command.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private readonly Action<object> execute;
 
         /// <summary>
         /// Defines the method that determines whether the command can execute in its current state.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        /// <param>Data used by the command.</param>
-        /// <returns>If this command can be executed.</returns>
+        /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null />.</param>
+        /// <returns>True if this command can be executed; otherwise, false.</returns>
         public bool CanExecute(object parameter)
         {
-            return this.canExecute == null || this.canExecute(parameter);
+            return this.canExecute != null && this.canExecute(parameter);
         }
 
         /// <summary>
@@ -52,7 +49,7 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the RelayCommand class.
+        /// Initializes a new instance of the <see cref="RelayCommand"/> class.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <param name="execute">The execution method.</param>
