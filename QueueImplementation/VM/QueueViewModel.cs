@@ -3,6 +3,8 @@ using Business;
 using Business.Helper;
 using Business.Interfaces;
 using MvvmCross.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -74,9 +76,13 @@ namespace ViewModel
 		private void AddNumber(object obj)
 		{
 			int previousCount = this.queue.Count();
-			this.queue.Enqueue(RandomNumber.GetValue());
+
+			int newValue = RandomNumber.GetValue();
+			this.queue.Enqueue(newValue);
+			this.Message = $"The item {newValue} was added";
 
 			this.RaisePropertyChanged(() => this.AllNumbers);
+			this.RaisePropertyChanged(() => this.Message);
 
 			if (previousCount == 0)
 				this.RestoreRemoveAndShowCommands();
@@ -100,6 +106,22 @@ namespace ViewModel
 		}
 
 		/// <summary>
+		/// Gets the possibility of adding new number.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <param name="obj">The object.</param>
+		/// <returns>True if adding new number is possible; otherwise, false</returns>
+		private bool CanAddNumber(object obj) => this.AllNumbers != null;
+
+		/// <summary>
+		/// Gets the possibility of getting the number.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <param name="obj">The object.</param>
+		/// <returns>True if getting number is possible; otherwise, false</returns>
+		private bool CanGetNumber(object obj) => this.AllNumbers.Count > 0;
+
+		/// <summary>
 		/// Gets or sets the current number.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
@@ -118,20 +140,11 @@ namespace ViewModel
 		}
 
 		/// <summary>
-		/// Gets the possibility of adding new number.
+		/// Gets or sets the message.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <param name="obj">The object.</param>
-		/// <returns>True if adding new number is possible; otherwise, false</returns>
-		private bool CanAddNumber(object obj) => this.AllNumbers != null;
-
-		/// <summary>
-		/// Gets the possibility of getting the number.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <param name="obj">The object.</param>
-		/// <returns>True if getting number is possible; otherwise, false</returns>
-		private bool CanGetNumber(object obj) => this.AllNumbers.Count > 0;
+		/// <value>The message.</value>
+		public string Message { get; set; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="QueueViewModel{T}"/> class.
@@ -171,16 +184,29 @@ namespace ViewModel
 		/// <param name="obj">The object.</param>
 		private void RemoveNumber(object obj)
 		{
-			this.CurrentNumber = this.queue.Dequeue();
-
-			this.RaisePropertyChanged(() => this.AllNumbers);
+			try
+			{
+				this.CurrentNumber = this.queue.Dequeue();
+				this.Message = $"The item {this.CurrentNumber} was removed.";
+			}
+			catch (InvalidOperationException ex)
+			{
+				this.Message = ex.Message;
+			}
 
 			if (this.queue.Count() == 0)
 			{
 				this.CurrentNumber = null;
+				this.Message += " The collection is empty.";
 				this.RestoreRemoveAndShowCommands();
 			}
+
+			this.RaisePropertyChanged(() => this.AllNumbers);
+			this.RaisePropertyChanged(() => this.Message);
 		}
+
+		private ObservableCollection<string> CollectionTypes
+		{ get; set; } = new ObservableCollection<string>{ "stack", "queue" };
 
 		/// <summary>
 		/// Restores the remove and show commands.
@@ -217,7 +243,17 @@ namespace ViewModel
 		/// <param name="obj">The object.</param>
 		private void ShowNumber(object obj)
 		{
-			this.CurrentNumber = this.queue.Peek();
+			try
+			{
+				this.CurrentNumber = this.queue.Peek();
+				this.Message = $"The item {this.CurrentNumber} is first to be removed.";
+			}
+			catch (InvalidOperationException ex)
+			{
+				this.Message = ex.Message;
+			}
+
+			this.RaisePropertyChanged(() => this.Message);
 		}
 	}
 }

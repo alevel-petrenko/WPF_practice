@@ -13,7 +13,7 @@ namespace Business.Helper
         /// Holds the random class.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        private static Random random = new Random();
+        private static readonly Random random = new Random();
 
         /// <summary>
         /// Gets the value from the range.
@@ -22,7 +22,6 @@ namespace Business.Helper
         /// <returns>The value from the range.</returns>
         public static int GetValue()
         {
-            Thread.Sleep(1000);
             return random.Next(-1000, 1000);
         }
     }
