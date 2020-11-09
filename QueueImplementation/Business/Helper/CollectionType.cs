@@ -1,7 +1,7 @@
 ﻿namespace Business.Helper
 {
     /// <summary>
-    /// Represents the types of possible queue collections.
+    /// Represents the types of possible collections.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public enum CollectionType

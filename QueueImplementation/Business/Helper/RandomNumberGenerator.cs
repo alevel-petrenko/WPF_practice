@@ -7,7 +7,7 @@ namespace Business.Helper
     /// Class represents functionality for getting random number.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    public static class RandomNumber
+    public static class RandomNumberGenerator
     {
         /// <summary>
         /// Holds the random class.

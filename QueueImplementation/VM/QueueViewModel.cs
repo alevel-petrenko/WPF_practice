@@ -4,7 +4,6 @@ using Business.Helper;
 using Business.Interfaces;
 using MvvmCross.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -77,7 +76,7 @@ namespace ViewModel
 		{
 			int previousCount = this.queue.Count();
 
-			int newValue = RandomNumber.GetValue();
+			int newValue = RandomNumberGenerator.GetValue();
 			this.queue.Enqueue(newValue);
 			this.Message = $"The item {newValue} was added";
 

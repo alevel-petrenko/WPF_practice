@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Business
+namespace Business.Queue
 {
 	/// <summary>
 	/// Represents the queue collection based on the linked list.

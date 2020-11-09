@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Business.Interfaces;
+using Business.Queue;
 
 namespace Business
 {

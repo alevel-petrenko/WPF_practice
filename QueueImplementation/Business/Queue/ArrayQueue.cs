@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Business
+namespace Business.Queue
 {
     /// <summary>
     /// Represents the queue collection based on the array.
@@ -79,9 +79,9 @@ namespace Business
             //
 			// Array is full.
 			//
-            if (this.queue.Length == size)
+            if (this.queue.Length == this.size)
 			{
-				T[] newQueue = new T[size * 2];
+				T[] newQueue = new T[this.size * 2];
 				int indexInNewArray = 0;
 
 				if (this.tail < this.head)
