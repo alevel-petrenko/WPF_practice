@@ -9,7 +9,7 @@ namespace Business
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
 	/// <typeparam name="T"></typeparam>
-	public static class QueueCollectionConfig<T>
+	public static class CustomCollectionConfig<T>
 	{
 		/// <summary>
 		/// Configures the instances.
@@ -20,8 +20,8 @@ namespace Business
 		{
 			var container = new ContainerBuilder();
 
-			container.RegisterType<ArrayQueue<T>>().As<IQueueCollection<T>>();
-			container.RegisterType<LinkedListQueue<T>>().As<IQueueCollection<T>>();
+			container.RegisterType<ArrayQueue<T>>().As<ICustomCollection<T>>();
+			container.RegisterType<LinkedListQueue<T>>().As<ICustomCollection<T>>();
 
 			return container.Build();
 		}

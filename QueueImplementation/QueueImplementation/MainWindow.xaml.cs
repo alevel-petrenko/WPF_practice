@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using ViewModel;
 
-namespace QueueImplementation
+namespace QueueStack
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -16,7 +16,7 @@ namespace QueueImplementation
 		public MainWindow()
         {
             InitializeComponent();
-            DataContext = new QueueViewModel<int>();
+            DataContext = new CustomCollectionViewModel<int>();
         }
     }
 }

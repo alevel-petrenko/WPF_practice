@@ -17,7 +17,7 @@ namespace Business.Helper
         /// <owner>Anton Petrenko</owner>
         /// <param name="type">The collection type.</param>
         /// <returns>The queue collection.</returns>
-        public IQueueCollection<T> GetCollection(CollectionType type)
+        public ICustomCollection<T> GetCollection(CollectionType type)
         {
             switch (type)
             {

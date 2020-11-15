@@ -1,7 +1,7 @@
-﻿<Application x:Class="QueueImplementation.App"
+﻿<Application x:Class="QueueStack.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:QueueImplementation"
+             xmlns:local="clr-namespace:QueueStack"
              StartupUri="MainWindow.xaml">
 	<Application.Resources>
 

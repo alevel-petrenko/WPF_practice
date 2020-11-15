@@ -9,7 +9,7 @@ namespace Business.Stack
 	/// Represents the stack collection based on the linked list.
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
-	public sealed class LinkedListStack<T> : IStackCollection<T>
+	public sealed class LinkedListStack<T> : ICustomCollection<T>
 	{
 		/// <summary>
 		/// Holds the stack collection to work with.
@@ -51,7 +51,7 @@ namespace Business.Stack
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <returns>The last element that is at the end of the collection.</returns>
-		public T Peek()
+		public T ShowCurrent()
 		{
 			if (this.stack.Count == 0)
 				throw new InvalidOperationException("There is no items in collection.");
@@ -64,7 +64,7 @@ namespace Business.Stack
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <returns>The last element from the end of the collection.</returns>
-		public T Pop()
+		public T Remove()
 		{
 			if (this.stack.Count == 0)
 				throw new InvalidOperationException("There is no items in collection.");
@@ -80,7 +80,7 @@ namespace Business.Stack
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="element">The element to add.</param>
-		public void Push(T element)
+		public void Add(T element)
 		{
 			this.stack.AddLast(element);
 		}

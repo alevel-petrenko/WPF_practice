@@ -9,7 +9,7 @@ namespace Business.Queue
     /// Represents the queue collection based on the array.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
-    public sealed class ArrayQueue<T> : IQueueCollection<T>
+    public sealed class ArrayQueue<T> : ICustomCollection<T>
     {
         /// <summary>
         /// Holds the head pointer.
@@ -52,7 +52,7 @@ namespace Business.Queue
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>The oldest element from the start of the collection.</returns>
-        public T Dequeue()
+        public T Remove()
         {
             if (this.size == 0)
                 throw new InvalidOperationException("There is no items in collection.");
@@ -74,7 +74,7 @@ namespace Business.Queue
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <param name="element">The element to add.</param>
-        public void Enqueue(T element)
+        public void Add(T element)
         {
             //
 			// Array is full.
@@ -150,7 +150,7 @@ namespace Business.Queue
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>The oldest element that is at the start of the collection.</returns>
-        public T Peek()
+        public T ShowCurrent()
         {
             if (this.size == 0)
                 throw new InvalidOperationException("There is no items in collection.");

@@ -4,6 +4,7 @@ using Business.Helper;
 using Business.Interfaces;
 using MvvmCross.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -13,8 +14,20 @@ namespace ViewModel
 	/// Represents the view model used for managing the queue collection.
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
-	public sealed class QueueViewModel<T> : MvxViewModel
+	public sealed class CustomCollectionViewModel<T> : MvxViewModel
 	{
+		/// <summary>
+		/// Holds the array type.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private const string ArrayType = "Array";
+
+		/// <summary>
+		/// Holds the linked list type.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private const string LinkedListType = "Linked list";
+
 		/// <summary>
 		/// Holds the add value command.
 		/// </summary>
@@ -28,16 +41,22 @@ namespace ViewModel
 		private ObservableCollection<int> allNumbers;
 
 		/// <summary>
-		/// Holds the current number that was processed.
+		/// Holds the current element that will be processed.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		private int? currentNumber;
+		private int? currentElement;
+
+		/// <summary>
+		/// Holds the message to display.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private string message;
 
 		/// <summary>
 		/// Holds the queue collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		private readonly IQueueCollection<int> queue;
+		private readonly ICustomCollection<int> queue;
 
 		/// <summary>
 		/// Holds the remove value command.
@@ -65,6 +84,14 @@ namespace ViewModel
 
 				return this.add;
 			}
+			set
+			{
+				if (this.add == value)
+					return;
+
+				this.add = value;
+				this.RaisePropertyChanged(() => this.Add);
+			}
 		}
 
 		/// <summary>
@@ -76,12 +103,12 @@ namespace ViewModel
 		{
 			int previousCount = this.queue.Count();
 
+			this.RestoreCurrentElement();
 			int newValue = RandomNumberGenerator.GetValue();
-			this.queue.Enqueue(newValue);
-			this.Message = $"The item {newValue} was added";
+			this.queue.Add(newValue);
+			this.Message = $"The item {newValue} was added.";
 
 			this.RaisePropertyChanged(() => this.AllNumbers);
-			this.RaisePropertyChanged(() => this.Message);
 
 			if (previousCount == 0)
 				this.RestoreRemoveAndShowCommands();
@@ -92,11 +119,11 @@ namespace ViewModel
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The collection of all numbers in queue.</value>
-		public ObservableCollection<int> AllNumbers
+		public IEnumerable<int> AllNumbers
 		{
 			get
 			{
-				if (Enumerable.SequenceEqual(this.allNumbers.OrderBy(number => number), this.queue.OrderBy(num => num)))
+				if (this.allNumbers.SequenceEqual(this.queue))
 					return this.allNumbers;
 
 				this.allNumbers = new ObservableCollection<int>(this.queue);
@@ -118,23 +145,23 @@ namespace ViewModel
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="obj">The object.</param>
 		/// <returns>True if getting number is possible; otherwise, false</returns>
-		private bool CanGetNumber(object obj) => this.AllNumbers.Count > 0;
+		private bool CanGetNumber(object obj) => this.AllNumbers.Count() > 0;
 
 		/// <summary>
-		/// Gets or sets the current number.
+		/// Gets or sets the current element.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The current number.</value>
-		public int? CurrentNumber
+		public int? CurrentElement
 		{
-			get => this.currentNumber;
+			get => this.currentElement;
 			set
 			{
-				if (this.currentNumber == value)
+				if (this.currentElement == value)
 					return;
 
-				this.currentNumber = value;
-				this.RaisePropertyChanged(() => this.CurrentNumber);
+				this.currentElement = value;
+				this.RaisePropertyChanged(() => this.CurrentElement);
 			}
 		}
 
@@ -143,20 +170,27 @@ namespace ViewModel
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The message.</value>
-		public string Message { get; set; }
+		public string Message
+		{
+			get
+			{
+				return this.message;
+			}
+			set
+			{
+				this.message = value;
+				this.RaisePropertyChanged(() => this.Message);
+			}
+		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="QueueViewModel{T}"/> class.
+		/// Initializes a new instance of the <see cref="CustomCollectionViewModel{T}"/> class.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		public QueueViewModel()
+		public CustomCollectionViewModel()
 		{
-			//
-			// TODO: add handling of choise array/linked list
-			//
-			var container = QueueCollectionConfig<int>.Configure();
-			this.queue = container.Resolve<IQueueCollection<int>>();
-
+			var container = CustomCollectionConfig<T>.Configure();
+			this.queue = container.Resolve<ICustomCollection<int>>();
 			this.allNumbers = new ObservableCollection<int>();
 		}
 
@@ -174,6 +208,14 @@ namespace ViewModel
 
 				return this.remove;
 			}
+			set
+			{
+				if (this.remove == value)
+					return;
+
+				this.remove = value;
+				this.RaisePropertyChanged(() => this.Remove);
+			}
 		}
 
 		/// <summary>
@@ -185,8 +227,9 @@ namespace ViewModel
 		{
 			try
 			{
-				this.CurrentNumber = this.queue.Dequeue();
-				this.Message = $"The item {this.CurrentNumber} was removed.";
+				this.RestoreCurrentElement();
+				var removedItem = this.queue.Remove();
+				this.Message = $"The item {removedItem} was removed.";
 			}
 			catch (InvalidOperationException ex)
 			{
@@ -195,17 +238,12 @@ namespace ViewModel
 
 			if (this.queue.Count() == 0)
 			{
-				this.CurrentNumber = null;
 				this.Message += " The collection is empty.";
 				this.RestoreRemoveAndShowCommands();
 			}
 
 			this.RaisePropertyChanged(() => this.AllNumbers);
-			this.RaisePropertyChanged(() => this.Message);
 		}
-
-		private ObservableCollection<string> CollectionTypes
-		{ get; set; } = new ObservableCollection<string>{ "stack", "queue" };
 
 		/// <summary>
 		/// Restores the remove and show commands.
@@ -213,11 +251,22 @@ namespace ViewModel
 		/// <owner>Anton Petrenko</owner>
 		private void RestoreRemoveAndShowCommands()
 		{
-			this.show = null;
-			this.remove = null;
-			this.RaisePropertyChanged(() => this.Show);
-			this.RaisePropertyChanged(() => this.Remove);
+			this.Show = null;
+			this.Remove = null;
 		}
+
+		/// <summary>
+		/// Restores the current element.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private void RestoreCurrentElement()
+		{
+			if (this.CurrentElement.HasValue)
+				this.CurrentElement = null;
+		}
+
+		public ObservableCollection<string> CollectionTypes
+		{ get; set; } = new ObservableCollection<string> { "stack", "queue" };
 
 		/// <summary>
 		/// Gets the show command.
@@ -233,6 +282,14 @@ namespace ViewModel
 
 				return this.show;
 			}
+			set
+			{
+				if (this.show == value)
+					return;
+
+				this.show = value;
+				this.RaisePropertyChanged(() => this.Show);
+			}
 		}
 
 		/// <summary>
@@ -244,15 +301,24 @@ namespace ViewModel
 		{
 			try
 			{
-				this.CurrentNumber = this.queue.Peek();
-				this.Message = $"The item {this.CurrentNumber} is first to be removed.";
+				this.CurrentElement = this.queue.ShowCurrent();
+				this.Message = $"The item {this.CurrentElement} is first to be removed.";
 			}
 			catch (InvalidOperationException ex)
 			{
 				this.Message = ex.Message;
 			}
+		}
 
-			this.RaisePropertyChanged(() => this.Message);
+		/// <summary>
+		/// Gets or sets the source collection name.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <value>The source collection name.</value>
+		public string SourceCollectionName
+		{
+			get;
+			set;
 		}
 	}
 }
