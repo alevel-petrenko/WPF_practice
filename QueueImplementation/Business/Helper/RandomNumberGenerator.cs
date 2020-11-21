@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Threading;
 
 namespace Business.Helper
 {
     /// <summary>
-    /// Class represents functionality for getting random number.
+    /// Represents functionality for getting random number.
     /// </summary>
     /// <owner>Anton Petrenko</owner>
     public static class RandomNumberGenerator
@@ -20,9 +19,6 @@ namespace Business.Helper
         /// </summary>
         /// <owner>Anton Petrenko</owner>
         /// <returns>The value from the range.</returns>
-        public static int GetValue()
-        {
-            return random.Next(-1000, 1000);
-        }
+        public static int GetValue() => random.Next(-1000, 1000);
     }
 }

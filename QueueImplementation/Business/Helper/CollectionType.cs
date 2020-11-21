@@ -16,6 +16,18 @@
         /// Holds the array.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        Array = 1
+        Array = 1,
+
+        /// <summary>
+        /// Holds the queue.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        Queue = 2,
+
+        /// <summary>
+        /// Holds the stack.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        Stack = 3
     }
 }

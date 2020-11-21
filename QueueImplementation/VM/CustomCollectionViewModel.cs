@@ -1,6 +1,4 @@
-﻿using Autofac;
-using Business;
-using Business.Helper;
+﻿using Business.Helper;
 using Business.Interfaces;
 using MvvmCross.ViewModels;
 using System;
@@ -11,23 +9,11 @@ using System.Linq;
 namespace ViewModel
 {
 	/// <summary>
-	/// Represents the view model used for managing the queue collection.
+	/// Represents the view model used for managing the collection.
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
 	public sealed class CustomCollectionViewModel<T> : MvxViewModel
 	{
-		/// <summary>
-		/// Holds the array type.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		private const string ArrayType = "Array";
-
-		/// <summary>
-		/// Holds the linked list type.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		private const string LinkedListType = "Linked list";
-
 		/// <summary>
 		/// Holds the add value command.
 		/// </summary>
@@ -41,22 +27,34 @@ namespace ViewModel
 		private ObservableCollection<int> allNumbers;
 
 		/// <summary>
+		/// Holds the collection.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private ICustomCollection<int> collection;
+
+		/// <summary>
+		/// Holds the configuration creator.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private readonly CollectionConfigCreator<int> configCreator = new CollectionConfigCreator<int>();
+
+		/// <summary>
 		/// Holds the current element that will be processed.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		private int? currentElement;
+		private int? elementToProcess;
+
+		/// <summary>
+		/// Holds the is choise possible.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private bool isChoisePossible = true;
 
 		/// <summary>
 		/// Holds the message to display.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		private string message;
-
-		/// <summary>
-		/// Holds the queue collection.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		private readonly ICustomCollection<int> queue;
 
 		/// <summary>
 		/// Holds the remove value command.
@@ -84,28 +82,22 @@ namespace ViewModel
 
 				return this.add;
 			}
-			set
-			{
-				if (this.add == value)
-					return;
-
-				this.add = value;
-				this.RaisePropertyChanged(() => this.Add);
-			}
 		}
 
 		/// <summary>
-		/// Adds the number to the queue collection.
+		/// Adds the number to the collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="obj">The object.</param>
 		private void AddNumber(object obj)
 		{
-			int previousCount = this.queue.Count();
+			if (this.Collection is null)
+				return;
 
+			int previousCount = this.Collection.Count();
 			this.RestoreCurrentElement();
 			int newValue = RandomNumberGenerator.GetValue();
-			this.queue.Add(newValue);
+			this.Collection.Add(newValue);
 			this.Message = $"The item {newValue} was added.";
 
 			this.RaisePropertyChanged(() => this.AllNumbers);
@@ -115,18 +107,22 @@ namespace ViewModel
 		}
 
 		/// <summary>
-		/// Gets the collection of all numbers in the queue.
+		/// Gets the collection of all numbers.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <value>The collection of all numbers in queue.</value>
+		/// <value>The collection of all numbers.</value>
 		public IEnumerable<int> AllNumbers
 		{
 			get
 			{
-				if (this.allNumbers.SequenceEqual(this.queue))
+				if (this.allNumbers != null && this.Collection != null && this.allNumbers.SequenceEqual(this.Collection))
 					return this.allNumbers;
 
-				this.allNumbers = new ObservableCollection<int>(this.queue);
+				if (this.Collection != null)
+				this.allNumbers = new ObservableCollection<int>(this.Collection);
+				else
+					this.allNumbers = new ObservableCollection<int>();
+
 				return this.allNumbers;
 			}
 		}
@@ -136,7 +132,7 @@ namespace ViewModel
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="obj">The object.</param>
-		/// <returns>True if adding new number is possible; otherwise, false</returns>
+		/// <returns><c>true</c> if adding new number is possible; otherwise, <c>false</c></returns>
 		private bool CanAddNumber(object obj) => this.AllNumbers != null;
 
 		/// <summary>
@@ -144,8 +140,41 @@ namespace ViewModel
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="obj">The object.</param>
-		/// <returns>True if getting number is possible; otherwise, false</returns>
+		/// <returns><c>true</c> if getting number is possible; otherwise, <c>false</c></returns>
 		private bool CanGetNumber(object obj) => this.AllNumbers.Count() > 0;
+
+		/// <summary>
+		/// Gets the collection.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <value>The collection.</value>
+		public ICustomCollection<int> Collection
+		{
+			get
+			{
+				try
+				{
+					if (this.collection is null)
+					{
+						this.collection = this.configCreator.InitializeCollection(this.SelectedQueueStackType, this.SelectedArrayLinkedListType);
+						this.IsChoisePossible = false;
+					}
+				}
+				catch (ArgumentException error)
+				{
+					this.Message = error.Message;
+				}
+
+				return this.collection;
+			}
+		}
+
+		/// <summary>
+		/// Gets the collection types.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <value>The collection types.</value>
+		public string[] CollectionTypes => new string[] { "stack", "queue" };
 
 		/// <summary>
 		/// Gets or sets the current element.
@@ -154,14 +183,35 @@ namespace ViewModel
 		/// <value>The current number.</value>
 		public int? CurrentElement
 		{
-			get => this.currentElement;
+			get => this.elementToProcess;
 			set
 			{
-				if (this.currentElement == value)
+				if (this.elementToProcess == value)
 					return;
 
-				this.currentElement = value;
+				this.elementToProcess = value;
 				this.RaisePropertyChanged(() => this.CurrentElement);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the value indicating whether choise is still possible.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <value><c>true</c> if the choise is still possible; otherwise, <c>false</c>.</value>
+		public bool IsChoisePossible 
+		{
+			get
+			{
+				return this.isChoisePossible;
+			}
+			set
+			{
+				if (this.isChoisePossible == value)
+					return;
+
+				this.isChoisePossible = value;
+				this.RaisePropertyChanged(() => this.IsChoisePossible);
 			}
 		}
 
@@ -181,17 +231,6 @@ namespace ViewModel
 				this.message = value;
 				this.RaisePropertyChanged(() => this.Message);
 			}
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CustomCollectionViewModel{T}"/> class.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		public CustomCollectionViewModel()
-		{
-			var container = CustomCollectionConfig<T>.Configure();
-			this.queue = container.Resolve<ICustomCollection<int>>();
-			this.allNumbers = new ObservableCollection<int>();
 		}
 
 		/// <summary>
@@ -219,7 +258,7 @@ namespace ViewModel
 		}
 
 		/// <summary>
-		/// Removes the number from the queue collection.
+		/// Removes the number from the collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="obj">The object.</param>
@@ -228,7 +267,7 @@ namespace ViewModel
 			try
 			{
 				this.RestoreCurrentElement();
-				var removedItem = this.queue.Remove();
+				var removedItem = this.Collection.Remove();
 				this.Message = $"The item {removedItem} was removed.";
 			}
 			catch (InvalidOperationException ex)
@@ -236,13 +275,23 @@ namespace ViewModel
 				this.Message = ex.Message;
 			}
 
-			if (this.queue.Count() == 0)
+			if (this.Collection.Count() == 0)
 			{
 				this.Message += " The collection is empty.";
 				this.RestoreRemoveAndShowCommands();
 			}
 
 			this.RaisePropertyChanged(() => this.AllNumbers);
+		}
+
+		/// <summary>
+		/// Restores the current element.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private void RestoreCurrentElement()
+		{
+			if (this.CurrentElement.HasValue)
+				this.CurrentElement = null;
 		}
 
 		/// <summary>
@@ -256,20 +305,21 @@ namespace ViewModel
 		}
 
 		/// <summary>
-		/// Restores the current element.
+		/// Gets or sets the selected type of the collection (array/linked list).
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		private void RestoreCurrentElement()
-		{
-			if (this.CurrentElement.HasValue)
-				this.CurrentElement = null;
-		}
-
-		public ObservableCollection<string> CollectionTypes
-		{ get; set; } = new ObservableCollection<string> { "stack", "queue" };
+		/// <value>The type of the selected array linked list.</value>
+		public string SelectedArrayLinkedListType { get; set; }
 
 		/// <summary>
-		/// Gets the show command.
+		/// Gets or sets the selected type of the collection (queue/stack).
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <value>The type of the selected queue stack.</value>
+		public string SelectedQueueStackType { get; set; }
+
+		/// <summary>
+		/// Gets and sets the show command.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The show command.</value>
@@ -301,24 +351,13 @@ namespace ViewModel
 		{
 			try
 			{
-				this.CurrentElement = this.queue.ShowCurrent();
+				this.CurrentElement = this.Collection.ShowCurrent();
 				this.Message = $"The item {this.CurrentElement} is first to be removed.";
 			}
 			catch (InvalidOperationException ex)
 			{
 				this.Message = ex.Message;
 			}
-		}
-
-		/// <summary>
-		/// Gets or sets the source collection name.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <value>The source collection name.</value>
-		public string SourceCollectionName
-		{
-			get;
-			set;
 		}
 	}
 }
