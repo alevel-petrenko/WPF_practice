@@ -45,7 +45,7 @@ namespace ViewModel
 		private int? elementToProcess;
 
 		/// <summary>
-		/// Holds the is choise possible.
+		/// Holds the is choice possible.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		private bool isChoisePossible = true;
@@ -195,10 +195,10 @@ namespace ViewModel
 		}
 
 		/// <summary>
-		/// Gets or sets the value indicating whether choise is still available.
+		/// Gets or sets the value indicating whether choice is still available.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <value><c>true</c> if the choise is still available; otherwise, <c>false</c>.</value>
+		/// <value><c>true</c> if the choice is still available; otherwise, <c>false</c>.</value>
 		public bool IsChoiseAvailable 
 		{
 			get

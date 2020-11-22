@@ -1,5 +1,8 @@
 ﻿using Business.Helper;
+using Business.Queue;
+using Business.Stack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Business.UnitTest.Helper
 {
@@ -11,13 +14,68 @@ namespace Business.UnitTest.Helper
 	public sealed class CollectionConfigCreatorTest
 	{
 		/// <summary>
-		/// Collections the type of the configuration creator test initialize collection when call get custom collection of correct.
+		/// Holds the configuration creator.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
+		private CollectionConfigCreator<char> creator;
+
+		/// <summary>
+		/// Tests the collection initialization when pass not correct collection or type.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <param name="selectedQueueStackType">The type of the selected collection (queue/stack).</param>
+		/// <param name="selectedArrayLinkedListType">The type of the selected collection (array/linked list).</param>
 		[TestMethod]
-		public void CollectionConfigCreatorTest_InitializeCollection_WhenCall_GetCustomCollectionOfCorrectType()
+		[DataRow("", "Array")]
+		[DataRow("Queue", "")]
+		[DataRow(" ", "Linked list")]
+		[DataRow("Stack", " ")]
+		[DataRow(null, "Array")]
+		[DataRow("Stack", null)]
+		[ExpectedException(typeof(ArgumentException))]
+		public void CollectionConfigCreator_InitializeCollection_PassNotCorrectType_GetArgumentException(string selectedQueueStackType,
+			string selectedArrayLinkedListType)
 		{
-			var creator = new CollectionConfigCreator<int>();
+			//
+			// Act.
+			//
+			creator.InitializeCollection(selectedQueueStackType, selectedArrayLinkedListType);
+		}
+
+		/// <summary>
+		/// Tests the collection initialization when pass collection and type.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <param name="selectedQueueStackType">The type of the selected collection (queue/stack).</param>
+		/// <param name="selectedArrayLinkedListType">The type of the selected collection (array/linked list).</param>
+		/// <param name="expectedType">The type of expected collection.</param>
+		[TestMethod]
+		[DataRow("Queue", "Array", typeof(ArrayQueue<char>))]
+		[DataRow("Queue", "Linked list", typeof(LinkedListQueue<char>))]
+		[DataRow("Stack", "Array", typeof(ArrayStack<char>))]
+		[DataRow("Stack", "Linked list", typeof(LinkedListStack<char>))]
+		public void CollectionConfigCreator_InitializeCollection_WhenCalled_GetCustomCollectionOfCorrectType(string selectedQueueStackType, 
+			string selectedArrayLinkedListType, Type expectedType)
+		{
+			//
+			// Act.
+			//
+			var actualCollection = creator.InitializeCollection(selectedQueueStackType, selectedArrayLinkedListType);
+
+			//
+			// Assert.
+			//
+			Assert.IsInstanceOfType(actualCollection, expectedType);
+		}
+
+		/// <summary>
+		/// Setups this instance.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		[TestInitialize]
+		public void Setup()
+		{
+			creator = new CollectionConfigCreator<char>();
 		}
 	}
 }

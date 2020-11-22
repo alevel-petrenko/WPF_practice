@@ -19,9 +19,9 @@ namespace Business.Helper
 		/// <returns>The initialized collection.</returns>
 		public ICustomCollection<T> InitializeCollection(string selectedQueueStackType, string selectedArrayLinkedListType)
 		{
-			if (string.IsNullOrEmpty(selectedArrayLinkedListType))
+			if (string.IsNullOrWhiteSpace(selectedArrayLinkedListType))
 				throw new ArgumentException("Please select array or linked list setting!");
-			if (string.IsNullOrEmpty(selectedQueueStackType))
+			if (string.IsNullOrWhiteSpace(selectedQueueStackType))
 				throw new ArgumentException("Please select queue or stack setting!");
 
 			var container = CustomCollectionConfig<T>.Configure(selectedQueueStackType, selectedArrayLinkedListType);

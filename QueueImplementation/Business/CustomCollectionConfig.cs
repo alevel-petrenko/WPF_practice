@@ -28,6 +28,7 @@ namespace Business
 		public static IContainer Configure(string selectedQueueStackType, string selectedArrayLinkedListType)
 		{
 			CustomCollectionConfig<T>.container = new ContainerBuilder();
+			selectedQueueStackType = selectedQueueStackType.ToLower();
 			selectedArrayLinkedListType = selectedArrayLinkedListType.ToLower().Replace(" ", string.Empty);
 
 			if (selectedQueueStackType == CollectionType.Stack.AsString())
