@@ -24,6 +24,28 @@ namespace Business.Stack
 		private int size = 0;
 
 		/// <summary>
+		/// Adds an element to the end of the collection.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <param name="element">The element to add.</param>
+		public void Add(T element)
+		{
+			//
+			// Array is full.
+			//
+			if (this.stack.Length == this.size)
+			{
+				T[] newStack = new T[this.size * 2];
+
+				this.stack.CopyTo(newStack, 0);
+				this.stack = newStack;
+			}
+
+			this.stack[this.size] = element;
+			this.size++;
+		}
+
+		/// <summary>
 		/// Clears this collection instance.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
@@ -55,19 +77,6 @@ namespace Business.Stack
 		}
 
 		/// <summary>
-		/// Returns the last element that is at the end of the collection, but does not remove it.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <returns>The last element that is at the end of the collection.</returns>
-		public T ShowCurrent()
-		{
-			if (this.size == 0)
-				throw new InvalidOperationException("There is no items in collection.");
-
-			return this.stack[this.size - 1];
-		}
-
-		/// <summary>
 		/// Removes the last element from the collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
@@ -82,25 +91,16 @@ namespace Business.Stack
 		}
 
 		/// <summary>
-		/// Adds an element to the end of the collection.
+		/// Returns the last element that is at the end of the collection, but does not remove it.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <param name="element">The element to add.</param>
-		public void Add(T element)
+		/// <returns>The last element that is at the end of the collection.</returns>
+		public T ShowCurrent()
 		{
-			//
-			// Array is full.
-			//
-			if (this.stack.Length == this.size)
-			{
-				T[] newStack = new T[this.size * 2];
+			if (this.size == 0)
+				throw new InvalidOperationException("There is no items in collection.");
 
-				this.stack.CopyTo(newStack, 0);
-				this.stack = newStack;
-			}
-
-			this.stack[this.size] = element;
-			this.size++;
+			return this.stack[this.size - 1];
 		}
 	}
 }

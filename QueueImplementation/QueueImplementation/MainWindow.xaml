@@ -36,14 +36,14 @@
 				 Grid.RowSpan="4" FontSize="15"
 				 ItemsSource="{Binding AllNumbers}" />
 
-		<StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" IsEnabled="{Binding IsChoisePossible}">
+		<StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" IsEnabled="{Binding IsChoiseAvailable}">
 			<RadioButton Margin="10" Content="Array" Checked="RadioButtonIsChecked"/>
 			<RadioButton Margin="10" Content="Linked list" Checked="RadioButtonIsChecked"/>
 		</StackPanel>
 
 		<ComboBox Grid.Column="2" Grid.Row="2"
 				  Height="30" Width="110"
-				  IsEnabled="{Binding IsChoisePossible}"
+				  IsEnabled="{Binding IsChoiseAvailable}"
 				  VerticalContentAlignment="Center"
 				  ItemsSource="{Binding CollectionTypes}"
 				  SelectedValue="{Binding SelectedQueueStackType}"/>

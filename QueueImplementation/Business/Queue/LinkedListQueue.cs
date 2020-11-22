@@ -15,7 +15,17 @@ namespace Business.Queue
 		/// Holds the queue collection to work with.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		private LinkedList<T> queue = new LinkedList<T>();
+		private readonly LinkedList<T> queue = new LinkedList<T>();
+
+		/// <summary>
+		/// Adds an element to the end of the collection.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <param name="element">The element to add.</param>
+		public void Add(T element)
+		{
+			this.queue.AddLast(element);
+		}
 
 		/// <summary>
 		/// Clears this collection instance.
@@ -24,6 +34,26 @@ namespace Business.Queue
 		public void Clear()
 		{
 			this.queue.Clear();
+		}
+
+		/// <summary>
+		/// Returns an enumerator that iterates through the collection.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <returns>An enumerator that can be used to iterate through the collection.</returns>
+		public IEnumerator<T> GetEnumerator()
+		{
+			return queue.GetEnumerator();
+		}
+
+		/// <summary>
+		/// Returns an enumerator that iterates through a collection.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the collection.</returns>
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return queue.GetEnumerator();
 		}
 
 		/// <summary>
@@ -43,26 +73,6 @@ namespace Business.Queue
 		}
 
 		/// <summary>
-		/// Adds an element to the end of the collection.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <param name="element">The element to add.</param>
-		public void Add(T element)
-		{
-			this.queue.AddLast(element);
-		}
-
-		/// <summary>
-		/// Returns an enumerator that iterates through the collection.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <returns>An enumerator that can be used to iterate through the collection.</returns>
-		public IEnumerator<T> GetEnumerator()
-		{
-			return queue.GetEnumerator();
-		}
-
-		/// <summary>
 		/// Returns the oldest element that is at the start of the collection, but does not remove it.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
@@ -73,16 +83,6 @@ namespace Business.Queue
 				throw new InvalidOperationException("There is no items in collection.");
 
 			return this.queue.First.Value;
-		}
-
-		/// <summary>
-		/// Returns an enumerator that iterates through a collection.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the collection.</returns>
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return queue.GetEnumerator();
 		}
 	}
 }

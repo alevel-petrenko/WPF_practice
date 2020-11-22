@@ -15,7 +15,17 @@ namespace Business.Stack
 		/// Holds the stack collection to work with.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		private LinkedList<T> stack = new LinkedList<T>();
+		private readonly LinkedList<T> stack = new LinkedList<T>();
+
+		/// <summary>
+		/// Adds an element to the end of the collection.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <param name="element">The element to add.</param>
+		public void Add(T element)
+		{
+			this.stack.AddLast(element);
+		}
 
 		/// <summary>
 		/// Clears this collection instance.
@@ -47,19 +57,6 @@ namespace Business.Stack
 		}
 
 		/// <summary>
-		/// Returns the last element that is at the end of the collection, but does not remove it.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <returns>The last element that is at the end of the collection.</returns>
-		public T ShowCurrent()
-		{
-			if (this.stack.Count == 0)
-				throw new InvalidOperationException("There is no items in collection.");
-
-			return this.stack.Last.Value;
-		}
-
-		/// <summary>
 		/// Removes the last element from the collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
@@ -76,13 +73,16 @@ namespace Business.Stack
 		}
 
 		/// <summary>
-		/// Adds an element to the end of the collection.
+		/// Returns the last element that is at the end of the collection, but does not remove it.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <param name="element">The element to add.</param>
-		public void Add(T element)
+		/// <returns>The last element that is at the end of the collection.</returns>
+		public T ShowCurrent()
 		{
-			this.stack.AddLast(element);
+			if (this.stack.Count == 0)
+				throw new InvalidOperationException("There is no items in collection.");
+
+			return this.stack.Last.Value;
 		}
 	}
 }

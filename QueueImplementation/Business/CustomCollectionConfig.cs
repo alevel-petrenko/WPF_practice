@@ -10,7 +10,6 @@ namespace Business
 	/// Represents the functionality to configure the custom collections.
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
-	/// <typeparam name="T"></typeparam>
 	public static class CustomCollectionConfig<T>
 	{
 		/// <summary>
@@ -43,6 +42,7 @@ namespace Business
 		/// Configures the queue collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
+		/// <param name="selectedArrayLinkedListType">The selected type of collection (array/linked list).</param>
 		private static void ConfigureQueue(string selectedArrayLinkedListType)
 		{
 			if (selectedArrayLinkedListType == CollectionType.Array.AsString())
@@ -55,6 +55,7 @@ namespace Business
 		/// Configures the stack collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
+		/// <param name="selectedArrayLinkedListType">The selected type of collection (array/linked list).</param>
 		private static void ConfigureStack(string selectedArrayLinkedListType)
 		{
 			if (selectedArrayLinkedListType == CollectionType.Array.AsString())

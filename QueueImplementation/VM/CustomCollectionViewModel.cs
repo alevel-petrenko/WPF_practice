@@ -157,7 +157,7 @@ namespace ViewModel
 					if (this.collection is null)
 					{
 						this.collection = this.configCreator.InitializeCollection(this.SelectedQueueStackType, this.SelectedArrayLinkedListType);
-						this.IsChoisePossible = false;
+						this.IsChoiseAvailable = false;
 					}
 				}
 				catch (ArgumentException error)
@@ -195,11 +195,11 @@ namespace ViewModel
 		}
 
 		/// <summary>
-		/// Gets or sets the value indicating whether choise is still possible.
+		/// Gets or sets the value indicating whether choise is still available.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <value><c>true</c> if the choise is still possible; otherwise, <c>false</c>.</value>
-		public bool IsChoisePossible 
+		/// <value><c>true</c> if the choise is still available; otherwise, <c>false</c>.</value>
+		public bool IsChoiseAvailable 
 		{
 			get
 			{
@@ -211,7 +211,7 @@ namespace ViewModel
 					return;
 
 				this.isChoisePossible = value;
-				this.RaisePropertyChanged(() => this.IsChoisePossible);
+				this.RaisePropertyChanged(() => this.IsChoiseAvailable);
 			}
 		}
 
