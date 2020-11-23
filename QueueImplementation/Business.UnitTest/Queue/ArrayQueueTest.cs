@@ -91,35 +91,6 @@ namespace Business.UnitTest.Helper
 		}
 
 		/// <summary>
-		/// Tests the enumerator of the array queue.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		[TestMethod]
-		public void ArrayQueue_GetEnumerator_AddElements_ReceiveAllElements()
-		{
-			//
-			// Arrange.
-			//
-			string expected = "DAY";
-			string actual = string.Empty;
-
-			//
-			// Act.
-			//
-			this.queue.Add('D');
-			this.queue.Add('A');
-			this.queue.Add('Y');
-
-			foreach (var item in this.queue)
-				actual += item;
-
-			//
-			// Assert.
-			//
-			Assert.AreEqual(expected, actual);
-		}
-
-		/// <summary>
 		/// Setups this instance.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>

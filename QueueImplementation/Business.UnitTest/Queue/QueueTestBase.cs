@@ -18,11 +18,11 @@ namespace Business.UnitTest.Helper
 		protected ICustomCollection<char> queue;
 
 		/// <summary>
-		/// Tests the array queue when add new element.
+		/// Tests the queue when add new element.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		[TestMethod]
-		public void ArrayQueue_Add_AddNewElement_CollectionStoreNewElement()
+		public void Queue_Add_AddNewElement_CollectionStoreNewElement()
 		{
 			//
 			// Arrange.
@@ -42,11 +42,11 @@ namespace Business.UnitTest.Helper
 		}
 
 		/// <summary>
-		/// Tests the array queue when pass new element.
+		/// Tests the queue when pass new element.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		[TestMethod]
-		public void ArrayQueue_Clear_WhenCalled_CollectionIsEmpty()
+		public void Queue_Clear_WhenCalled_CollectionIsEmpty()
 		{
 			//
 			// Act.
@@ -63,12 +63,41 @@ namespace Business.UnitTest.Helper
 		}
 
 		/// <summary>
-		/// Tests the empty array queue when peek first element.
+		/// Tests the enumerator of the  queue.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		[TestMethod]
+		public void Queue_GetEnumerator_AddElements_ReceiveAllElements()
+		{
+			//
+			// Arrange.
+			//
+			string expected = "DAY";
+			string actual = string.Empty;
+
+			//
+			// Act.
+			//
+			this.queue.Add('D');
+			this.queue.Add('A');
+			this.queue.Add('Y');
+
+			foreach (var item in this.queue)
+				actual += item;
+
+			//
+			// Assert.
+			//
+			Assert.AreEqual(expected, actual);
+		}
+
+		/// <summary>
+		/// Tests the empty queue when peek first element.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
-		public void ArrayQueue_ShowCurrent_QueueIsEmpty_GetInvalidOperationException()
+		public void Queue_ShowCurrent_QueueIsEmpty_GetInvalidOperationException()
 		{
 			//
 			// Act.
@@ -77,11 +106,11 @@ namespace Business.UnitTest.Helper
 		}
 
 		/// <summary>
-		/// Tests the array queue when peek first element.
+		/// Tests the queue when peek first element.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		[TestMethod]
-		public void ArrayQueue_ShowCurrent_WhenCalled_GetTheFirstElement()
+		public void Queue_ShowCurrent_WhenCalled_GetTheFirstElement()
 		{
 			//
 			// Arrange.
@@ -103,12 +132,12 @@ namespace Business.UnitTest.Helper
 		}
 
 		/// <summary>
-		/// Tests the empty array queue when remove first element.
+		/// Tests the empty queue when remove first element.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
-		public void ArrayQueue_Remove_QueueIsEmpty_GetInvalidOperationException()
+		public void Queue_Remove_QueueIsEmpty_GetInvalidOperationException()
 		{
 			//
 			// Act.
@@ -117,11 +146,11 @@ namespace Business.UnitTest.Helper
 		}
 
 		/// <summary>
-		/// Tests the array queue when remove first element.
+		/// Tests the queue when remove first element.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		[TestMethod]
-		public void ArrayQueue_Remove_WhenCalled_RemoveFirstElementFromCollection()
+		public void Queue_Remove_WhenCalled_RemoveFirstElementFromCollection()
 		{
 			//
 			// Arrange.
