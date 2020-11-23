@@ -124,19 +124,6 @@ namespace Business.Queue
 		}
 
 		/// <summary>
-		/// Returns the oldest element that is at the start of the collection, but does not remove it.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <returns>The oldest element that is at the start of the collection.</returns>
-		public T ShowCurrent()
-		{
-			if (this.size == 0)
-				throw new InvalidOperationException("There is no items in collection.");
-
-			return this.queue[this.head];
-		}
-
-		/// <summary>
 		/// Removes the oldest element from the start of the collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
@@ -156,6 +143,19 @@ namespace Business.Queue
 			this.size--;
 
 			return itemToReturn;
+		}
+
+		/// <summary>
+		/// Returns the oldest element that is at the start of the collection, but does not remove it.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <returns>The oldest element that is at the start of the collection.</returns>
+		public T ShowCurrent()
+		{
+			if (this.size == 0)
+				throw new InvalidOperationException("There is no items in collection.");
+
+			return this.queue[this.head];
 		}
 	}
 }

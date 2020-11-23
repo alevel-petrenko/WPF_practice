@@ -75,7 +75,7 @@ namespace Business.UnitTest.Helper
 		[TestInitialize]
 		public void Setup()
 		{
-			creator = new CollectionConfigCreator<char>();
+			this.creator = new CollectionConfigCreator<char>();
 		}
 	}
 }

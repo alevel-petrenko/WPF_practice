@@ -1,4 +1,4 @@
-﻿using Business.Helper;
+﻿using Business.Queue;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Business.UnitTest.Helper
@@ -8,8 +8,16 @@ namespace Business.UnitTest.Helper
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
 	[TestClass]
-	public sealed class LinkedListQueueTest
+	public sealed class LinkedListQueueTest : QueueTestBase
 	{
-
+		/// <summary>
+		/// Setups this instance.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		[TestInitialize]
+		public void Setup()
+		{
+			this.queue = new LinkedListQueue<char>();
+		}
 	}
 }
