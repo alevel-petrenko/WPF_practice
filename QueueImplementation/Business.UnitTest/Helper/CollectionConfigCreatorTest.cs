@@ -1,4 +1,5 @@
 ﻿using Business.Helper;
+using Business.Helper.Enumeration;
 using Business.Queue;
 using Business.Stack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -26,15 +27,11 @@ namespace Business.UnitTest.Helper
 		/// <param name="selectedQueueStackType">The type of the selected collection (queue/stack).</param>
 		/// <param name="selectedArrayLinkedListType">The type of the selected collection (array/linked list).</param>
 		[TestMethod]
-		[DataRow("", "Array")]
-		[DataRow("Queue", "")]
-		[DataRow(" ", "Linked list")]
-		[DataRow("Stack", " ")]
-		[DataRow(null, "Array")]
-		[DataRow("Stack", null)]
+		[DataRow(null, BasicCollectionType.Array)]
+		[DataRow(CustomCollectionType.Stack, null)]
 		[ExpectedException(typeof(ArgumentException))]
-		public void CollectionConfigCreator_InitializeCollection_PassNotCorrectType_GetArgumentException(string selectedQueueStackType,
-			string selectedArrayLinkedListType)
+		public void CollectionConfigCreator_InitializeCollection_PassNotCorrectType_GetArgumentException(CustomCollectionType? selectedQueueStackType,
+			BasicCollectionType? selectedArrayLinkedListType)
 		{
 			//
 			// Act.
@@ -50,12 +47,12 @@ namespace Business.UnitTest.Helper
 		/// <param name="selectedArrayLinkedListType">The type of the selected collection (array/linked list).</param>
 		/// <param name="expectedType">The type of expected collection.</param>
 		[TestMethod]
-		[DataRow("Queue", "Array", typeof(ArrayQueue<char>))]
-		[DataRow("Queue", "Linked list", typeof(LinkedListQueue<char>))]
-		[DataRow("Stack", "Array", typeof(ArrayStack<char>))]
-		[DataRow("Stack", "Linked list", typeof(LinkedListStack<char>))]
-		public void CollectionConfigCreator_InitializeCollection_WhenCalled_GetCustomCollectionOfCorrectType(string selectedQueueStackType, 
-			string selectedArrayLinkedListType, Type expectedType)
+		[DataRow(CustomCollectionType.Queue, BasicCollectionType.Array, typeof(ArrayQueue<char>))]
+		[DataRow(CustomCollectionType.Queue, BasicCollectionType.LinkedList, typeof(LinkedListQueue<char>))]
+		[DataRow(CustomCollectionType.Stack, BasicCollectionType.Array, typeof(ArrayStack<char>))]
+		[DataRow(CustomCollectionType.Stack, BasicCollectionType.LinkedList, typeof(LinkedListStack<char>))]
+		public void CollectionConfigCreator_InitializeCollection_WhenCalled_GetCustomCollectionOfCorrectType(CustomCollectionType selectedQueueStackType,
+			BasicCollectionType selectedArrayLinkedListType, Type expectedType)
 		{
 			//
 			// Act.

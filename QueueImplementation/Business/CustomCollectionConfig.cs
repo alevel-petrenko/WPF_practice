@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Business.Helper;
+using Business.Helper.Enumeration;
 using Business.Interfaces;
 using Business.Queue;
 using Business.Stack;
@@ -25,18 +25,16 @@ namespace Business
 		/// <param name="selectedQueueStackType">The selected type of collection (queue/stack).</param>
 		/// <param name="selectedArrayLinkedListType">The selected type of collection (array/linked list).</param>
 		/// <returns>The instances.</returns>
-		public static IContainer Configure(string selectedQueueStackType, string selectedArrayLinkedListType)
+		public static IContainer Configure(CustomCollectionType selectedQueueStackType, BasicCollectionType selectedArrayLinkedListType)
 		{
 			CustomCollectionConfig<T>.container = new ContainerBuilder();
-			selectedQueueStackType = selectedQueueStackType.ToLower();
-			selectedArrayLinkedListType = selectedArrayLinkedListType.ToLower().Replace(" ", string.Empty);
 
-			if (selectedQueueStackType == CollectionType.Stack.AsString())
+			if (selectedQueueStackType == CustomCollectionType.Stack)
 				CustomCollectionConfig<T>.ConfigureStack(selectedArrayLinkedListType);
-			else if (selectedQueueStackType == CollectionType.Queue.AsString())
+			else if (selectedQueueStackType == CustomCollectionType.Queue)
 				CustomCollectionConfig<T>.ConfigureQueue(selectedArrayLinkedListType);
 
-			return container.Build();
+			return CustomCollectionConfig<T>.container.Build();
 		}
 
 		/// <summary>
@@ -44,12 +42,12 @@ namespace Business
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="selectedArrayLinkedListType">The selected type of collection (array/linked list).</param>
-		private static void ConfigureQueue(string selectedArrayLinkedListType)
+		private static void ConfigureQueue(BasicCollectionType selectedArrayLinkedListType)
 		{
-			if (selectedArrayLinkedListType == CollectionType.Array.AsString())
-				container.RegisterType<ArrayQueue<T>>().As<ICustomCollection<T>>();
-			else if (selectedArrayLinkedListType == CollectionType.LinkedList.AsString())
-				container.RegisterType<LinkedListQueue<T>>().As<ICustomCollection<T>>();
+			if (selectedArrayLinkedListType == BasicCollectionType.Array)
+				CustomCollectionConfig<T>.container.RegisterType<ArrayQueue<T>>().As<ICustomCollection<T>>();
+			else if (selectedArrayLinkedListType == BasicCollectionType.LinkedList)
+				CustomCollectionConfig<T>.container.RegisterType<LinkedListQueue<T>>().As<ICustomCollection<T>>();
 		}
 
 		/// <summary>
@@ -57,12 +55,12 @@ namespace Business
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="selectedArrayLinkedListType">The selected type of collection (array/linked list).</param>
-		private static void ConfigureStack(string selectedArrayLinkedListType)
+		private static void ConfigureStack(BasicCollectionType selectedArrayLinkedListType)
 		{
-			if (selectedArrayLinkedListType == CollectionType.Array.AsString())
-				container.RegisterType<ArrayStack<T>>().As<ICustomCollection<T>>();
-			else if (selectedArrayLinkedListType == CollectionType.LinkedList.AsString())
-				container.RegisterType<LinkedListStack<T>>().As<ICustomCollection<T>>();
+			if (selectedArrayLinkedListType == BasicCollectionType.Array)
+				CustomCollectionConfig<T>.container.RegisterType<ArrayStack<T>>().As<ICustomCollection<T>>();
+			else if (selectedArrayLinkedListType == BasicCollectionType.LinkedList)
+				CustomCollectionConfig<T>.container.RegisterType<LinkedListStack<T>>().As<ICustomCollection<T>>();
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Business.Helper.Enumeration;
 using Business.Interfaces;
 using System;
 
@@ -14,17 +15,16 @@ namespace Business.Helper
 		/// Initializes the collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <param name="selectedQueueStackType">The selected type of collection (queue/stack).</param>
-		/// <param name="selectedArrayLinkedListType">The selected type of collection (array/linked list).</param>
+		/// <param name="selectedQueueStackType">The selected type of custom collection (queue/stack).</param>
+		/// <param name="selectedArrayLinkedListType">The selected type of basic collection (array/linked list).</param>
 		/// <returns>The initialized collection.</returns>
-		public ICustomCollection<T> InitializeCollection(string selectedQueueStackType, string selectedArrayLinkedListType)
+		public ICustomCollection<T> InitializeCollection(CustomCollectionType? selectedQueueStackType, BasicCollectionType? selectedArrayLinkedListType)
 		{
-			if (string.IsNullOrWhiteSpace(selectedArrayLinkedListType))
-				throw new ArgumentException("Please select array or linked list setting!");
-			if (string.IsNullOrWhiteSpace(selectedQueueStackType))
-				throw new ArgumentException("Please select queue or stack setting!");
+			if (!selectedArrayLinkedListType.HasValue || !selectedQueueStackType.HasValue)
+				throw new ArgumentException("Select all settings for the collection.");
 
-			var container = CustomCollectionConfig<T>.Configure(selectedQueueStackType, selectedArrayLinkedListType);
+			var container = CustomCollectionConfig<T>.Configure(selectedQueueStackType.Value, selectedArrayLinkedListType.Value);
+
 			return container.Resolve<ICustomCollection<T>>();
 		}
 	}

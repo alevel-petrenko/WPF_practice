@@ -1,4 +1,5 @@
 ﻿using Business.Helper;
+using Business.Helper.Enumeration;
 using Business.Interfaces;
 using MvvmCross.ViewModels;
 using System;
@@ -12,7 +13,7 @@ namespace ViewModel
 	/// Represents the view model used for managing the collection.
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
-	public sealed class CustomCollectionViewModel<T> : MvxViewModel
+	public sealed class CustomCollectionViewModel : MvxViewModel
 	{
 		/// <summary>
 		/// Holds the add value command.
@@ -36,7 +37,7 @@ namespace ViewModel
 		/// Holds the configuration creator.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		private readonly CollectionConfigCreator<int> configCreator = new CollectionConfigCreator<int>();
+		private readonly CollectionConfigCreator<int> configCreator;
 
 		/// <summary>
 		/// Holds the current element that will be processed.
@@ -48,7 +49,7 @@ namespace ViewModel
 		/// Holds the is choice possible.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		private bool isChoisePossible = true;
+		private bool isChoisePossible;
 
 		/// <summary>
 		/// Holds the message to display.
@@ -119,7 +120,7 @@ namespace ViewModel
 					return this.allNumbers;
 
 				if (this.Collection != null)
-				this.allNumbers = new ObservableCollection<int>(this.Collection);
+					this.allNumbers = new ObservableCollection<int>(this.Collection);
 				else
 					this.allNumbers = new ObservableCollection<int>();
 
@@ -156,7 +157,7 @@ namespace ViewModel
 				{
 					if (this.collection is null)
 					{
-						this.collection = this.configCreator.InitializeCollection(this.SelectedQueueStackType, this.SelectedArrayLinkedListType);
+						this.collection = this.configCreator.InitializeCollection(this.SelectedCustomCollectionType, this.SelectedBasicCollectionType);
 						this.IsChoiseAvailable = false;
 					}
 				}
@@ -168,13 +169,6 @@ namespace ViewModel
 				return this.collection;
 			}
 		}
-
-		/// <summary>
-		/// Gets the collection types.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <value>The collection types.</value>
-		public string[] CollectionTypes => new string[] { "stack", "queue" };
 
 		/// <summary>
 		/// Gets or sets the current element.
@@ -195,11 +189,21 @@ namespace ViewModel
 		}
 
 		/// <summary>
+		/// Initializes a new instance of the <see cref="CustomCollectionViewModel"/> class.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		public CustomCollectionViewModel()
+		{
+			this.configCreator = new CollectionConfigCreator<int>();
+			this.isChoisePossible = true;
+		}
+
+		/// <summary>
 		/// Gets or sets the value indicating whether choice is still available.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value><c>true</c> if the choice is still available; otherwise, <c>false</c>.</value>
-		public bool IsChoiseAvailable 
+		public bool IsChoiseAvailable
 		{
 			get
 			{
@@ -305,18 +309,18 @@ namespace ViewModel
 		}
 
 		/// <summary>
-		/// Gets or sets the selected type of the collection (array/linked list).
+		/// Gets or sets the selected type of the basic collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <value>The type of the selected array linked list.</value>
-		public string SelectedArrayLinkedListType { get; set; }
+		/// <value>The type of the basic collection.</value>
+		public BasicCollectionType? SelectedBasicCollectionType { get; set; }
 
 		/// <summary>
-		/// Gets or sets the selected type of the collection (queue/stack).
+		/// Gets or sets the selected type of the custom collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <value>The type of the selected queue stack.</value>
-		public string SelectedQueueStackType { get; set; }
+		/// <value>The type of the custom collection.</value>
+		public CustomCollectionType? SelectedCustomCollectionType { get; set; }
 
 		/// <summary>
 		/// Gets and sets the show command.
