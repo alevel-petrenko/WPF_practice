@@ -22,17 +22,17 @@ namespace Business
 		/// Configures the instances.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <param name="selectedQueueStackType">The selected type of collection (queue/stack).</param>
-		/// <param name="selectedArrayLinkedListType">The selected type of collection (array/linked list).</param>
+		/// <param name="selectedCustomCollection">The selected custom type of collection (queue/stack).</param>
+		/// <param name="selectedBasicCollection">The selected basic type of collection (array/linked list).</param>
 		/// <returns>The instances.</returns>
-		public static IContainer Configure(CustomCollectionType selectedQueueStackType, BasicCollectionType selectedArrayLinkedListType)
+		public static IContainer Configure(CustomCollectionType selectedCustomCollection, BasicCollectionType selectedBasicCollection)
 		{
 			CustomCollectionConfig<T>.container = new ContainerBuilder();
 
-			if (selectedQueueStackType == CustomCollectionType.Stack)
-				CustomCollectionConfig<T>.ConfigureStack(selectedArrayLinkedListType);
-			else if (selectedQueueStackType == CustomCollectionType.Queue)
-				CustomCollectionConfig<T>.ConfigureQueue(selectedArrayLinkedListType);
+			if (selectedCustomCollection == CustomCollectionType.Stack)
+				CustomCollectionConfig<T>.ConfigureStack(selectedBasicCollection);
+			else if (selectedCustomCollection == CustomCollectionType.Queue)
+				CustomCollectionConfig<T>.ConfigureQueue(selectedBasicCollection);
 
 			return CustomCollectionConfig<T>.container.Build();
 		}
@@ -41,12 +41,12 @@ namespace Business
 		/// Configures the queue collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <param name="selectedArrayLinkedListType">The selected type of collection (array/linked list).</param>
-		private static void ConfigureQueue(BasicCollectionType selectedArrayLinkedListType)
+		/// <param name="selectedBasicCollection">The selected type of collection (array/linked list).</param>
+		private static void ConfigureQueue(BasicCollectionType selectedBasicCollection)
 		{
-			if (selectedArrayLinkedListType == BasicCollectionType.Array)
+			if (selectedBasicCollection == BasicCollectionType.Array)
 				CustomCollectionConfig<T>.container.RegisterType<ArrayQueue<T>>().As<ICustomCollection<T>>();
-			else if (selectedArrayLinkedListType == BasicCollectionType.LinkedList)
+			else if (selectedBasicCollection == BasicCollectionType.LinkedList)
 				CustomCollectionConfig<T>.container.RegisterType<LinkedListQueue<T>>().As<ICustomCollection<T>>();
 		}
 
@@ -54,12 +54,12 @@ namespace Business
 		/// Configures the stack collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
-		/// <param name="selectedArrayLinkedListType">The selected type of collection (array/linked list).</param>
-		private static void ConfigureStack(BasicCollectionType selectedArrayLinkedListType)
+		/// <param name="selectedBasicCollection">The selected type of collection (array/linked list).</param>
+		private static void ConfigureStack(BasicCollectionType selectedBasicCollection)
 		{
-			if (selectedArrayLinkedListType == BasicCollectionType.Array)
+			if (selectedBasicCollection == BasicCollectionType.Array)
 				CustomCollectionConfig<T>.container.RegisterType<ArrayStack<T>>().As<ICustomCollection<T>>();
-			else if (selectedArrayLinkedListType == BasicCollectionType.LinkedList)
+			else if (selectedBasicCollection == BasicCollectionType.LinkedList)
 				CustomCollectionConfig<T>.container.RegisterType<LinkedListStack<T>>().As<ICustomCollection<T>>();
 		}
 	}

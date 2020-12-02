@@ -54,7 +54,7 @@ namespace ViewModel
         /// <owner>Anton Petrenko</owner>
         /// <param name="execute">The execution method.</param>
         /// <param name="canExecute">The possibility of execution. Value is null by default.</param>
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
         {
             this.execute = execute;
             this.canExecute = canExecute;

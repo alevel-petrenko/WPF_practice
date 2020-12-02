@@ -16,18 +16,6 @@ namespace ViewModel
 	public sealed class CustomCollectionViewModel : MvxViewModel
 	{
 		/// <summary>
-		/// Holds the add value command.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		private RelayCommand add;
-
-		/// <summary>
-		/// Holds the all numbers.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		private ObservableCollection<int> allNumbers;
-
-		/// <summary>
 		/// Holds the collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
@@ -58,32 +46,11 @@ namespace ViewModel
 		private string message;
 
 		/// <summary>
-		/// Holds the remove value command.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		private RelayCommand remove;
-
-		/// <summary>
-		/// Holds the show value command.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		private RelayCommand show;
-
-		/// <summary>
 		/// Gets the add command.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The add command.</value>
-		public RelayCommand Add
-		{
-			get
-			{
-				if (this.add is null)
-					this.add = new RelayCommand(this.AddNumber, this.CanAddNumber);
-
-				return this.add;
-			}
-		}
+		public RelayCommand Add => new RelayCommand(this.AddNumber, this.CanAddNumber);
 
 		/// <summary>
 		/// Adds the number to the collection.
@@ -101,31 +68,10 @@ namespace ViewModel
 			this.Collection.Add(newValue);
 			this.Message = $"The item {newValue} was added.";
 
-			this.RaisePropertyChanged(() => this.AllNumbers);
+			this.RaisePropertyChanged(() => this.Collection);
 
 			if (previousCount == 0)
 				this.RestoreRemoveAndShowCommands();
-		}
-
-		/// <summary>
-		/// Gets the collection of all numbers.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <value>The collection of all numbers.</value>
-		public IEnumerable<int> AllNumbers
-		{
-			get
-			{
-				if (this.allNumbers != null && this.Collection != null && this.allNumbers.SequenceEqual(this.Collection))
-					return this.allNumbers;
-
-				if (this.Collection != null)
-					this.allNumbers = new ObservableCollection<int>(this.Collection);
-				else
-					this.allNumbers = new ObservableCollection<int>();
-
-				return this.allNumbers;
-			}
 		}
 
 		/// <summary>
@@ -134,7 +80,7 @@ namespace ViewModel
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="obj">The object.</param>
 		/// <returns><c>true</c> if adding new number is possible; otherwise, <c>false</c></returns>
-		private bool CanAddNumber(object obj) => this.AllNumbers != null;
+		private bool CanAddNumber(object obj) => true;
 
 		/// <summary>
 		/// Gets the possibility of getting the number.
@@ -142,7 +88,7 @@ namespace ViewModel
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="obj">The object.</param>
 		/// <returns><c>true</c> if getting number is possible; otherwise, <c>false</c></returns>
-		private bool CanGetNumber(object obj) => this.AllNumbers.Count() > 0;
+		private bool CanGetNumber(object obj) => this.Collection != null && this.Collection.Count() > 0;
 
 		/// <summary>
 		/// Gets the collection.
@@ -242,24 +188,7 @@ namespace ViewModel
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The remove command.</value>
-		public RelayCommand Remove
-		{
-			get
-			{
-				if (this.remove is null)
-					this.remove = new RelayCommand(this.RemoveNumber, this.CanGetNumber);
-
-				return this.remove;
-			}
-			set
-			{
-				if (this.remove == value)
-					return;
-
-				this.remove = value;
-				this.RaisePropertyChanged(() => this.Remove);
-			}
-		}
+		public RelayCommand Remove => new RelayCommand(this.RemoveNumber, this.CanGetNumber);
 
 		/// <summary>
 		/// Removes the number from the collection.
@@ -285,7 +214,7 @@ namespace ViewModel
 				this.RestoreRemoveAndShowCommands();
 			}
 
-			this.RaisePropertyChanged(() => this.AllNumbers);
+			this.RaisePropertyChanged(() => this.Collection);
 		}
 
 		/// <summary>
@@ -304,8 +233,8 @@ namespace ViewModel
 		/// <owner>Anton Petrenko</owner>
 		private void RestoreRemoveAndShowCommands()
 		{
-			this.Show = null;
-			this.Remove = null;
+			this.RaisePropertyChanged(() => this.Show);
+			this.RaisePropertyChanged(() => this.Remove);
 		}
 
 		/// <summary>
@@ -323,28 +252,11 @@ namespace ViewModel
 		public CustomCollectionType? SelectedCustomCollectionType { get; set; }
 
 		/// <summary>
-		/// Gets and sets the show command.
+		/// Gets the show command.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The show command.</value>
-		public RelayCommand Show
-		{
-			get
-			{
-				if (this.show is null)
-					this.show = new RelayCommand(this.ShowNumber, this.CanGetNumber);
-
-				return this.show;
-			}
-			set
-			{
-				if (this.show == value)
-					return;
-
-				this.show = value;
-				this.RaisePropertyChanged(() => this.Show);
-			}
-		}
+		public RelayCommand Show => new RelayCommand(this.ShowNumber, this.CanGetNumber);
 
 		/// <summary>
 		/// Shows the number.

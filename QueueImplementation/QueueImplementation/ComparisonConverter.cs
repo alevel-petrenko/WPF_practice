@@ -9,7 +9,7 @@ namespace Presentation
 	/// </summary>
 	/// <owner>Anton Petrenko</owner>
 	public class ComparisonConverter : IValueConverter
-    {
+	{
 		/// <summary>
 		/// Converts a value.
 		/// </summary>
@@ -19,10 +19,16 @@ namespace Presentation
 		/// <param name="parameter">The converter parameter to use.</param>
 		/// <param name="culture">The culture to use in the converter.</param>
 		/// <returns>A converted value. If the method returns <see langword="null" />, the valid null value is used.</returns>
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value?.Equals(parameter);
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			if (value is null)
+				return false;
+
+			return value.Equals(parameter);
+		}
 
 		/// <summary>
-		/// Converts a value.
+		/// Converts a value back.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="value">The value that is produced by the binding target.</param>
@@ -31,11 +37,11 @@ namespace Presentation
 		/// <param name="culture">The culture to use in the converter.</param>
 		/// <returns>A converted value. If the method returns <see langword="null" />, the valid null value is used.</returns>
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
+		{
 			if (value is null)
 				return Binding.DoNothing;
 
-            return value.Equals(true) ? parameter : Binding.DoNothing;
-        }
-    }
+			return value.Equals(true) ? parameter : Binding.DoNothing;
+		}
+	}
 }
