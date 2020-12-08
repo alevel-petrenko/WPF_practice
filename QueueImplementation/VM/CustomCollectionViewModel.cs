@@ -59,19 +59,35 @@ namespace ViewModel
 		/// <param name="obj">The object.</param>
 		private void AddNumber(object obj)
 		{
-			if (this.Collection is null)
+			if (this.InternalCollection is null)
 				return;
 
-			int previousCount = this.Collection.Count();
+			int previousCount = this.InternalCollection.Count();
 			this.RestoreCurrentElement();
 			int newValue = RandomNumberGenerator.GetValue();
-			this.Collection.Add(newValue);
+			this.InternalCollection.Add(newValue);
 			this.Message = $"The item {newValue} was added.";
 
-			this.RaisePropertyChanged(() => this.Collection);
+			this.RaisePropertyChanged(() => this.AllNumbers);
 
 			if (previousCount == 0)
 				this.RestoreRemoveAndShowCommands();
+		}
+
+		/// <summary>
+		/// Gets the collection of all numbers for presenting.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <value>The collection of all numbers.</value>
+		public IEnumerable<int> AllNumbers
+		{
+			get
+			{
+				if (this.InternalCollection != null)
+					return new ObservableCollection<int>(this.InternalCollection);
+				else
+					return new ObservableCollection<int>();
+			}
 		}
 
 		/// <summary>
@@ -88,14 +104,14 @@ namespace ViewModel
 		/// <owner>Anton Petrenko</owner>
 		/// <param name="obj">The object.</param>
 		/// <returns><c>true</c> if getting number is possible; otherwise, <c>false</c></returns>
-		private bool CanGetNumber(object obj) => this.Collection != null && this.Collection.Count() > 0;
+		private bool CanGetNumber(object obj) => this.InternalCollection != null && this.InternalCollection.Count() > 0;
 
 		/// <summary>
 		/// Gets the collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The collection.</value>
-		public ICustomCollection<int> Collection
+		private ICustomCollection<int> InternalCollection
 		{
 			get
 			{
@@ -200,7 +216,7 @@ namespace ViewModel
 			try
 			{
 				this.RestoreCurrentElement();
-				var removedItem = this.Collection.Remove();
+				var removedItem = this.InternalCollection.Remove();
 				this.Message = $"The item {removedItem} was removed.";
 			}
 			catch (InvalidOperationException ex)
@@ -208,13 +224,13 @@ namespace ViewModel
 				this.Message = ex.Message;
 			}
 
-			if (this.Collection.Count() == 0)
+			if (this.InternalCollection.Count() == 0)
 			{
 				this.Message += " The collection is empty.";
 				this.RestoreRemoveAndShowCommands();
 			}
 
-			this.RaisePropertyChanged(() => this.Collection);
+			this.RaisePropertyChanged(() => this.AllNumbers);
 		}
 
 		/// <summary>
@@ -267,7 +283,7 @@ namespace ViewModel
 		{
 			try
 			{
-				this.CurrentElement = this.Collection.ShowCurrent();
+				this.CurrentElement = this.InternalCollection.ShowCurrent();
 				this.Message = $"The item {this.CurrentElement} is first to be removed.";
 			}
 			catch (InvalidOperationException ex)

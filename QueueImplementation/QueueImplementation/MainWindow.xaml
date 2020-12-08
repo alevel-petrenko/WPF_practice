@@ -36,7 +36,7 @@
 
 		<ListBox Grid.Row="1" Grid.Column="1" Margin="10"
 				 Grid.RowSpan="4" FontSize="15"
-				 ItemsSource="{Binding Collection}" />
+				 ItemsSource="{Binding AllNumbers}" />
 
 		<StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" IsEnabled="{Binding IsChoiseAvailable}">
 			<StackPanel.Resources>
