@@ -16,6 +16,12 @@ namespace ViewModel
 	public sealed class CustomCollectionViewModel : MvxViewModel
 	{
 		/// <summary>
+		/// Holds the add command.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private RelayCommand add;
+
+		/// <summary>
 		/// Holds the collection.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
@@ -46,11 +52,32 @@ namespace ViewModel
 		private string message;
 
 		/// <summary>
+		/// Holds the remove command.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private RelayCommand remove;
+
+		/// <summary>
+		/// Holds the show command.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		private RelayCommand show;
+
+		/// <summary>
 		/// Gets the add command.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The add command.</value>
-		public RelayCommand Add => new RelayCommand(this.AddNumber, this.CanAddNumber);
+		public RelayCommand Add
+		{
+			get
+			{
+				if (this.add is null)
+					this.add = new RelayCommand(this.AddNumber, this.CanAddNumber);
+
+				return this.add;
+			}
+		}
 
 		/// <summary>
 		/// Adds the number to the collection.
@@ -204,7 +231,16 @@ namespace ViewModel
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The remove command.</value>
-		public RelayCommand Remove => new RelayCommand(this.RemoveNumber, this.CanGetNumber);
+		public RelayCommand Remove
+		{
+			get
+			{
+				if (this.remove is null)
+					this.remove = new RelayCommand(this.RemoveNumber, this.CanGetNumber);
+
+				return this.remove;
+			}
+		}
 
 		/// <summary>
 		/// Removes the number from the collection.
@@ -249,6 +285,8 @@ namespace ViewModel
 		/// <owner>Anton Petrenko</owner>
 		private void RestoreRemoveAndShowCommands()
 		{
+			this.remove = null;
+			this.show = null;
 			this.RaisePropertyChanged(() => this.Show);
 			this.RaisePropertyChanged(() => this.Remove);
 		}
@@ -272,7 +310,16 @@ namespace ViewModel
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The show command.</value>
-		public RelayCommand Show => new RelayCommand(this.ShowNumber, this.CanGetNumber);
+		public RelayCommand Show
+		{
+			get
+			{
+				if (this.show is null)
+					this.show = new RelayCommand(this.ShowNumber, this.CanGetNumber);
+
+				return this.show;
+			}
+		}
 
 		/// <summary>
 		/// Shows the number.
