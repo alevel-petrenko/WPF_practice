@@ -134,32 +134,6 @@ namespace ViewModel
 		private bool CanGetNumber(object obj) => this.InternalCollection != null && this.InternalCollection.Count() > 0;
 
 		/// <summary>
-		/// Gets the collection.
-		/// </summary>
-		/// <owner>Anton Petrenko</owner>
-		/// <value>The collection.</value>
-		private ICustomCollection<int> InternalCollection
-		{
-			get
-			{
-				try
-				{
-					if (this.collection is null)
-					{
-						this.collection = this.configCreator.InitializeCollection(this.SelectedCustomCollectionType, this.SelectedBasicCollectionType);
-						this.IsChoiseAvailable = false;
-					}
-				}
-				catch (ArgumentException error)
-				{
-					this.Message = error.Message;
-				}
-
-				return this.collection;
-			}
-		}
-
-		/// <summary>
 		/// Gets or sets the current element.
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
@@ -185,6 +159,32 @@ namespace ViewModel
 		{
 			this.configCreator = new CollectionConfigCreator<int>();
 			this.isChoisePossible = true;
+		}
+
+		/// <summary>
+		/// Gets the internal collection.
+		/// </summary>
+		/// <owner>Anton Petrenko</owner>
+		/// <value>The internal collection.</value>
+		private ICustomCollection<int> InternalCollection
+		{
+			get
+			{
+				try
+				{
+					if (this.collection is null)
+					{
+						this.collection = this.configCreator.InitializeCollection(this.SelectedCustomCollectionType, this.SelectedBasicCollectionType);
+						this.IsChoiseAvailable = false;
+					}
+				}
+				catch (ArgumentException error)
+				{
+					this.Message = error.Message;
+				}
+
+				return this.collection;
+			}
 		}
 
 		/// <summary>
@@ -303,7 +303,7 @@ namespace ViewModel
 		/// </summary>
 		/// <owner>Anton Petrenko</owner>
 		/// <value>The type of the custom collection.</value>
-		public CustomCollectionType? SelectedCustomCollectionType { get; set; }
+		public CustomCollectionType SelectedCustomCollectionType { get; set; }
 
 		/// <summary>
 		/// Gets the show command.

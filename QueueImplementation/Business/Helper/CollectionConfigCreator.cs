@@ -18,12 +18,12 @@ namespace Business.Helper
 		/// <param name="selectedCustomCollection">The selected type of custom collection (queue/stack).</param>
 		/// <param name="selectedBasicCollection">The selected type of basic collection (array/linked list).</param>
 		/// <returns>The initialized collection.</returns>
-		public ICustomCollection<T> InitializeCollection(CustomCollectionType? selectedCustomCollection, BasicCollectionType? selectedBasicCollection)
+		public ICustomCollection<T> InitializeCollection(CustomCollectionType selectedCustomCollection, BasicCollectionType? selectedBasicCollection)
 		{
-			if (!selectedBasicCollection.HasValue || !selectedCustomCollection.HasValue)
+			if (!selectedBasicCollection.HasValue || selectedCustomCollection == CustomCollectionType.None)
 				throw new ArgumentException("Select all settings for the collection.");
 
-			var container = CustomCollectionConfig<T>.Configure(selectedCustomCollection.Value, selectedBasicCollection.Value);
+			var container = CustomCollectionConfig<T>.Configure(selectedCustomCollection, selectedBasicCollection.Value);
 
 			return container.Resolve<ICustomCollection<T>>();
 		}

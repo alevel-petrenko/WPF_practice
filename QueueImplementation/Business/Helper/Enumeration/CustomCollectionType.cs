@@ -7,15 +7,21 @@
     public enum CustomCollectionType
     {
         /// <summary>
-        /// Holds the queue.
+        /// Holds the none type.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        Queue = 0,
+        None = 0,
 
         /// <summary>
-        /// Holds the stack.
+        /// Holds the queue type.
         /// </summary>
         /// <owner>Anton Petrenko</owner>
-        Stack = 1
+        Queue = 1,
+
+        /// <summary>
+        /// Holds the stack type.
+        /// </summary>
+        /// <owner>Anton Petrenko</owner>
+        Stack = 2
     }
 }
